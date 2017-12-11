@@ -10,9 +10,11 @@ All these dependencies are defined in the `build.gradle` file. You can freely ed
 
 Gradle will help you to build and distribute your project. It will allow you to easily manage your dependencies.
 
-Gradle supports the following commands on this project:
+Gradle supports the following basic tasks on this project:
 - `gradle test` to run the unit tests
 - `gradle run` to run the project as a Java application
 - `gradle assembleDist` to bundle the project as distribution in a `.zip` and a `.tar` files.
 - `gradle clean` to clean up the project (deletes the `build` and `dist` directories)
 - `gradle tasks` to list all the available tasks
+
+**Note**: if `gradle` is not installed on your system, you can use the provided wrapper by using the `gradlew` command instead of the `gradle` one.
