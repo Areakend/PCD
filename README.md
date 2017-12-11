@@ -18,3 +18,19 @@ Gradle supports the following basic tasks on this project:
 - `gradle tasks` to list all the available tasks
 
 **Note**: if `gradle` is not installed on your system, you can use the provided wrapper by using the `gradlew` command instead of the `gradle` one.
+
+## Importing this project configuration in an IDE
+
+Gradle is supported in mainstream IDEs such as IntelliJ, Eclipse or NetBeans. Therefore, you can easily import this project in your favorite IDE without having to reconfigure your build process.
+
+### IntelliJ
+
+IntelliJ allows to import gradle project. You just have to import the project and select the `build.gradle` file during the importation.
+
+### Eclipse
+
+Eclipse allows to import a gradle project.
+
+### NetBeans
+
+You first have to install the gradle plugin in NetBeans before being able to import a gradle project.
