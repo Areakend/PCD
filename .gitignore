@@ -1,5 +1,5 @@
-
-# Created by https://www.gitignore.io/api/vim,java,macos,emacs,maven,gradle,windows
+# logs folder
+logs/
 
 ### Emacs ###
 # -*- mode: gitignore; -*-
@@ -181,5 +181,3 @@ gradle-app.setting
 
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
-
-# End of https://www.gitignore.io/api/vim,java,macos,emacs,maven,gradle,windows
