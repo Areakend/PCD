@@ -197,7 +197,6 @@ bin/
 
 #TOKEN
 .token
-
 #IntelliJ
 .idea/
 out/

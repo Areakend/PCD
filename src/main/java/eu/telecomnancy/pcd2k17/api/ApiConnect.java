@@ -1,5 +1,6 @@
 package eu.telecomnancy.pcd2k17.api;
 import org.gitlab4j.api.GitLabApi;
+import org.gitlab4j.api.ProjectApi;
 import org.gitlab4j.api.models.Project;
 
 import java.io.*;
@@ -9,6 +10,7 @@ import java.util.Scanner;
 public class ApiConnect {
     private String url;
     private List<Project> projects;
+    private GitLabApi GLA;
 
     public ApiConnect(String u){
         this.url = u;
@@ -16,8 +18,8 @@ public class ApiConnect {
 
     public GitLabApi login(){
         this.getToken();
-        GitLabApi git = new GitLabApi(this.url, this.getToken());
-        return git;
+        this.GLA = new GitLabApi(this.url, this.getToken());
+        return this.GLA;
     }
 
     public boolean loginOK(GitLabApi git) throws org.gitlab4j.api.GitLabApiException{
@@ -27,12 +29,19 @@ public class ApiConnect {
         return false;
     }
 
-    public List<Project> getProjects(GitLabApi git) throws org.gitlab4j.api.GitLabApiException{
-        projects = git.getProjectApi().getProjects();
-        for (int i =0 ; i<projects.size() ; i++){
-            System.out.println(projects.get(i).getName());
+    public List<Project> getProjectsList(GitLabApi git){
+        try {
+            projects = git.getProjectApi().getMemberProjects();
+            return this.projects;
         }
-        return this.projects;
+        catch (org.gitlab4j.api.GitLabApiException e){
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    public ProjectApi getProjectApi(){
+        return this.GLA.getProjectApi();
     }
 
     private String getToken(){
