@@ -29,6 +29,6 @@ public class MainApi {
         //aa.deleteAssignement(aa.getIdAssign("Test4"));
 
         //add Member
-        aa.addMembers(aa.getIdAssign("Test4",246, ));
+       // aa.addMembers(aa.getIdAssign("Test4",246, ));
     }
 }

@@ -22,10 +22,22 @@ public class ApiConnect {
         return this.GLA;
     }
 
-    public boolean loginOK(GitLabApi git) throws org.gitlab4j.api.GitLabApiException{
-        if (git.getProjectApi().getProjects().size() >0){
-            return true;
+    public GitLabApi login(String tok){
+        this.setToken(tok);
+        return this.login();
+    }
+
+    public boolean loginOK(){
+        try{
+            if (this.GLA.getProjectApi().getProjects().size() >0){
+                return true;
+            }
         }
+        catch (Exception e){
+
+        }
+        File file = new File(".token/userToken.txt");
+        file.delete();
         return false;
     }
 
