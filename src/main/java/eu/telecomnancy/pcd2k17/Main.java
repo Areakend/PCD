@@ -22,15 +22,13 @@ public class Main extends Application {
   public void start(Stage primaryStage) throws Exception {
     primaryStage.setTitle("JFX Sample Application");
 
-    FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("main.fxml"));
-    Parent root = loader.load();
+    Parent root = FXMLLoader.load(getClass().getResource("ConnexionScreen.fxml"));  
 
     primaryStage.setOnCloseRequest(event -> {
       log.debug("terminating application.");
       Platform.exit();
     });
-    primaryStage.setScene(new Scene(root, 320, 200));
+    primaryStage.setScene(new Scene(root, 400, 200));
     primaryStage.show();
   }
 
