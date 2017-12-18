@@ -17,18 +17,17 @@ public class MainApi {
         System.out.println("");
         ApiAssignement aa = new ApiAssignement(api);
         aa.setName("rs");
-        aa.checkAssignement();
         aa.setName("rs2017-hynes-roudaut");
-        aa.checkAssignement();
         System.out.println("");
 
         //create assignement
-        aa.createAssignement("Test4");
-
-        //delete assignement
-        //aa.deleteAssignement(aa.getIdAssign("Test4"));
+        //aa.createAssignement("Test2");
 
         //add Member
-       // aa.addMembers(aa.getIdAssign("Test4",246, ));
+        //aa.addMembers(aa.getIdAssign("Test2") ,246 ,AccessLevel.DEVELOPER);
+        //aa.delMembers(aa.getIdAssign("Test2"),246);
+
+        //delete assignement
+        //aa.deleteAssignement(aa.getIdAssign("Test2"));
     }
 }
