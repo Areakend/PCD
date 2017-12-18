@@ -1,6 +1,7 @@
 package eu.telecomnancy.pcd2k17.api;
 
 import org.gitlab4j.api.GitLabApi;
+import org.gitlab4j.api.models.AccessLevel;
 
 public class MainApi {
     public static void main(String args[]) {
@@ -22,10 +23,12 @@ public class MainApi {
         System.out.println("");
 
         //create assignement
-        //aa.createAssignement("Test4");
+        aa.createAssignement("Test4");
 
         //delete assignement
-        //aa.deleteAssignement(aa.getIdAssign("Test2"));
+        //aa.deleteAssignement(aa.getIdAssign("Test4"));
 
+        //add Member
+        aa.addMembers(aa.getIdAssign("Test4",246, ));
     }
 }

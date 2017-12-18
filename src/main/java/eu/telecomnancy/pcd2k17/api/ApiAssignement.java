@@ -35,13 +35,14 @@ public class ApiAssignement {
     }
 
     public boolean createAssignement(String name){
+        this.name = name;
         try {
             this.projectApi.createProject(name);
             System.out.println("Your project "+name+" has been created");
             return true;
         }
         catch (org.gitlab4j.api.GitLabApiException e){
-            System.out.println("Error when creating project : A project with the same name exists.");
+            System.out.println("Error when creating project : The project "+name+" exists.");
         }
         return false;
     }
@@ -53,13 +54,14 @@ public class ApiAssignement {
             return true;
         }
         catch (org.gitlab4j.api.GitLabApiException e){
-            System.out.println("Error when deleting a project : "+name + " does not exist.");
+            System.out.println("Error when deleting a project : "+this.name+ " does not exist.");
         }
 
         return false;
     }
 
     public int getIdAssign(String name){
+        this.name = name;
         for (int i = 0 ; i<this.lsp.size(); i++){
             if (this.lsp.get(i).getName().equals(name)){
                 System.out.println("Assignement "+name+" Found.");
@@ -67,5 +69,17 @@ public class ApiAssignement {
             }
         }
         return -1;
+    }
+
+    public boolean addMembers(int idProject, int userId, int accessLevel){
+        try {
+            this.projectApi.addMember(idProject,userId,accessLevel);
+            return true;
+        }
+        catch (org.gitlab4j.api.GitLabApiException e){
+            System.out.println("Error when removing "+userId+".");
+        }
+
+        return false;
     }
 }

@@ -59,13 +59,20 @@ public class ApiConnect {
             try {
                 Scanner reader = new Scanner(System.in);
                 System.out.println("Token :");
-                PrintWriter writer = new PrintWriter(".token/userToken.txt", "UTF-8");
-                writer.println(reader.nextLine());
-                writer.close();
+                this.setToken(reader.nextLine());
                 reader.close();
             }
             catch (Exception ee){}
         }
         return null;
+    }
+
+    public void setToken(String tok){
+        try {
+            PrintWriter writer = new PrintWriter(".token/userToken.txt", "UTF-8");
+            writer.println(tok);
+            writer.close();
+        }
+        catch (Exception ee){}
     }
 }
