@@ -194,3 +194,9 @@ bin/
 #!.vscode/launch.json
 #!.vscode/extensions.json
 .history
+
+#TOKEN
+.token
+#IntelliJ
+.idea/
+out/

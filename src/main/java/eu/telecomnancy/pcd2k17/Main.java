@@ -12,7 +12,9 @@ import javafx.fxml.FXMLLoader;
 public class Main extends Application {
 
   final static Logger log = LogManager.getLogger(Main.class);
-
+  static String path = null;
+  public static Stage primaryStage;
+  
   public static void main(String args[]) {
     log.debug("executing main() method.");
     launch(args);
@@ -23,6 +25,9 @@ public class Main extends Application {
     primaryStage.setTitle("JFX Sample Application");
 
     Parent root = FXMLLoader.load(getClass().getResource("ConnexionScreen.fxml"));  
+	//FXMLLoader loader = new FXMLLoader();
+    //loader.setLocation(getClass().getResource("main.fxml"));
+    //Parent root = loader.load();
 
     primaryStage.setOnCloseRequest(event -> {
       log.debug("terminating application.");
