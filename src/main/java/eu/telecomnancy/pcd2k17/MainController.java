@@ -8,6 +8,7 @@ import org.apache.logging.log4j.LogManager;
 
 import javafx.fxml.FXML;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
 public class MainController {
@@ -18,8 +19,8 @@ public class MainController {
   public void handleClickOk(ActionEvent event) {
 	  
 		final FileChooser fileChooser = new FileChooser();
-
-		File file = fileChooser.showOpenDialog(Main.primaryStage);
+		Stage app_stage = (Stage) (((javafx.scene.Node) event.getSource()).getScene().getWindow());
+		File file = fileChooser.showOpenDialog(app_stage);
 		if (file != null) {
 			Main.path = file.getAbsolutePath();
 		}

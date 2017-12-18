@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.pcd2k17.UI.java.EnseignantScreenController">
+   <children>
+      <Group fx:id="GroupCreateDevoir" layoutX="443.0" layoutY="238.0" onMousePressed="#CreateDevoir">
+         <children>
+            <ImageView fitHeight="200.0" fitWidth="200.0" layoutY="-25.0" rotate="45.0">
+               <image>
+                  <Image url="@../../../../../resources/eu/telecomnancy/pcd2k17/Icons/cross.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="-41.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Créer un devoir" textAlignment="CENTER" wrappingWidth="281.13671875">
+               <font>
+                  <Font name="Calibri" size="36.0" />
+               </font>
+            </Text>
+         </children>
+      </Group>
+   </children>
+</AnchorPane>

@@ -1,6 +1,9 @@
 package eu.telecomnancy.pcd2k17;
 
 import org.apache.logging.log4j.Logger;
+
+import eu.telecomnancy.pcd2k17.UI.java.ConnexionScreenController;
+
 import org.apache.logging.log4j.LogManager;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -13,7 +16,7 @@ public class Main extends Application {
 
   final static Logger log = LogManager.getLogger(Main.class);
   static String path = null;
-  public static Stage primaryStage;
+
   
   public static void main(String args[]) {
     log.debug("executing main() method.");
@@ -23,7 +26,8 @@ public class Main extends Application {
   @Override
   public void start(Stage primaryStage) throws Exception {
     primaryStage.setTitle("JFX Sample Application");
-
+    log.debug(""+getClass().toString());
+    log.debug(""+getClass().getResource("ConnexionScreen.fxml"));
     Parent root = FXMLLoader.load(getClass().getResource("ConnexionScreen.fxml"));  
 	//FXMLLoader loader = new FXMLLoader();
     //loader.setLocation(getClass().getResource("main.fxml"));
