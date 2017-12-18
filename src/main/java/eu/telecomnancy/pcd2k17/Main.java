@@ -12,7 +12,9 @@ import javafx.fxml.FXMLLoader;
 public class Main extends Application {
 
   final static Logger log = LogManager.getLogger(Main.class);
-
+  static String path = null;
+  public static Stage primaryStage;
+  
   public static void main(String args[]) {
     log.debug("executing main() method.");
     launch(args);
