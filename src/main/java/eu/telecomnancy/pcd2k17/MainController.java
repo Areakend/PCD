@@ -20,9 +20,7 @@ public class MainController {
 		final FileChooser fileChooser = new FileChooser();
 
 		File file = fileChooser.showOpenDialog(Main.primaryStage);
-		if (file != null) {
-			Main.path = file.getAbsolutePath();
-		}
+		Main.path = file.getAbsolutePath();
 		log.debug("path : " + Main.path);
   }
 

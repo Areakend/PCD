@@ -56,7 +56,8 @@ public class ApiConnect {
         return this.GLA.getProjectApi();
     }
 
-    private String getToken(){
+    @SuppressWarnings("resource")
+	private String getToken(){
         String line ;
         BufferedReader in;
 
@@ -68,13 +69,13 @@ public class ApiConnect {
             return line;
         }
         catch (Exception e){
-            try {
-                Scanner reader = new Scanner(System.in);
-                System.out.println("Token :");
-                this.setToken(reader.nextLine());
-                reader.close();
-            }
-            catch (Exception ee){}
+//            try {
+//                Scanner reader = new Scanner(System.in);
+//                System.out.println("Token :");
+//                this.setToken(reader.nextLine());
+//                reader.close();
+//            }
+//            catch (Exception ee){}
         }
         return null;
     }
