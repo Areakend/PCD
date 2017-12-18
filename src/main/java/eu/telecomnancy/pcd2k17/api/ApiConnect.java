@@ -1,23 +1,30 @@
 package eu.telecomnancy.pcd2k17.api;
 import org.gitlab4j.api.GitLabApi;
-import org.gitlab4j.api.GitLabApiException;
 import org.gitlab4j.api.models.Project;
 
 import java.io.*;
 import java.util.List;
 import java.util.Scanner;
 
-public class apiConnect {
+public class ApiConnect {
     private String url;
     private List<Project> projects;
 
-    public apiConnect(String u){
+    public ApiConnect(String u){
         this.url = u;
     }
 
-    public GitLabApi login(String token){
-        GitLabApi git = new GitLabApi(this.url, token);
+    public GitLabApi login(){
+        this.getToken();
+        GitLabApi git = new GitLabApi(this.url, this.getToken());
         return git;
+    }
+
+    public boolean loginOK(GitLabApi git) throws org.gitlab4j.api.GitLabApiException{
+        if (git.getProjectApi().getProjects().size() >0){
+            return true;
+        }
+        return false;
     }
 
     public List<Project> getProjects(GitLabApi git) throws org.gitlab4j.api.GitLabApiException{
@@ -29,7 +36,7 @@ public class apiConnect {
     }
 
     private String getToken(){
-        String line;
+        String line ;
         BufferedReader in;
 
         try {
@@ -37,11 +44,9 @@ public class apiConnect {
             dir.mkdir();
             in = new BufferedReader(new FileReader(".token/userToken.txt"));
             line = in.readLine();
-            if (line != null) System.out.println(line);
-            else throw new IOException();
+            return line;
         }
-        catch (java.io.FileNotFoundException e){
-            System.out.println("Fichier inexistant\n");
+        catch (Exception e){
             try {
                 Scanner reader = new Scanner(System.in);
                 System.out.println("Token :");
@@ -50,29 +55,8 @@ public class apiConnect {
                 writer.close();
                 reader.close();
             }
-            catch (Exception ee){
-
-            }
+            catch (Exception ee){}
         }
-        catch (java.io.IOException ioe){
-            System.out.println("Fichier Vide\n");
-        }
-
-        return "zizi";
-    }
-
-    public static void main(String args[]) {
-        // Log in to the GitLab server using a username and password
-        apiConnect api = new apiConnect("https://gitlab.telecomnancy.univ-lorraine.fr");
-        System.out.println(api.getToken());
-        /*
-        try {
-            GitLabApi git = api.login("1pNC2G7U7UvXs7_4M9zG");
-        }
-        catch (Exception e){
-            System.out.println("Erreur de login :'(");
-        }
-         */
-
+        return null;
     }
 }
