@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.PreparedStatement;
 
 public class SelectDb {
 
@@ -37,11 +38,35 @@ public class SelectDb {
             System.out.println(e.getMessage());
         }
     }
-    
+   
+
+   public void getAssignmentsOf(String discipline){
+              String sql = "SELECT title, description, discipline "
+                         + "FROM assignments WHERE discipline = ?";
+       
+       try (Connection conn = this.connect();
+            PreparedStatement pstmt  = conn.prepareStatement(sql)){
+           
+           pstmt.setString(1, discipline);
+           //
+           ResultSet rs  = pstmt.executeQuery();
+           
+           while (rs.next()) {
+               System.out.println(rs.getString("title") +  "\t" + 
+                                  rs.getString("description") + "\t" +
+                                  rs.getString("discipline"));
+           }
+       } catch (SQLException e) {
+           System.out.println(e.getMessage());
+       }
+   }
    
     public static void main(String[] args) {
         SelectDb app = new SelectDb();
         app.selectAll();
+        System.out.println(" ");
+        SelectDb app2 = new SelectDb();
+        app2.getAssignmentsOf("PCD");
     }
  
 }
