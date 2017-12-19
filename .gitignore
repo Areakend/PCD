@@ -200,3 +200,4 @@ bin/
 #IntelliJ
 .idea/
 out/
+src/main/resources/eu/telecomnancy/pcd2k17/database/

@@ -15,19 +15,19 @@ public class MainApi {
             System.out.println(api.getProjectsList(git).get(i).getName());
 
         System.out.println("");
-        ApiAssignement aa = new ApiAssignement(api);
+        ApiAssignment aa = new ApiAssignment(api);
         aa.setName("rs");
         aa.setName("rs2017-hynes-roudaut");
         System.out.println("");
 
-        //create assignement
-        //aa.createAssignement("Test2");
+        //create assignment
+        //aa.createAssigneent("Test2");
 
         //add Member
         //aa.addMembers(aa.getIdAssign("Test2") ,246 ,AccessLevel.DEVELOPER);
         //aa.delMembers(aa.getIdAssign("Test2"),246);
 
-        //delete assignement
-        //aa.deleteAssignement(aa.getIdAssign("Test2"));
+        //delete assignment
+        //aa.deleteAssignment(aa.getIdAssign("Test2"));
     }
 }

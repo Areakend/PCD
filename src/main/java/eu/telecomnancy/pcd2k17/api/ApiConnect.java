@@ -5,7 +5,6 @@ import org.gitlab4j.api.models.Project;
 
 import java.io.*;
 import java.util.List;
-import java.util.Scanner;
 
 public class ApiConnect {
     private String url;
