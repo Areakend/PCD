@@ -1,14 +1,19 @@
 package eu.telecomnancy.pcd2k17.api;
 import org.gitlab4j.api.GitLabApi;
 import org.gitlab4j.api.ProjectApi;
+import org.gitlab4j.api.RepositoryApi;
+import org.gitlab4j.api.RepositoryFileApi;
 import org.gitlab4j.api.models.Project;
 
 import java.io.*;
 import java.util.List;
 
 public final class ApiConnect {
+    public static GitLabApi GLA;
+    public static RepositoryApi REPOAPI;
+    public static RepositoryFileApi REPOFILEAPI;
+
     private String url;
-    private GitLabApi GLA;
     private static ApiConnect apico;
 
     public ApiConnect(String u){
@@ -16,43 +21,42 @@ public final class ApiConnect {
         this.url = u;
     }
 
-    public GitLabApi login(){
+    public void login(){
         this.getToken();
-        this.GLA = new GitLabApi(this.url, this.getToken());
-        return this.GLA;
+        ApiConnect.GLA = new GitLabApi(this.url, this.getToken());
+        ApiConnect.REPOAPI = new RepositoryApi(ApiConnect.GLA);
+        ApiConnect.REPOFILEAPI = new RepositoryFileApi(ApiConnect.GLA);
     }
 
-    public GitLabApi login(String tok){
+    public void login(String tok){
         this.setToken(tok);
-        return this.login();
+        this.login();
     }
 
     public boolean loginOK(){
         try{
-            if (this.GLA.getProjectApi().getProjects().size() >0){
+            if (ApiConnect.GLA.getProjectApi().getProjects().size() >0){
                 return true;
             }
         }
         catch (Exception e){
-
         }
         File file = new File(".token/userToken.txt");
         file.delete();
         return false;
     }
 
-    public List<Project> getProjectsList(GitLabApi git){
+    public List<Project> getProjectsList(){
         try {
-            return git.getProjectApi().getMemberProjects();
+            return ApiConnect.GLA.getProjectApi().getMemberProjects();
         }
         catch (org.gitlab4j.api.GitLabApiException e){
             System.out.println(e);
         }
-        return null;
-    }
+        return null;    }
 
     public ProjectApi getProjectApi(){
-        return this.GLA.getProjectApi();
+        return ApiConnect.GLA.getProjectApi();
     }
 
 	@SuppressWarnings("resource")

@@ -5,8 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class InsertDb {
-	
+public class DeleteDb {
+
     private Connection connect() {
         String url = "jdbc:sqlite:" + System.getProperty("user.dir") + "/src/main/resources/eu/telecomnancy/pcd2k17/database/test.db";
         Connection conn = null;
@@ -18,15 +18,20 @@ public class InsertDb {
         return conn;
     }
  
-    public void insert(String title, String description, String discipline) {
-        String sql = "INSERT INTO Assignments(title,description,discipline) VALUES(?,?,?)";
+    public void delete(String title) {
+        String sql = "DELETE FROM assignments WHERE title = ?";
+        
+        System.out.println("Deleting");
  
         try (Connection conn = this.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        	
+        	System.out.println("Deleting...");
+ 
             pstmt.setString(1, title);
-            pstmt.setString(2, description);
-            pstmt.setString(3, discipline);
             pstmt.executeUpdate();
+            System.out.println("Delete OK");
+ 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -34,12 +39,8 @@ public class InsertDb {
  
     
     public static void main(String[] args) {
- 
-        InsertDb app = new InsertDb();
-        app.insert("pcd2k17", "c'est la merde", "PCD");
-        app.insert("rs2k17", "c'est encore la merde", "RS");
-        app.insert("moci2k17", "como esta en la casa", "MOCI");
-        app.insert("pcd2k16", "youteub", "PCD");
+        DeleteDb app = new DeleteDb();
+        app.delete("moci2k17");
     }
  
 }
