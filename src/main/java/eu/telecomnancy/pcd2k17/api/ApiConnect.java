@@ -22,10 +22,22 @@ public class ApiConnect {
         return this.GLA;
     }
 
-    public boolean loginOK(GitLabApi git) throws org.gitlab4j.api.GitLabApiException{
-        if (git.getProjectApi().getProjects().size() >0){
-            return true;
+    public GitLabApi login(String tok){
+        this.setToken(tok);
+        return this.login();
+    }
+
+    public boolean loginOK(){
+        try{
+            if (this.GLA.getProjectApi().getProjects().size() >0){
+                return true;
+            }
         }
+        catch (Exception e){
+
+        }
+        File file = new File(".token/userToken.txt");
+        file.delete();
         return false;
     }
 
@@ -44,7 +56,8 @@ public class ApiConnect {
         return this.GLA.getProjectApi();
     }
 
-    private String getToken(){
+    @SuppressWarnings("resource")
+	private String getToken(){
         String line ;
         BufferedReader in;
 
@@ -56,16 +69,23 @@ public class ApiConnect {
             return line;
         }
         catch (Exception e){
-            try {
-                Scanner reader = new Scanner(System.in);
-                System.out.println("Token :");
-                PrintWriter writer = new PrintWriter(".token/userToken.txt", "UTF-8");
-                writer.println(reader.nextLine());
-                writer.close();
-                reader.close();
-            }
-            catch (Exception ee){}
+//            try {
+//                Scanner reader = new Scanner(System.in);
+//                System.out.println("Token :");
+//                this.setToken(reader.nextLine());
+//                reader.close();
+//            }
+//            catch (Exception ee){}
         }
         return null;
+    }
+
+    public void setToken(String tok){
+        try {
+            PrintWriter writer = new PrintWriter(".token/userToken.txt", "UTF-8");
+            writer.println(tok);
+            writer.close();
+        }
+        catch (Exception ee){}
     }
 }

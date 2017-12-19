@@ -19,11 +19,9 @@ public class MainController {
   public void handleClickOk(ActionEvent event) {
 	  
 		final FileChooser fileChooser = new FileChooser();
-		Stage app_stage = (Stage) (((javafx.scene.Node) event.getSource()).getScene().getWindow());
-		File file = fileChooser.showOpenDialog(app_stage);
-		if (file != null) {
-			Main.path = file.getAbsolutePath();
-		}
+
+		File file = fileChooser.showOpenDialog(Main.primaryStage);
+		Main.path = file.getAbsolutePath();
 		log.debug("path : " + Main.path);
   }
 
