@@ -34,3 +34,26 @@ Eclipse allows to import a gradle project.
 ### NetBeans
 
 You first have to install the gradle plugin in NetBeans before being able to import a gradle project.
+
+#RELEASE
+## RELEASE_DAY_1
+
+Dans la version 1.0, notre projet se limite à un écran de connexion. Sur cet écran, on peut entrer un token. Ce token va permettre d'accéder au compte gitlab associé à celui-ci.
+
+## RELEASE_DAY_2
+
+Dans la version 2.0, notre projet permet de changer d'écran après avoir rentré un token valide. 
+On accède à une vue avec 2 boutons. Le premier bouton "Créer un devoir" change de vue et on arrive sur une vue qui permet de créer un devoir.
+Dans ce devoir, on peut choisir la matière avec une ChoiceBox, on rentre le titre, une description, une date de début (resp. de rendu) et l'heure de début(resp. de rendu).
+On peut aussi choisir un fichier à importer. Il y a un filtre .csv pour que l'utilisateur ne puisse qu'importer des fichiers CSV. Ces fichiers serviront à créer les listes d'élèves.
+
+Avec le deuxième bouton "Accéder au dépôt", on accède à une nouvelle vue qui permet d'accéder à un dépôt pour un élève.
+On peut voir le nom de la matière, le titre du projet ainsi que la date et l'heure du rendu.
+L'élève peut choisir plusieurs fichiers qu'il veut envoyer sur le dépôt, ceux-ci s'affichent dans le menu au-dessus.
+L'élève peut également mettre un message de commit.
+
+Une base de données est en cours d'achèvement mais n'est pas encore au point.
+
+###A implémenter
+- Base de donnée complete
+- Lier les boutons avec les fonctionnalités de l'API gitlab.
