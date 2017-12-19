@@ -79,7 +79,8 @@ public class CreateAssignementController{
 			fileChooser.getExtensionFilters().addAll(
 					new FileChooser.ExtensionFilter("Tanguy","*.csv"),
 					new FileChooser.ExtensionFilter("Jerem","*.pd"),
-					new FileChooser.ExtensionFilter("Julien","*.jpeg2000")
+					new FileChooser.ExtensionFilter("Julien","*.jpeg2000"),
+					new FileChooser.ExtensionFilter("Raph","*.*")
 					);
 			
 			Stage FileLoaderStage = (Stage) ((Node) event.getSource()).getScene().getWindow();

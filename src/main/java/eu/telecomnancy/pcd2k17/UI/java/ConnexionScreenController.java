@@ -29,7 +29,7 @@ public class ConnexionScreenController {
 		if (Main.Token.length() > 0){
 			Main.api.login(Main.Token);
 			if (Main.api.loginOK()) {
-				log.debug("Connection r�ussie"); //Afficher stage suivant
+				log.debug("Connection reussie"); //Afficher stage suivant
 
 				Stage FileLoaderStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 				FileLoaderStage.hide();
