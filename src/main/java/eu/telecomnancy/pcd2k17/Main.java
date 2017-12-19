@@ -18,10 +18,14 @@ public class Main extends Application {
   final static Logger log = LogManager.getLogger(Main.class);
   public static String path = null;
   public static String Token = null;
+  public static String fileList[] = new String[64];
+  public static int nbofFiles = 0;
+  public static String commitMessage = null;
   public static ApiConnect api = new ApiConnect("https://gitlab.telecomnancy.univ-lorraine.fr");
   public static Parent rootFL;
   public static Parent rootEnseignant;
   public static Parent createDevoir;
+  public static Parent consultDevoir;
 
   
   public static void main(String args[]) {
@@ -37,6 +41,7 @@ public class Main extends Application {
     rootFL = FXMLLoader.load(getClass().getResource("main.fxml"));
     rootEnseignant = FXMLLoader.load(getClass().getResource("EnseignantScreen.fxml"));
     createDevoir = FXMLLoader.load(getClass().getResource("CreateAssignement.fxml"));
+    consultDevoir = FXMLLoader.load(getClass().getResource("studentControl.fxml"));
 
 	//FXMLLoader loader = new FXMLLoader();
     //loader.setLocation(getClass().getResource("main.fxml"));
