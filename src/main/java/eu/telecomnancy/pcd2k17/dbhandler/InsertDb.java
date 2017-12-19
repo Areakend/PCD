@@ -41,6 +41,7 @@ public class InsertDb {
         app.insert("pcd2k17", "de la merde", "PCD");
         app.insert("rs2k17", "de la merde un peu moins grosse", "RS");
         app.insert("moci2K17", "como esta en la casa", "MOCI");
+        app.insert("pcd2k16", "youteub", "PCD");
     }
  
 }
