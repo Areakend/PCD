@@ -13,9 +13,9 @@
       <Group fx:id="GroupCreateDevoir" layoutX="500.0" layoutY="230.0">
          <children>
             <Button layoutX="-40.0" layoutY="-38.0" mnemonicParsing="false" onAction="#goToCreateDevoir" prefHeight="269.0" prefWidth="280.0" />
-            <ImageView fitHeight="200.0" fitWidth="200.0" focusTraversable="true" layoutY="-25.0">
+            <ImageView fitHeight="200.0" fitWidth="200.0" focusTraversable="true" layoutY="-25.0" rotate="45.0">
                <image>
-                  <Image url="@Icons/plus.png" />
+                  <Image url="@Icons/close.png" />
                </image>
             </ImageView>
             <Text focusTraversable="true" layoutX="-41.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Créer un devoir" textAlignment="CENTER" wrappingWidth="281.13671875">
@@ -27,13 +27,13 @@
       </Group>
       <Group layoutX="900.0" layoutY="230.0">
          <children>
-            <Button layoutX="-40.0" layoutY="-38.0" mnemonicParsing="false" prefHeight="269.0" prefWidth="280.0" />
+            <Button layoutX="-40.0" layoutY="-38.0" mnemonicParsing="false" onAction="#goToConsultDevoir" prefHeight="269.0" prefWidth="280.0" />
             <ImageView fitHeight="200.0" fitWidth="200.0" layoutY="-25.0">
                <image>
-                  <Image url="@Icons/cancel.png" />
+                  <Image url="@Icons/close.png" />
                </image>
             </ImageView>
-            <Text layoutX="-41.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Supprimer un devoir" textAlignment="CENTER" wrappingWidth="281.13671875">
+            <Text layoutX="-41.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Acceder au depot" textAlignment="CENTER" wrappingWidth="281.13671875">
                <font>
                   <Font name="Calibri" size="30.0" />
                </font>

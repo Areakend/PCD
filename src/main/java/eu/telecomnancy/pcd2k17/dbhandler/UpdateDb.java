@@ -1,23 +1,11 @@
 package eu.telecomnancy.pcd2k17.dbhandler;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
- 
 
-public class UpdateDb {
 
-    private Connection connect() {
-        String url = "jdbc:sqlite:" + System.getProperty("user.dir") + "/src/main/resources/eu/telecomnancy/pcd2k17/database/test.db";
-        Connection conn = null;
-        try {
-            conn = DriverManager.getConnection(url);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return conn;
-    }
+public class UpdateDb extends MainDbhandler {
  
     
     public void update(String title, String description, String discipline) {

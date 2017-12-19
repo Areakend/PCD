@@ -1,23 +1,20 @@
 package eu.telecomnancy.pcd2k17.dbhandler;
 import java.io.File;
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class MainDbhandler {
 
     public static void createNewDatabase(String fileName) {
+    	
+    	createFile();
  
         String url = "jdbc:sqlite:" + System.getProperty("user.dir") + "/src/main/resources/eu/telecomnancy/pcd2k17/database/" + fileName;
  
         try (Connection conn = DriverManager.getConnection(url)) {
             if (conn != null) {
-                DatabaseMetaData meta = conn.getMetaData();
-                System.out.println("The driver name is " + meta.getDriverName());
-                System.out.println("A new database has been created.");
-                //System.out.println(System.getProperty("user.dir"));
+                System.out.println("The database " + fileName + " has been created.");
             }
  
         } catch (SQLException e) {
@@ -25,21 +22,16 @@ public class MainDbhandler {
         }
     }
     
-    public static void createNewTable() {
-        String url = "jdbc:sqlite:" + System.getProperty("user.dir") + "/src/main/resources/eu/telecomnancy/pcd2k17/database/test.db";
-
-        String sql = "CREATE TABLE IF NOT EXISTS Assignments (\n"
-                + "	title text PRIMARY KEY,\n"
-                + "	description text,\n"
-                + "	discipline text\n"
-                + ");";
-        
-        try (Connection conn = DriverManager.getConnection(url);
-                Statement stmt = conn.createStatement()) {
-            stmt.execute(sql);
+    public Connection connect() {
+        String url = "jdbc:sqlite:" + System.getProperty("user.dir") + "/src/main/resources/eu/telecomnancy/pcd2k17/database/gitTN";
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection(url);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+        System.out.println("2");
+        return conn;
     }
     
     public static void createFile() {
@@ -50,10 +42,4 @@ public class MainDbhandler {
         catch (Exception e){}
     }
 
-
-    public static void main(String[] args) {
-    	createFile();
-        createNewDatabase("test.db");
-        createNewTable();
-    }
 }
