@@ -9,11 +9,8 @@ import java.time.LocalDate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import eu.telecomnancy.pcd2k17.Main;
-import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.beans.value.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -28,13 +25,16 @@ import javafx.stage.Stage;
 public class CreateAssignementController{
 
 	final static Logger log = LogManager.getLogger(ConnexionScreenController.class);
+	@SuppressWarnings("unused")
 	private String matiere,titre,description,heureDebut,heureFin,path;
+	@SuppressWarnings("unused")
 	private LocalDate dateDebut,dateFin;
 
 	
 	  ObservableList<String> list = FXCollections.observableArrayList("1","2");
 	
-	  @FXML
+	  @SuppressWarnings("rawtypes")
+	@FXML
 	  ChoiceBox matiereChoiceBox = new ChoiceBox();
 	  
 	  @FXML
@@ -77,10 +77,8 @@ public class CreateAssignementController{
 		  
 			final FileChooser fileChooser = new FileChooser();
 			fileChooser.getExtensionFilters().addAll(
-					new FileChooser.ExtensionFilter("Tanguy","*.csv"),
-					new FileChooser.ExtensionFilter("Jerem","*.pd"),
-					new FileChooser.ExtensionFilter("Julien","*.jpeg2000"),
-					new FileChooser.ExtensionFilter("Raph","*.*")
+					new FileChooser.ExtensionFilter("CSV","*.csv"),
+					new FileChooser.ExtensionFilter("ALL","*.*")
 					);
 			
 			Stage FileLoaderStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -92,11 +90,11 @@ public class CreateAssignementController{
 			pathText.setText(p1.getFileName().toString());
 	  }
 	  
-	  @FXML
+	  @SuppressWarnings("unchecked")
+	@FXML
 	  public void initialize(){
 		  matiereChoiceBox.setItems(list);
 		  matiereChoiceBox.setValue("1");  
-		  descriptionText.setText("Hello");
 	  }
 	  
 	  public boolean AllField(){

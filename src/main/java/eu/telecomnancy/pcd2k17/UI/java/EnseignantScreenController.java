@@ -1,6 +1,5 @@
 package eu.telecomnancy.pcd2k17.UI.java;
 
-import java.io.File;
 import java.io.IOException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

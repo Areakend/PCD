@@ -17,6 +17,9 @@ import javafx.stage.Stage;
 public class studentControl {
 
 	final static Logger log = LogManager.getLogger(studentControl.class);
+	
+	private String path = null;
+
 	// public static Stage FileLoaderStage;
 
 	@FXML
@@ -30,6 +33,8 @@ public class studentControl {
 
 	@FXML
 	public void validDevoir(ActionEvent event) throws IOException {
+		
+		
 		/*
 		 * Stage FileLoaderStage = (Stage) ((Node)
 		 * event.getSource()).getScene().getWindow();
@@ -48,23 +53,21 @@ public class studentControl {
 
 		final FileChooser fileChooser = new FileChooser();
 		fileChooser.getExtensionFilters().addAll(
-				new FileChooser.ExtensionFilter("Raph", "*.*"),
-				new FileChooser.ExtensionFilter("Tanguy", "*.csv"),
-				new FileChooser.ExtensionFilter("Julien", "*.jpeg2000"),
-				new FileChooser.ExtensionFilter("Jerem", "*.pd")
+				new FileChooser.ExtensionFilter("ALL", "*.*"),
+				new FileChooser.ExtensionFilter("CSV", "*.csv")
 				);
 
 		Stage FileLoaderStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		File file = fileChooser.showOpenDialog(FileLoaderStage);
 		// Main.path = file.getAbsolutePath();
 
-		if (Main.path != file.getAbsolutePath()) {
-			Main.path = file.getAbsolutePath();
-			Main.fileList[Main.nbofFiles] = Main.path;
+		if (path != file.getAbsolutePath()) {
+			path = file.getAbsolutePath();
+			Main.fileList[Main.nbofFiles] = path;
 			Main.nbofFiles++;
-			fileList.setText(fileList.getText() + Main.path + "\n");
+			fileList.setText(fileList.getText() + path + "\n");
 		}
-		log.debug("path : " + Main.path);
+		log.debug("path : " + path);
 		
 		log.debug("File List : " + Main.fileList[0]);
 	}

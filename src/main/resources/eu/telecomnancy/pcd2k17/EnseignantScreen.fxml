@@ -30,7 +30,7 @@
             <Button layoutX="-40.0" layoutY="-38.0" mnemonicParsing="false" onAction="#goToConsultDevoir" prefHeight="269.0" prefWidth="280.0" />
             <ImageView fitHeight="200.0" fitWidth="200.0" layoutY="-25.0">
                <image>
-                  <Image url="@Icons/plus.png" />
+                  <Image url="@Icons/close.png" />
                </image>
             </ImageView>
             <Text layoutX="-41.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Acceder au depot" textAlignment="CENTER" wrappingWidth="281.13671875">
