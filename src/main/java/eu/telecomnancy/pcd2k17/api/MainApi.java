@@ -1,7 +1,5 @@
 package eu.telecomnancy.pcd2k17.api;
 
-import org.gitlab4j.api.GitLabApi;
-import org.gitlab4j.api.GitLabApiException;
 import org.gitlab4j.api.models.RepositoryFile;
 
 import java.io.File;
@@ -34,12 +32,13 @@ public class MainApi {
         ApiAssignmentFileManager fileManager = new ApiAssignmentFileManager(assign1);
         ApiFile file = new ApiFile(assign1);
 
+        System.out.println("");
+        fileManager.showElements();
+        System.out.println("");
         String path = ".fileSave";
         String path2 = "https://gitlab.telecomnancy.univ-lorraine.fr/Jeremy.Hynes/devoir.git";
         String branch = "master";
 
-        RepositoryFile rpFile = file.createFile("Test.txt",path,branch);
-        //file.pushFile(rpFile,"master","Test commit de Test.txt");
         RepositoryFile rpFile2 = file.getFile("Test_a_dl",branch);
 
         System.out.println(rpFile2.getFilePath());
