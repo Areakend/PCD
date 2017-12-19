@@ -2,6 +2,7 @@ package eu.telecomnancy.pcd2k17;
 
 import org.apache.logging.log4j.Logger;
 import java.io.File;
+
 import org.apache.logging.log4j.LogManager;
 
 import javafx.fxml.FXML;
@@ -18,10 +19,18 @@ public class MainController {
   public void handleClickOk(ActionEvent event) {
 	  
 		final FileChooser fileChooser = new FileChooser();
+
+		fileChooser.getExtensionFilters().addAll(
+				new FileChooser.ExtensionFilter("Tanguy","*.csv"),
+				new FileChooser.ExtensionFilter("Jerem","*.txt"),
+				new FileChooser.ExtensionFilter("Julien","*.pdf")
+				);
+		
 		Stage FileLoaderStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		File file = fileChooser.showOpenDialog(FileLoaderStage);
 		//Main.path = file.getAbsolutePath();
 		//log.debug("path : " + Main.path);
+
   }
 
 }

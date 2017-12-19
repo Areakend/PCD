@@ -19,7 +19,7 @@ public class SelectDb {
         }
         return conn;
     }
- 
+
     
    public void selectAll(){
         String sql = "SELECT title, description, discipline FROM assignments";
@@ -27,8 +27,7 @@ public class SelectDb {
         try (Connection conn = this.connect();
              Statement stmt  = conn.createStatement();
              ResultSet rs    = stmt.executeQuery(sql)){
-            
-            // loop through the result set
+
             while (rs.next()) {
                 System.out.println(rs.getString("title") +  "\t" + 
                                    rs.getString("description") + "\t" +

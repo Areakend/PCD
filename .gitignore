@@ -198,6 +198,9 @@ bin/
 # TOKEN
 .token
 
+#Save
+.fileSave
+
 # IntelliJ
 .idea/
 out/

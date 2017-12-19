@@ -26,17 +26,17 @@ public class ConnexionScreenController {
 		log.debug("Input TextField : " + tokenTextField.getText());
 
 		Main.Token = tokenTextField.getText();
-		Main.api.login(Main.Token);
-		if (Main.api.loginOK()) {
-			log.debug("Connection réussie"); //Afficher stage suivant
-	        
-		    Stage FileLoaderStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		    FileLoaderStage.hide();
-		    FileLoaderStage.setScene(new Scene(Main.rootEnseignant, 1600, 800));
-		    FileLoaderStage.show();
-		 
-		}
+		if (Main.Token.length() > 0){
+			Main.api.login(Main.Token);
+			if (Main.api.loginOK()) {
+				log.debug("Connection rï¿½ussie"); //Afficher stage suivant
 
+				Stage FileLoaderStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+				FileLoaderStage.hide();
+				FileLoaderStage.setScene(new Scene(Main.rootEnseignant, 1600, 800));
+				FileLoaderStage.show();
+			}
+		}
 
 	}
 
