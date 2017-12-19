@@ -3,28 +3,25 @@ import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class MainDbhandler {
 
     public static void createNewDatabase(String fileName) {
-    	
     	createFile();
- 
-        String url = "jdbc:sqlite:" + System.getProperty("user.dir") + "/src/main/resources/eu/telecomnancy/pcd2k17/database/" + fileName;
- 
+        String url = "jdbc:sqlite:" + System.getProperty("user.dir") + 
+        		"/src/main/resources/eu/telecomnancy/pcd2k17/database/" + fileName;
         try (Connection conn = DriverManager.getConnection(url)) {
             if (conn != null) {
                 System.out.println("The database " + fileName + " has been created.");
             }
- 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
     
     public Connection connect() {
-        String url = "jdbc:sqlite:" + System.getProperty("user.dir") + "/src/main/resources/eu/telecomnancy/pcd2k17/database/gitTN.db";
+        String url = "jdbc:sqlite:" + System.getProperty("user.dir") + 
+        		"/src/main/resources/eu/telecomnancy/pcd2k17/database/gitTN.db";
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url);
@@ -41,5 +38,6 @@ public class MainDbhandler {
         }
         catch (Exception e){}
     }
+    
     
 }
