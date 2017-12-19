@@ -2,7 +2,7 @@ package eu.telecomnancy.pcd2k17;
 
 import org.apache.logging.log4j.Logger;
 
-import eu.telecomnancy.pcd2k17.UI.java.ConnexionScreenController;
+
 import eu.telecomnancy.pcd2k17.api.ApiConnect;
 
 import org.apache.logging.log4j.LogManager;
@@ -16,7 +16,6 @@ import javafx.fxml.FXMLLoader;
 public class Main extends Application {
 
   final static Logger log = LogManager.getLogger(Main.class);
-  public static String path = null;
   public static String Token = null;
   public static ApiConnect api = new ApiConnect("https://gitlab.telecomnancy.univ-lorraine.fr");
   public static Parent rootFL;

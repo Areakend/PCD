@@ -20,8 +20,8 @@ public class MainController {
 		final FileChooser fileChooser = new FileChooser();
 		Stage FileLoaderStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		File file = fileChooser.showOpenDialog(FileLoaderStage);
-		Main.path = file.getAbsolutePath();
-		log.debug("path : " + Main.path);
+		//Main.path = file.getAbsolutePath();
+		//log.debug("path : " + Main.path);
   }
 
 }

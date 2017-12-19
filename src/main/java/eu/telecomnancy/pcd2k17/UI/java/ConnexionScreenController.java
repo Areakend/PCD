@@ -1,18 +1,10 @@
 package eu.telecomnancy.pcd2k17.UI.java;
 
-import java.io.IOException;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.gitlab4j.api.GitLabApi;
-
 import eu.telecomnancy.pcd2k17.Main;
-import eu.telecomnancy.pcd2k17.api.ApiConnect;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -27,9 +19,6 @@ public class ConnexionScreenController {
 
 	@FXML
 	TextField tokenTextField = new TextField();
-
-	@FXML
-	Label test;
 
 	@FXML
 	public void handleClickConnect(ActionEvent event) throws Exception {
