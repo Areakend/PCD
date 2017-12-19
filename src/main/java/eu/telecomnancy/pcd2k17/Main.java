@@ -20,6 +20,7 @@ public class Main extends Application {
   public static String Token = null;
   public static Stage primaryStage;
   public static ApiConnect api = new ApiConnect("https://gitlab.telecomnancy.univ-lorraine.fr");
+  public static Parent rootFL;
 
   
   public static void main(String args[]) {
@@ -32,6 +33,7 @@ public class Main extends Application {
     primaryStage.setTitle("JFX Sample Application");
         
     Parent root = FXMLLoader.load(getClass().getResource("ConnexionScreen.fxml"));
+    rootFL = FXMLLoader.load(getClass().getResource("main.fxml"));
 
 	//FXMLLoader loader = new FXMLLoader();
     //loader.setLocation(getClass().getResource("main.fxml"));
