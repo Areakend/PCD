@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="400.0" style="-fx-background-color: FFEBAC;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.pcd2k17.UI.java.ConnexionScreenController">
    <children>
@@ -37,14 +36,14 @@
       </GridPane>
       <AnchorPane layoutX="1.0" prefHeight="200.0" prefWidth="200.0">
          <children>
-            <Text layoutX="13.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The banana company" wrappingWidth="174.97509765625">
-               <font>
-                  <Font name="Kristi" size="30.0" />
-               </font>
-            </Text>
             <ImageView fitHeight="106.0" fitWidth="136.0" layoutX="40.0" layoutY="33.0" preserveRatio="true">
                <image>
                   <Image url="@Logo/Logo.png" />
+               </image>
+            </ImageView>
+            <ImageView layoutX="21.0" layoutY="139.0">
+               <image>
+                  <Image url="@Logo/TheBananaCompany.PNG" />
                </image>
             </ImageView>
          </children>
