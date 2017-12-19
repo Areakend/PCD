@@ -43,13 +43,11 @@ public class ConnexionScreenController {
 				log.debug("Connection r�ussie"); //Afficher stage suivant
 
 				Stage FileLoaderStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-				FileLoaderStage.setScene(new Scene(Main.rootFL, 400, 200));
+				FileLoaderStage.hide();
+				FileLoaderStage.setScene(new Scene(Main.rootEnseignant, 1600, 800));
 				FileLoaderStage.show();
-
 			}
 		}
-
-
 
 	}
 

@@ -15,35 +15,40 @@ import javafx.fxml.FXMLLoader;
 
 public class Main extends Application {
 
-	final static Logger log = LogManager.getLogger(Main.class);
-	static String path = null;
-	public static String Token = null;
-	public static Stage primaryStage;
-	public static ApiConnect api = new ApiConnect("https://gitlab.telecomnancy.univ-lorraine.fr");
-	public static Parent rootFL;
+  final static Logger log = LogManager.getLogger(Main.class);
+  public static String path = null;
+  public static String Token = null;
+  public static ApiConnect api = new ApiConnect("https://gitlab.telecomnancy.univ-lorraine.fr");
+  public static Parent rootFL;
+  public static Parent rootEnseignant;
+  public static Parent createDevoir;
 
-	public static void main(String args[]) {
-		log.debug("executing main() method.");
-		launch(args);
-	}
+  
+  public static void main(String args[]) {
+    log.debug("executing main() method.");
+    launch(args);
+  }
 
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		primaryStage.setTitle("JFX Sample Application");
+  @Override
+  public void start(Stage primaryStage) throws Exception {
+    primaryStage.setTitle("JFX Sample Application");
+        
+    Parent root = FXMLLoader.load(getClass().getResource("ConnexionScreen.fxml"));
+    rootFL = FXMLLoader.load(getClass().getResource("main.fxml"));
+    rootEnseignant = FXMLLoader.load(getClass().getResource("EnseignantScreen.fxml"));
+    createDevoir = FXMLLoader.load(getClass().getResource("CreateAssignement.fxml"));
 
-		Parent root = FXMLLoader.load(getClass().getResource("ConnexionScreen.fxml"));
-		rootFL = FXMLLoader.load(getClass().getResource("main.fxml"));
+	//FXMLLoader loader = new FXMLLoader();
+    //loader.setLocation(getClass().getResource("main.fxml"));
+    //Parent root = loader.load();
 
-		// FXMLLoader loader = new FXMLLoader();
-		// loader.setLocation(getClass().getResource("main.fxml"));
-		// Parent root = loader.load();
+    primaryStage.setOnCloseRequest(event -> {
+      log.debug("terminating application.");
+      Platform.exit();
+    });
+    primaryStage.setScene(new Scene(root, 400, 200));
+    primaryStage.show();
+  }
 
-		primaryStage.setOnCloseRequest(event -> {
-			log.debug("terminating application.");
-			Platform.exit();
-		});
-		primaryStage.setScene(new Scene(root, 400, 200));
-		primaryStage.show();
-	}
 
 }
