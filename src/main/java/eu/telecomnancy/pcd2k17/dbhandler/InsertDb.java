@@ -1,14 +1,15 @@
 package eu.telecomnancy.pcd2k17.dbhandler;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class InsertDb extends MainDbhandler {
+public class InsertDb {//extends MainDbhandler {
 	
  
     public void insert(String title, String description, String discipline) {
-        String sql = "INSERT INTO Assignments(title,description,discipline) VALUES(?,?,?)";
+        String sql = "INSERT INTO Assignments(title,description,discipline) VALUES(?,?,?);";
  
         try (Connection conn = this.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -21,6 +22,17 @@ public class InsertDb extends MainDbhandler {
         }
     }
  
+    
+    private Connection connect() {
+        String url = "jdbc:sqlite:" + System.getProperty("user.dir") + "/src/main/resources/eu/telecomnancy/pcd2k17/database/test.db";
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection(url);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return conn;
+    }
     
     public static void main(String[] args) {
  

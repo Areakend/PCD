@@ -3,6 +3,7 @@ import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class MainDbhandler {
 
@@ -23,14 +24,13 @@ public class MainDbhandler {
     }
     
     public Connection connect() {
-        String url = "jdbc:sqlite:" + System.getProperty("user.dir") + "/src/main/resources/eu/telecomnancy/pcd2k17/database/gitTN";
+        String url = "jdbc:sqlite:" + System.getProperty("user.dir") + "/src/main/resources/eu/telecomnancy/pcd2k17/database/gitTN.db";
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        System.out.println("2");
         return conn;
     }
     
@@ -41,5 +41,5 @@ public class MainDbhandler {
         }
         catch (Exception e){}
     }
-
+    
 }
