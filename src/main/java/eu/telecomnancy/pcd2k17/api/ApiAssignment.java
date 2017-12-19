@@ -77,6 +77,14 @@ public class ApiAssignment implements ApiAssignmentInterface{
         return this.name;
     }
 
+    public void setDescription(String desc){
+        this.project.setDescription(desc);
+    }
+
+    public String getDescription(){
+        return this.project.getDescription();
+    }
+
     public void refresh(){
         this.listAssignment.refresh();
         this.idAssign = this.listAssignment.getIdAssign(this.name);
@@ -87,7 +95,7 @@ public class ApiAssignment implements ApiAssignmentInterface{
             try{
                 this.project = this.listAssignment.projectApi.getProject(idAssign);
             }
-            catch (org.gitlab4j.api.GitLabApiException e){System.out.println("Internal Error : Refresh.");}
+            catch (org.gitlab4j.api.GitLabApiException e){}
         }
     }
 

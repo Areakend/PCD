@@ -1,6 +1,5 @@
 package eu.telecomnancy.pcd2k17.UI.java;
 
-import java.io.File;
 import java.io.IOException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,6 +18,13 @@ public class EnseignantScreenController {
 	  public void goToCreateDevoir(ActionEvent event) throws IOException {
 		    Stage FileLoaderStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		    FileLoaderStage.setScene(new Scene(Main.createDevoir, 1600, 800));
+		    FileLoaderStage.show();
+	  }
+	  
+	  @FXML
+	  public void goToConsultDevoir(ActionEvent event) throws IOException {
+		    Stage FileLoaderStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		    FileLoaderStage.setScene(new Scene(Main.consultDevoir, 1600, 800));
 		    FileLoaderStage.show();
 	  }
 

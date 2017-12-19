@@ -16,7 +16,7 @@ public final class ApiListAssignment implements ApiAssignmentInterface{
         ApiListAssignment.ala = this;
         this.apico = ac;
         this.projectApi = ac.getProjectApi();
-        this.lsp = ac.getProjectsList(ac.login());
+        this.lsp = ac.getProjectsList();
     }
 
     public void createAssignment(String name){
@@ -25,7 +25,7 @@ public final class ApiListAssignment implements ApiAssignmentInterface{
             System.out.println("Your project "+name+" has been created");
         }
         catch (org.gitlab4j.api.GitLabApiException e){
-            System.out.println("Error when creating project : The project "+name+" exists already.");
+            System.out.println("Error when creating project : The project "+name+" exists already." );
         }
     }
 
@@ -54,12 +54,14 @@ public final class ApiListAssignment implements ApiAssignmentInterface{
 
     public void show(){
         this.refresh();
-        for (int i =0 ; i<this.lsp.size() ; i++)
-            System.out.println(this.lsp.get(i).getName());
+        for (Project p: this.lsp) {
+            System.out.println(p.getName());
+        }
+        System.out.println("");
     }
 
     public void refresh(){
-        this.lsp = this.apico.getProjectsList(this.apico.login());
+        this.lsp = this.apico.getProjectsList();
     }
 
     public static ApiListAssignment getInstance() {
