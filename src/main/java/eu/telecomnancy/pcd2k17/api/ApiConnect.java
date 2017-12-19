@@ -55,6 +55,7 @@ public final class ApiConnect {
         return this.GLA.getProjectApi();
     }
 
+	@SuppressWarnings("resource")
 	private String getToken(){
         String line ;
         BufferedReader in;
@@ -76,7 +77,7 @@ public final class ApiConnect {
             writer.println(tok);
             writer.close();
         }
-        catch (Exception ee){}
+        catch (Exception ee){System.out.println("marche pas");}
     }
 
     public static ApiConnect getInstance(){
