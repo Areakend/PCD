@@ -1,4 +1,5 @@
 package eu.telecomnancy.pcd2k17.dbhandler;
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
@@ -40,9 +41,18 @@ public class MainDbhandler {
             System.out.println(e.getMessage());
         }
     }
+    
+    public static void createFile() {
+    	try {
+            File dir = new File("src/main/resources/eu/telecomnancy/pcd2k17/database");
+            dir.mkdir();
+        }
+        catch (Exception e){}
+    }
 
 
     public static void main(String[] args) {
+    	createFile();
         createNewDatabase("test.db");
         createNewTable();
     }

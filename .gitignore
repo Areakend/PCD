@@ -195,9 +195,12 @@ bin/
 #!.vscode/extensions.json
 .history
 
-#TOKEN
+# TOKEN
 .token
-#IntelliJ
+
+# IntelliJ
 .idea/
 out/
+
+#Database
 src/main/resources/eu/telecomnancy/pcd2k17/database/
