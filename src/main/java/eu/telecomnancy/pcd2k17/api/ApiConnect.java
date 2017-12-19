@@ -6,12 +6,13 @@ import org.gitlab4j.api.models.Project;
 import java.io.*;
 import java.util.List;
 
-public class ApiConnect {
+public final class ApiConnect {
     private String url;
-    private List<Project> projects;
     private GitLabApi GLA;
+    private static ApiConnect apico;
 
     public ApiConnect(String u){
+        ApiConnect.apico = this;
         this.url = u;
     }
 
@@ -42,8 +43,7 @@ public class ApiConnect {
 
     public List<Project> getProjectsList(GitLabApi git){
         try {
-            projects = git.getProjectApi().getMemberProjects();
-            return this.projects;
+            return git.getProjectApi().getMemberProjects();
         }
         catch (org.gitlab4j.api.GitLabApiException e){
             System.out.println(e);
@@ -55,7 +55,7 @@ public class ApiConnect {
         return this.GLA.getProjectApi();
     }
 
-    @SuppressWarnings("resource")
+	@SuppressWarnings("resource")
 	private String getToken(){
         String line ;
         BufferedReader in;
@@ -67,15 +67,7 @@ public class ApiConnect {
             line = in.readLine();
             return line;
         }
-        catch (Exception e){
-//            try {
-//                Scanner reader = new Scanner(System.in);
-//                System.out.println("Token :");
-//                this.setToken(reader.nextLine());
-//                reader.close();
-//            }
-//            catch (Exception ee){}
-        }
+        catch (Exception e){}
         return null;
     }
 
@@ -85,6 +77,11 @@ public class ApiConnect {
             writer.println(tok);
             writer.close();
         }
-        catch (Exception ee){}
+        catch (Exception ee){System.out.println("marche pas");}
     }
+
+    public static ApiConnect getInstance(){
+        return ApiConnect.apico;
+    }
+
 }
