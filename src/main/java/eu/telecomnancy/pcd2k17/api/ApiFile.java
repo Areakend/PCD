@@ -25,7 +25,7 @@ public class ApiFile{
         return repoFile;
     }
 
-    public void pushFile(RepositoryFile file,String branch, String commit){
+    public void createFile(RepositoryFile file,String branch, String commit){
         try {
             ApiConnect.REPOFILEAPI.createFile(file,this.assign.getIdAssign(),branch,commit);
         }

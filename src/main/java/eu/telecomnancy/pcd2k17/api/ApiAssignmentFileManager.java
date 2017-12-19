@@ -1,6 +1,7 @@
 package eu.telecomnancy.pcd2k17.api;
 
 import org.gitlab4j.api.models.Branch;
+import org.gitlab4j.api.models.TreeItem;
 
 import java.util.List;
 
@@ -50,5 +51,17 @@ public class ApiAssignmentFileManager{
             System.out.println("Internal Error : Can't find your branch.");
         }
         return null;
+    }
+
+    public void showElements(){
+        try {
+            List<TreeItem> tree = ApiConnect.REPOAPI.getTree(this.assign.getIdAssign());
+            for (TreeItem t:tree) {
+                System.out.println(t.getType().toString()+" - "+t.getName());
+            }
+        }
+        catch (org.gitlab4j.api.GitLabApiException e){
+            System.out.println("Internal Error : Can't show the repo's files. "+e);
+        }
     }
 }
