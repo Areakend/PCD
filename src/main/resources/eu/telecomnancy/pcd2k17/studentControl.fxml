@@ -147,5 +147,10 @@
             </TextArea>
          </children>
       </GridPane>
+      <Button fx:id="menuButton" layoutX="1329.0" layoutY="56.0" mnemonicParsing="false" onAction="#goToMenu" prefHeight="39.0" prefWidth="108.0" text="Menu">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
