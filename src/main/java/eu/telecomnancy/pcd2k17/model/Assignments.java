@@ -15,21 +15,20 @@ public class Assignments extends MainDbhandler{
 	public void createAssignments() {
 		String url = "jdbc:sqlite:"+ System.getProperty("user.dir") + 
 				"/src/main/resources/eu/telecomnancy/pcd2k17/database/gitTN.db";
-		String sql = //"CREATE TYPE state IF NOT EXISTS AS ENUM ('active', 'closed', 'archived');\n"
-				//"CREATE TYPE isPrivate IF NOT EXISTS AS ENUM ('true','false');\n"
-				"CREATE TABLE IF NOT EXISTS Assignments (\n"
+		String sql = "CREATE TABLE IF NOT EXISTS Assignments (\n"
+				+ " idAssignment int PRIMARY KEY,\n"
 				+ " title text,\n"
 				+ " description text,\n"
-				+ " discipline text,\n"
-				+ " teacher text,\n"
-				+ " releaseDate int,\n"
-				+ " deadline int,\n"
-				//+ tous les groupes de projet
-				+ " prefix text,\n"
-				//+ " currentState state,\n"
+				+ " discipline text,\n" //#Teachers.discipline
+				+ " releaseDate text,\n"
+				+ " deadline text,\n"
+				+ " deadlineHour text,\n"
+				+ " groupName text,\n" //#Groups.groupName
+				+ " state text,\n"
 				+ " folder text,\n"
-				//+ " privateGit isPrivate,\n"
-				+ " origine text\n"
+				+ " privateGit text,\n"
+				+ " origine text,\n"
+				+ " studentsCapacity int\n"
 				+ ");";
 		try (Connection conn = DriverManager.getConnection(url);
 				Statement stmt = conn.createStatement()) {
@@ -41,22 +40,28 @@ public class Assignments extends MainDbhandler{
 				
 	}
 	
-    public void insertAssignment(String title, String description, String discipline, String teacher,
-    		int releaseDate, int deadline, String prefix, String folder, String origine) {
-        String sql = "INSERT INTO Assignments(title,description,discipline,teacher,releaseDate,"
-        		+ "deadline,prefix,folder,origine) VALUES(?,?,?,?,?,?,?,?,?);";
+    public void insertAssignment(int idAssignment, String title, String description, String discipline,
+    		String releaseDate, String deadline, String deadlineHour, String groupName, String state,
+    		String folder, String privateGit, String origine, int studentsCapacity) {
+        String sql = "INSERT INTO Assignments(idAssignment,title,description,discipline,"
+        		+ "releaseDate,deadline,deadlineHour,groupName,state,folder,privateGit,"
+        		+ "origine,studentCapacity) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?);";
  
         try (Connection conn = this.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, title);
-            pstmt.setString(2, description);
-            pstmt.setString(3, discipline);
-            pstmt.setString(4, teacher);
-            pstmt.setInt(5, releaseDate);
-            pstmt.setInt(6, deadline);
-            pstmt.setString(7, prefix);
-            pstmt.setString(8, folder);
-            pstmt.setString(9, origine);
+        	pstmt.setInt(1, idAssignment);
+            pstmt.setString(2, title);
+            pstmt.setString(3, description);
+            pstmt.setString(4, discipline);
+            pstmt.setString(5, releaseDate);
+            pstmt.setString(6, deadline);
+            pstmt.setString(7, deadlineHour);
+            pstmt.setString(8, groupName);
+            pstmt.setString(9, state);
+            pstmt.setString(10, folder);
+            pstmt.setString(11, privateGit);
+            pstmt.setString(12, origine);
+            pstmt.setInt(13, studentsCapacity);
             pstmt.executeUpdate();
             System.out.println("Assignment has been created.");
         } catch (SQLException e) {
@@ -64,19 +69,19 @@ public class Assignments extends MainDbhandler{
         }
     }
     
-    public void deleteAssignment(String title) {
-    	String sql = "DELETE FROM Assignments WHERE title = ?";
+    public void deleteAssignment(int idAssignment) {
+    	String sql = "DELETE FROM Assignments WHERE idAssignment = ?";
     	try (Connection conn = this.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) { 
-            pstmt.setString(1, title);
+            pstmt.setInt(1, idAssignment);
             pstmt.executeUpdate();
             System.out.println("Assignment has been deleted.");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
-    
-    //La fonction suivante ne permet de changer la valeur que des Strings
+
+    // Ne permet pas de changer la taille des groupes
     public void updateAssignment(String title, String updatedField, String newValue) {
         String sql = "UPDATE Assignments SET " + updatedField + " = ? "
                 + "WHERE title = ?";
@@ -97,22 +102,25 @@ public class Assignments extends MainDbhandler{
              Statement stmt  = conn.createStatement();
              ResultSet rs    = stmt.executeQuery(sql)){
             while (rs.next()) {
-                System.out.println(rs.getString("title") +  "\t" + 
+                System.out.println(rs.getInt("idAssignment") +  "\t" + 
+                				   rs.getString("title") +  "\t" + 
                                    rs.getString("description") + "\t" +
                                    rs.getString("discipline") + "\t" +
-                                   rs.getString("teacher") + "\t" +
-                                   rs.getInt("releaseDate") + "\t" +
-                                   rs.getInt("deadline") + "\t" +
-                                   rs.getString("prefix") + "\t" +
+                                   rs.getString("releaseDate") + "\t" +
+                                   rs.getString("deadline") + "\t" +
+                                   rs.getString("deadlineHour") + "\t" +
+                                   rs.getString("groupName") + "\t" +
+                                   rs.getString("state") + "\t" +
                                    rs.getString("folder") + "\t" +
-                                   rs.getString("origine"));
+                                   rs.getString("privateGit") + "\t" +
+                                   rs.getString("origine") + "\t" +
+                                   rs.getInt("studentsCapacity"));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
     
-    //La fonction suivante ne permet de chercher la valeur qu'à travers des Strings
     public void getAssignmentsby(String searchField, String Value){
         String sql = "SELECT * FROM Assignments WHERE " + searchField + " = ?";
         try (Connection conn = this.connect();
@@ -120,15 +128,19 @@ public class Assignments extends MainDbhandler{
         	pstmt.setString(1, Value);
         	ResultSet rs  = pstmt.executeQuery();
         	while (rs.next()) {
-        		System.out.println(rs.getString("title") +  "\t" + 
-                        		   rs.getString("description") + "\t" +
-                        		   rs.getString("discipline") + "\t" +
-                        		   rs.getString("teacher") + "\t" +
-                        		   rs.getInt("releaseDate") + "\t" +
-                        		   rs.getInt("deadline") + "\t" +
-                        		   rs.getString("prefix") + "\t" +
-                        		   rs.getString("folder") + "\t" +
-                        		   rs.getString("origine"));
+        		System.out.println(rs.getInt("idAssignment") +  "\t" + 
+     				   			   rs.getString("title") +  "\t" + 
+     				   			   rs.getString("description") + "\t" +
+     				   			   rs.getString("discipline") + "\t" +
+     				   			   rs.getString("releaseDate") + "\t" +
+     				   			   rs.getString("deadline") + "\t" +
+     				   			   rs.getString("deadlineHour") + "\t" +
+     				   			   rs.getString("groupName") + "\t" +
+     				   			   rs.getString("state") + "\t" +
+     				   			   rs.getString("folder") + "\t" +
+     				   			   rs.getString("privateGit") + "\t" +
+     				   			   rs.getString("origine") + "\t" +
+     				   			   rs.getInt("studentsCapacity"));
         		}
         	} catch (SQLException e) {
         		System.out.println(e.getMessage());
@@ -137,7 +149,7 @@ public class Assignments extends MainDbhandler{
     
 	
 	public static void main(String[] args) {
-		// A faire dès le lancement de l'appli
+		/*// A faire dès le lancement de l'appli
 		MainDbhandler.createFile();
 		MainDbhandler.createNewDatabase("gitTN.db");
 		Assignments assign = new Assignments();
@@ -150,7 +162,7 @@ public class Assignments extends MainDbhandler{
 		assign.updateAssignment("title","title","titre");
 		assign.getAssignmentsby("teacher", "teacher");
 		// A ne pas forcément faire
-		assign.deleteAssignment("titre");
+		assign.deleteAssignment("titre");*/
 	}
 
 }
