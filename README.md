@@ -63,6 +63,6 @@ Une base de données est en cours d'achèvement mais n'est pas encore au point.
 - Lier les boutons avec les fonctionnalités de l'API gitlab.
 
 ## RELEASE_DAY_3
-POUR LANCER L'APPLICATION, DOUBLE CLIQUER DESSUS.
-Dans la version 3.0, les menus permettent une navigation plus intuitive, avec la possibilit� de cliquer sur le bouton "Menu" ramenant au menu prncipal.
-Des alertes sont pr�sente lors de la cr�ation d'un projet permettant � l'utilisateur de ne pas se tormper (mauvaise d�te, horraires dans un mauvais format, ...).
+Dans la version 3.0, les menus permettent une navigation plus intuitive, avec la possibilié de cliquer sur le bouton "Menu" ramenant au menu prncipal.
+Des alertes sont présente lors de la création d'un projet permettant à l'utilisateur de ne pas se tormper (mauvaise dâte, horraires dans un mauvais format, ...).
+La base de donnée a été finalisée.
