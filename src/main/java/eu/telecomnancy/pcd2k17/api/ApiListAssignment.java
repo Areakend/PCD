@@ -2,10 +2,13 @@ package eu.telecomnancy.pcd2k17.api;
 
 import org.gitlab4j.api.GroupApi;
 import org.gitlab4j.api.models.Group;
+import org.gitlab4j.api.models.Visibility;
+
+import java.util.List;
 
 
 public abstract class ApiListAssignment {
-    private GroupApi group;
+    protected GroupApi group;
     private ApiDiscipline discipline;
 
     public ApiListAssignment(ApiDiscipline discipline_){
@@ -13,9 +16,9 @@ public abstract class ApiListAssignment {
         this.discipline = discipline_;
     }
 
-    public void createAssignment(String name){
+    public void createAssignment(String name,String desc){
         try{
-            this.group.addGroup(name,this.discipline.getName()+"."+name);
+            this.group.addGroup(name,name,desc,Boolean.FALSE,Boolean.TRUE,Visibility.PRIVATE,Boolean.FALSE,Boolean.FALSE,this.discipline.getDisciplineId(),0);
         }
         catch (org.gitlab4j.api.GitLabApiException e){
             System.out.println("Internal Error : Can't create a new assignment. " + e);
@@ -31,9 +34,14 @@ public abstract class ApiListAssignment {
         }
     }
 
-    protected Group getAssignment(String path){
+    protected Group getAssignment(String name){
         try {
-            return this.group.getGroup(path);
+            List<Group> group = this.group.getGroups();
+            for (int i = 0 ; i<group.size();i++){
+                if (group.get(i).getName().equals(name)){
+                    return group.get(i);
+                }
+            }
         }
         catch (org.gitlab4j.api.GitLabApiException e){
             System.out.println("The Assignment doesn't exist. Creating a new one.");

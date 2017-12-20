@@ -61,11 +61,15 @@ public abstract class ApiListDiscipline {
 
     public void showListDiscipline(){
         try{
-            System.out.println("\n List of disciplines :");
+            int i = 0;
+            System.out.println("List of disciplines :");
             for (Group gp:this.group.getGroups()) {
-                System.out.println(gp.getName());
+                if(gp.getParentId() == null){
+                    i++;
+                    System.out.println(gp.getName());
+                }
             }
-            System.out.println("Total : "+this.group.getGroups().size());
+            System.out.println("Total : "+i+"\n");
         }
         catch (org.gitlab4j.api.GitLabApiException e){
             System.out.println("Internal Error : Can't show the disciplines. "+e);

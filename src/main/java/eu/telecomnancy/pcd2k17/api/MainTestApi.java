@@ -10,14 +10,15 @@ public class MainTestApi {
             ApiDiscipline Coucou = new ApiDiscipline("Coucou");
             Coucou.showListDiscipline();
 
-            //ApiAssignment assign = new ApiAssignment("Devoir1",Coucou);
+            ApiAssignment assign = new ApiAssignment("Devoir1",Coucou,"Test de devoir");
+            ApiAssignment assign2 = new ApiAssignment("Devoir2",Coucou,"Test de devoir2");
 
-            System.out.println("");
-            ApiDiscipline Test = new ApiDiscipline("Test");
-            System.out.println(Test.getDiscipline(Test.getName()).getFullPath());
+
+            assign.showAssignments();
 
 
             Coucou.showListDiscipline();
+
             //assign.deleteAssignment();
 
         }
