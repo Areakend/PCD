@@ -30,13 +30,13 @@ public class Groups extends MainDbhandler{
 				
 	}
 	
-    public void insertGroup(String name, int mailStudent) {
+    public void insertGroup(String name, int idStudent) {
         String sql = "INSERT INTO Groups(name,idStudent) VALUES(?,?);";
  
         try (Connection conn = this.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, name);
-            pstmt.setInt(2, mailStudent);
+            pstmt.setInt(2, idStudent);
             pstmt.executeUpdate();
             System.out.println("Group has been created.");
         } catch (SQLException e) {
