@@ -5,9 +5,9 @@ import org.gitlab4j.api.models.RepositoryFile;
 import java.io.File;
 
 public class ApiFile{
-    private ApiAssignment assign;
+    private ApiProjectReturn assign;
 
-    public ApiFile(ApiAssignment assign_){
+    public ApiFile(ApiProjectReturn assign_){
         this.assign = assign_;
     }
 
@@ -43,23 +43,4 @@ public class ApiFile{
         }
         return null;
     }
-
-    public File saveFile(String branch,String filepathRepository,String directoryPath){
-        File dir = new File(directoryPath);
-        dir.mkdir();
-        try{
-            return ApiConnect.REPOFILEAPI.getRawFile(this.assign.getIdAssign(),branch,filepathRepository,dir);
-        }
-        catch (org.gitlab4j.api.GitLabApiException e){
-            System.out.println("Internal Error : Can't save the file. " + e);
-        }
-
-        return null;
-    }
-
-    public File saveFile(String branch,String filepathRepository){
-        return this.saveFile(branch,filepathRepository,".saveFile");
-    }
-
-
 }

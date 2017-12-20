@@ -1,8 +1,5 @@
 package eu.telecomnancy.pcd2k17.api;
-import org.gitlab4j.api.GitLabApi;
-import org.gitlab4j.api.ProjectApi;
-import org.gitlab4j.api.RepositoryApi;
-import org.gitlab4j.api.RepositoryFileApi;
+import org.gitlab4j.api.*;
 import org.gitlab4j.api.models.Project;
 
 import java.io.*;
@@ -12,6 +9,7 @@ public final class ApiConnect {
     public static GitLabApi GLA;
     public static RepositoryApi REPOAPI;
     public static RepositoryFileApi REPOFILEAPI;
+    public static GroupApi GROUP;
 
     private String url;
     private static ApiConnect apico;
@@ -26,6 +24,7 @@ public final class ApiConnect {
         ApiConnect.GLA = new GitLabApi(this.url, this.getToken());
         ApiConnect.REPOAPI = new RepositoryApi(ApiConnect.GLA);
         ApiConnect.REPOFILEAPI = new RepositoryFileApi(ApiConnect.GLA);
+        ApiConnect.GROUP = new GroupApi(ApiConnect.GLA);
     }
 
     public void login(String tok){
@@ -54,10 +53,6 @@ public final class ApiConnect {
             System.out.println(e);
         }
         return null;    }
-
-    public ProjectApi getProjectApi(){
-        return ApiConnect.GLA.getProjectApi();
-    }
 
 	@SuppressWarnings("resource")
 	private String getToken(){
