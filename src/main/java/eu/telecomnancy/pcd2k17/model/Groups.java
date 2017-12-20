@@ -17,7 +17,8 @@ public class Groups extends MainDbhandler{
 				"/src/main/resources/eu/telecomnancy/pcd2k17/database/gitTN.db";
 		String sql = "CREATE TABLE IF NOT EXISTS Groups (\n"
 				+ " name text,\n"
-				+ " idStudent int\n" //#Students.idStudent
+				+ " idStudent int,\n" //#Students.idStudent
+				+ " CONSTRAINT Fk_idStudent FOREIGN KEY (idStudent) REFERENCES Students(idStudent)\n"
 				+ ");";
 		try (Connection conn = DriverManager.getConnection(url);
 				Statement stmt = conn.createStatement()) {
@@ -112,9 +113,9 @@ public class Groups extends MainDbhandler{
         		}
         }
     
-	
+	/*
 	public static void main(String[] args) {
-		/*// A faire dès le lancement de l'appli
+		// A faire dès le lancement de l'appli
 		MainDbhandler.createFile();
 		MainDbhandler.createNewDatabase("gitTN.db");
 		Groups assign = new Groups();
@@ -127,7 +128,7 @@ public class Groups extends MainDbhandler{
 		assign.updateGroup("title","title","titre");
 		assign.getGroupsby("teacher", "teacher");
 		// A ne pas forcément faire
-		assign.deleteGroup("titre");*/
-	}
+		assign.deleteGroup("titre");
+	}*/
 
 }

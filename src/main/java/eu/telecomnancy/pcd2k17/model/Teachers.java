@@ -112,9 +112,9 @@ public class Teachers extends MainDbhandler{
         		}
         }
     
-	
+	/*
 	public static void main(String[] args) {
-		/*// A faire dès le lancement de l'appli
+		// A faire dès le lancement de l'appli
 		MainDbhandler.createFile();
 		MainDbhandler.createNewDatabase("gitTN.db");
 		Teachers assign = new Teachers();
@@ -126,7 +126,7 @@ public class Teachers extends MainDbhandler{
 		assign.updateTeacher("mail","name","theName");
 		assign.getTeachersby("name", "theName");
 		// A ne pas forcément faire
-		assign.deleteTeacher("theName");*/
-	}
+		assign.deleteTeacher("theName");
+	}*/
 
 }

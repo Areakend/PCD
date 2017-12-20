@@ -28,7 +28,8 @@ public class Assignments extends MainDbhandler{
 				+ " folder text,\n"
 				+ " privateGit text,\n"
 				+ " origine text,\n"
-				+ " studentsCapacity int\n"
+				+ " studentsCapacity int,\n"
+				+ " CONSTRAINT Fk_discipline FOREIGN KEY (discipline) REFERENCES Teachers(discipline)\n"
 				+ ");";
 		try (Connection conn = DriverManager.getConnection(url);
 				Statement stmt = conn.createStatement()) {
@@ -147,9 +148,9 @@ public class Assignments extends MainDbhandler{
         		}
         }
     
-	
+	/*
 	public static void main(String[] args) {
-		/*// A faire dès le lancement de l'appli
+		// A faire dès le lancement de l'appli
 		MainDbhandler.createFile();
 		MainDbhandler.createNewDatabase("gitTN.db");
 		Assignments assign = new Assignments();
@@ -162,7 +163,7 @@ public class Assignments extends MainDbhandler{
 		assign.updateAssignment("title","title","titre");
 		assign.getAssignmentsby("teacher", "teacher");
 		// A ne pas forcément faire
-		assign.deleteAssignment("titre");*/
-	}
+		assign.deleteAssignment("titre");
+	}*/
 
 }
