@@ -152,10 +152,5 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="choisirProjet" layoutX="163.0" layoutY="56.0" mnemonicParsing="false" onAction="#choisirMatiere" prefHeight="39.0" prefWidth="175.0" text="Choisir un projet">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
    </children>
 </AnchorPane>

@@ -1,6 +1,7 @@
 package eu.telecomnancy.pcd2k17.UI.java;
 
 import java.io.IOException;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import eu.telecomnancy.pcd2k17.Main;
@@ -11,25 +12,23 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class EnseignantScreenController {
-	
-	final static Logger log = LogManager.getLogger(ConnexionScreenController.class);
-	  
-	  @FXML
-	  public void goToCreateDevoir(ActionEvent event) throws IOException {
-		    Stage FileLoaderStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		    FileLoaderStage.setScene(new Scene(Main.createDevoir, 1600, 800));
-		    FileLoaderStage.show();
-	  }
-	  
-	  @FXML
-	  public void goToConsultDevoir(ActionEvent event) throws IOException {
-		    Stage FileLoaderStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		    FileLoaderStage.setScene(new Scene(Main.consultDevoir, 1600, 800));
-		    FileLoaderStage.show();
-	  }
 
-	
-	  
-	  
-	  
+	final static Logger log = LogManager.getLogger(ConnexionScreenController.class);
+
+	@FXML
+	public void goToCreateDevoir(ActionEvent event) throws IOException {
+		Stage FileLoaderStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		FileLoaderStage.setScene(new Scene(Main.createDevoir, 1600, 800));
+		FileLoaderStage.show();
+	}
+
+	@FXML
+	public void goToConsultDevoir(ActionEvent event) throws IOException {
+		
+		
+		Stage FileLoaderStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		FileLoaderStage.setScene(new Scene(Main.consultDevoir, 1600, 800));
+		FileLoaderStage.show();
+	}
+
 }
