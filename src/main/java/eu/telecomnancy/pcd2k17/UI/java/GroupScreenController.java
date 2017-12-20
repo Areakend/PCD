@@ -10,6 +10,8 @@ import javafx.scene.Node;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.scene.control.TreeTableView;
+import javafx.scene.control.TreeTableColumn;
 
 public class GroupScreenController {
 
@@ -17,6 +19,46 @@ public class GroupScreenController {
 	  
 	@FXML
 	Text pathText = new Text();
+	
+	TreeTableView<String> groupsTreeTableView;
+	 
+	@FXML
+	private TreeTableColumn<String, String> firstNameTableColumn;
+	
+	@FXML
+	private TreeTableColumn<String, String> lastNameTableColumn;
+	
+	@FXML
+	private TreeTableColumn<String, String> mailTableColumn;
+	
+	@FXML
+	private TreeTableColumn<String, String> groupsTableColumn;
+	
+	@FXML
+	public void AddStudent(ActionEvent event){
+		
+	}
+	
+	@FXML
+	public void deleteStudent(ActionEvent event){
+		
+	}
+	
+	@FXML
+	public void modifyStudent(ActionEvent event){
+		
+	}
+	
+	@FXML
+	public void generateGroups(ActionEvent event){
+		
+	}
+	
+	@FXML
+	public void validate(ActionEvent event){
+		
+	}
+	
 	
 	@FXML
 	  public void importCSV(ActionEvent event) {
