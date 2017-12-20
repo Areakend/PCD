@@ -29,6 +29,12 @@ public class ConnexionScreenController {
 		if (Main.Token.length() > 0) {
 			Main.api.login(Main.Token);
 			if (Main.api.loginOK()) {
+				 Main.mainPane.setCenter(Main.panel0);
+			        Scene scene = new Scene(Main.mainPane, 1400, 700);
+			        Main.stage.setTitle("test");
+			        Main.stage.setScene(scene);
+			        Main.stage.show();
+			        Main.stage2.hide();
 				log.debug("Connection reussie"); // Afficher stage suivant
 				Main.mainPane.setCenter(Main.panel1);
 			} else {
