@@ -30,17 +30,14 @@ public class ConnexionScreenController {
 			Main.api.login(Main.Token);
 			if (Main.api.loginOK()) {
 				log.debug("Connection reussie"); // Afficher stage suivant
-
-				Stage FileLoaderStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-				FileLoaderStage.hide();
-				FileLoaderStage.setScene(new Scene(Main.rootEnseignant, 1600, 800));
-				FileLoaderStage.show();
+				Main.mainPane.setCenter(Main.panel1);
+			} else {
+				Alert connectionError = new Alert(AlertType.ERROR);
+				connectionError.setTitle("Connection error");
+				connectionError.setHeaderText(null);
+				connectionError.setContentText("Could not connect with this token");
+				connectionError.showAndWait();
 			}
-			else {Alert connectionError = new Alert(AlertType.ERROR);
-			connectionError.setTitle("Connection error");
-			connectionError.setHeaderText(null);
-			connectionError.setContentText("Could not connect with this token");
-			connectionError.showAndWait();}
 		}
 
 	}

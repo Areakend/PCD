@@ -95,6 +95,12 @@ public class studentControl {
 		log.debug("Push Devoir");
 	}
 
+	  @FXML
+	  public void back2Menu(ActionEvent event) throws IOException {
+
+			Main.mainPane.setCenter(Main.panel1);  
+	  }
+	
 	@FXML
 	public void importFile(ActionEvent event) {
 

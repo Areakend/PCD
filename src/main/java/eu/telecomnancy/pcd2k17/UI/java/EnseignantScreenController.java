@@ -7,8 +7,10 @@ import org.apache.logging.log4j.Logger;
 import eu.telecomnancy.pcd2k17.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class EnseignantScreenController {
@@ -17,18 +19,18 @@ public class EnseignantScreenController {
 
 	@FXML
 	public void goToCreateDevoir(ActionEvent event) throws IOException {
-		Stage FileLoaderStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		FileLoaderStage.setScene(new Scene(Main.createDevoir, 1600, 800));
-		FileLoaderStage.show();
+
+		Main.mainPane.setCenter(Main.panel2);
+
 	}
+
 
 	@FXML
 	public void goToConsultDevoir(ActionEvent event) throws IOException {
+
+		Main.mainPane.setCenter(Main.panel3);
+
 		
-		
-		Stage FileLoaderStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		FileLoaderStage.setScene(new Scene(Main.consultDevoir, 1600, 800));
-		FileLoaderStage.show();
 	}
 
 }
