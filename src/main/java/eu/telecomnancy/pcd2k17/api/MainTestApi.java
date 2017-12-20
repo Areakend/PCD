@@ -8,18 +8,25 @@ public class MainTestApi {
             System.out.println("Login OK\n");
 
             ApiDiscipline Coucou = new ApiDiscipline("Coucou");
-            Coucou.showListDiscipline();
+            api.showListDiscipline();
 
-            ApiAssignment assign = new ApiAssignment("Devoir1",Coucou,"Test de devoir");
-            ApiAssignment assign2 = new ApiAssignment("Devoir2",Coucou,"Test de devoir2");
-
-
-            assign.showAssignments();
+            ApiAssignment assign = new ApiAssignment(Coucou,"Devoir1","Test de devoir");
+            ApiAssignment assign2 = new ApiAssignment(Coucou,"Devoir2","Test de devoir2");
 
 
-            Coucou.showListDiscipline();
+            Coucou.showAssignments();
+
+
+            api.showListDiscipline();
+
+            ApiProjectReturn rendu1 = new ApiProjectReturn("Rendu de projet "+assign.getName(),assign);
+            ApiProjectReturn rendu2 = new ApiProjectReturn("Rendu de projet "+assign2.getName(),assign2);
+
+            assign.showProjects();
+
 
             //assign.deleteAssignment();
+
 
         }
 

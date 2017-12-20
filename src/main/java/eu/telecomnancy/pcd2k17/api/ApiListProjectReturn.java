@@ -1,27 +1,17 @@
 package eu.telecomnancy.pcd2k17.api;
 
 import org.gitlab4j.api.ProjectApi;
-import org.gitlab4j.api.models.Project;
 
-import java.util.List;
-
-public class ApiListProjectReturn {
-    private static ApiListProjectReturn ala;
-    private int idAssign;
-    private ApiConnect apico;
-    private List<Project> lsp;
+public abstract class ApiListProjectReturn {
     private ProjectApi projectApi;
 
-    public ApiListProjectReturn(ApiConnect ac){
-        ApiListProjectReturn.ala = this;
-        this.apico = ac;
+    protected ApiListProjectReturn(){
         this.projectApi = ApiConnect.GLA.getProjectApi();
-        this.lsp = ac.getProjectsList();
     }
 
-    public void createAssignment(String name){
+    protected void createProject(String name, int groupId){
         try {
-            this.projectApi.createProject(name);
+            this.projectApi.createProject(groupId,name);
             System.out.println("Your project "+name+" has been created");
         }
         catch (org.gitlab4j.api.GitLabApiException e){
@@ -29,7 +19,7 @@ public class ApiListProjectReturn {
         }
     }
 
-    public boolean deleteAssignment(int idProject){
+    protected boolean deleteProject(int idProject){
         try {
             this.projectApi.deleteProject(idProject);
             System.out.println("Deletion Sucess");
@@ -42,33 +32,4 @@ public class ApiListProjectReturn {
         return false;
     }
 
-    public int getIdAssign(String name){
-        for (int i = 0 ; i<this.lsp.size(); i++){
-            if (this.lsp.get(i).getName().equals(name)){
-                this.idAssign = this.lsp.get(i).getId();
-                return this.lsp.get(i).getId();
-            }
-        }
-        return -1;
-    }
-
-    public void show(){
-        this.refresh();
-        for (Project p: this.lsp) {
-            System.out.println(p.getName());
-        }
-        System.out.println("");
-    }
-
-    public ProjectApi getProjectApi() {
-        return projectApi;
-    }
-
-    public void refresh(){
-        this.lsp = this.apico.getProjectsList();
-    }
-
-    public static ApiListProjectReturn getInstance() {
-        return ApiListProjectReturn.ala;
-    }
 }

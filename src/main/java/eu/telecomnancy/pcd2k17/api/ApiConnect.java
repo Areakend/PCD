@@ -1,8 +1,10 @@
 package eu.telecomnancy.pcd2k17.api;
 import org.gitlab4j.api.*;
+import org.gitlab4j.api.models.Group;
 import org.gitlab4j.api.models.Project;
 
 import java.io.*;
+import java.util.LinkedList;
 import java.util.List;
 
 public final class ApiConnect {
@@ -10,6 +12,7 @@ public final class ApiConnect {
     public static RepositoryApi REPOAPI;
     public static RepositoryFileApi REPOFILEAPI;
     public static GroupApi GROUP;
+    public static ProjectApi PROJECT;
 
     private String url;
     private static ApiConnect apico;
@@ -25,6 +28,7 @@ public final class ApiConnect {
         ApiConnect.REPOAPI = new RepositoryApi(ApiConnect.GLA);
         ApiConnect.REPOFILEAPI = new RepositoryFileApi(ApiConnect.GLA);
         ApiConnect.GROUP = new GroupApi(ApiConnect.GLA);
+        ApiConnect.PROJECT = new ProjectApi(ApiConnect.GLA);
     }
 
     public void login(String tok){
@@ -44,15 +48,6 @@ public final class ApiConnect {
         file.delete();
         return false;
     }
-
-    public List<Project> getProjectsList(){
-        try {
-            return ApiConnect.GLA.getProjectApi().getMemberProjects();
-        }
-        catch (org.gitlab4j.api.GitLabApiException e){
-            System.out.println(e);
-        }
-        return null;    }
 
 	@SuppressWarnings("resource")
 	private String getToken(){
@@ -77,6 +72,46 @@ public final class ApiConnect {
             writer.close();
         }
         catch (Exception ee){System.out.println("marche pas");}
+    }
+
+    public Group getDiscipline(String name){
+        try {
+            List<Group> group = ApiConnect.GROUP.getGroups();
+            for (int i = 0 ; i<group.size();i++){
+                if (group.get(i).getName().equals(name)){
+                    return group.get(i);
+                }
+            }
+        }
+        catch (org.gitlab4j.api.GitLabApiException e){
+            System.out.println("Internal Error : Can't get groups. "+e );
+        }
+        return null;
+    }
+
+    public List<String> getListDiscipline(){
+        List<String> list = new LinkedList<>();
+        try{
+            for (Group gp:ApiConnect.GROUP.getGroups()) {
+                if(gp.getParentId() == null){
+                    list.add(gp.getName());
+                }
+            }
+        }
+        catch (org.gitlab4j.api.GitLabApiException e){
+            System.out.println("Internal Error : Can't show the disciplines. "+e);
+        }
+        return list;
+    }
+
+    public void showListDiscipline(){
+        int i = 0;
+        System.out.println("List of disciplines :");
+        for (String s:this.getListDiscipline()) {
+            System.out.println(s);
+            i++;
+        }
+        System.out.println("Total : "+i+"\n");
     }
 
     public static ApiConnect getInstance(){
