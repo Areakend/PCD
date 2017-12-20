@@ -35,6 +35,10 @@ Eclipse allows to import a gradle project.
 
 You first have to install the gradle plugin in NetBeans before being able to import a gradle project.
 
+
+
+POUR LANCER L'APPLICATION, DOUBLE CLIQUER DESSUS.
+
 #RELEASE
 ## RELEASE_DAY_1
 
@@ -57,3 +61,8 @@ Une base de donn√©es est en cours d'ach√®vement mais n'est pas encore au point.
 ###A impl√©menter
 - Base de donn√©e complete
 - Lier les boutons avec les fonctionnalit√©s de l'API gitlab.
+
+## RELEASE_DAY_3
+POUR LANCER L'APPLICATION, DOUBLE CLIQUER DESSUS.
+Dans la version 3.0, les menus permettent une navigation plus intuitive, avec la possibilitÈ de cliquer sur le bouton "Menu" ramenant au menu prncipal.
+Des alertes sont prÈsente lors de la crÈation d'un projet permettant ‡ l'utilisateur de ne pas se tormper (mauvaise d‚te, horraires dans un mauvais format, ...).
