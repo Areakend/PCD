@@ -1,102 +1,84 @@
 package eu.telecomnancy.pcd2k17.api;
 
-import org.gitlab4j.api.models.AccessLevel;
-import org.gitlab4j.api.models.Project;
 
-public class ApiAssignment implements ApiAssignmentInterface{
+import org.gitlab4j.api.models.Group;
+
+import java.util.LinkedList;
+import java.util.List;
+
+public class ApiAssignment extends ApiListAssignment{
     private String name;
-    private Project project;
-    private int idAssign;
+    private String desc;
+    private ApiDiscipline discipline;
+    private Group gp;
     private ApiListAssignment listAssignment;
 
-    public ApiAssignment(String s){
-        this.listAssignment = ApiListAssignment.getInstance();
-        this.name = s;
-        this.idAssign = this.listAssignment.getIdAssign(s);
-        if (this.idAssign == -1){
-            System.out.println("This assignment doesn't exist yet. Please create by using this.create().");
+    public ApiAssignment(String name_, ApiDiscipline discipline_, String desc_){
+        super(discipline_);
+        this.name = name_;
+        this.desc = desc_;
+        this.discipline = discipline_;
+        this.gp = this.getAssignment(name);
+        this.checkAssignment();
+    }
+
+    private void checkAssignment(){
+        if(this.gp == null){
+            this.createAssignment(name,desc);
+            this.gp = this.getAssignment(this.name);
         }
-        else {
-            try{
-                this.project = this.listAssignment.projectApi.getProject(idAssign);
+    }
+
+    public int getAssignmentId(){
+        return this.gp.getId();
+    }
+
+    public void deleteAssignment(){
+        this.deleteAssignment(this.getAssignmentId());
+    }
+
+    protected List<String> getListAssignments(){
+        List<String> list = new LinkedList<>();
+        try{
+            for (Group gp:this.group.getGroups()) {
+                if (gp.getId() == this.gp.getParentId())
+                    list.add(gp.getName());
             }
-            catch (org.gitlab4j.api.GitLabApiException e){System.out.println("Internal Error : Project not found.");}
-        }
-    }
-
-    public void create(){
-        if (this.idAssign == -1){
-            this.listAssignment.createAssignment(this.name);
-            this.refresh();
-        }
-        else {
-            System.out.println("The assignment "+this.name+" exists already.");
-        }
-    }
-
-    public void delete(){
-        this.listAssignment.deleteAssignment(this.idAssign);
-        this.refresh();
-    }
-
-    public boolean addMembers(int idProject, int userId, AccessLevel accessLevel){
-        try {
-            this.listAssignment.projectApi.addMember(idProject,userId,accessLevel);
-            System.out.println("Member "+userId+" "+"added successfully");
-            return true;
         }
         catch (org.gitlab4j.api.GitLabApiException e){
-            System.out.println("Error when adding "+userId+".");
+            System.out.println("Internal Error : Can't show the disciplines. "+e);
         }
-        System.out.println("Assignment "+name+" Not Found.");
-        return false;
+        return list;
     }
 
-    //Default adding
-    public boolean addMembers(int idProject, int userId){
-        return this.addMembers(idProject,userId,AccessLevel.GUEST);
-    }
-
-    public boolean delMembers(int idProject, int userId){
+    public void showAssignments(){
         try {
-            this.listAssignment.projectApi.removeMember(idProject,userId);
-            System.out.println("Member "+userId+" "+"deleted successfully");
-            return true;
+            int j = 0;
+            System.out.println("List of Assignments : ");
+            List<Group> group = this.group.getGroups();
+
+            System.out.println(this.gp.getParentId() + " + " + this.gp.getName());
+
+            for (int i = 0 ; i<group.size();i++){
+
+                System.out.println(group.get(i).getId()+" - " +group.get(i).getFullName() + " - " + group.get(i).getFullName().startsWith(this.discipline.getName()));
+
+
+                if((group.get(i).getFullName().startsWith(this.discipline.getName())
+                        && (this.gp.getParentId()!=group.get(i).getId()))){
+                    j++;
+                    System.out.println(group.get(i).getName());
+                }
+            }
+            System.out.println("Total : "+j+"\n");
         }
         catch (org.gitlab4j.api.GitLabApiException e){
-            System.out.println("Error when deleting "+userId+".");
+            System.out.println("The Assignment doesn't exist. Creating a new one.");
         }
-        return false;
-    }
-
-    public int getIdAssign(){
-        return this.listAssignment.getIdAssign(this.name);
     }
 
     public String getName(){
         return this.name;
-    }
-
-    public void setDescription(String desc){
-        this.project.setDescription(desc);
-    }
-
-    public String getDescription(){
-        return this.project.getDescription();
-    }
-
-    public void refresh(){
-        this.listAssignment.refresh();
-        this.idAssign = this.listAssignment.getIdAssign(this.name);
-        if (this.idAssign == -1){
-            System.out.println("This assignment doesn't exist yet. Please create by using this.create().");
-        }
-        else {
-            try{
-                this.project = this.listAssignment.projectApi.getProject(idAssign);
-            }
-            catch (org.gitlab4j.api.GitLabApiException e){}
-        }
     }
 
 }

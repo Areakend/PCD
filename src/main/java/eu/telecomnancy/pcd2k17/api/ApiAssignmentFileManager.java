@@ -3,13 +3,14 @@ package eu.telecomnancy.pcd2k17.api;
 import org.gitlab4j.api.models.Branch;
 import org.gitlab4j.api.models.TreeItem;
 
+import java.io.File;
 import java.util.List;
 
 public class ApiAssignmentFileManager{
-    private ApiAssignment assign;
+    private ApiProjectReturn assign;
     private List<Branch> listBranch;
 
-    public ApiAssignmentFileManager(ApiAssignment assign_){
+    public ApiAssignmentFileManager(ApiProjectReturn assign_){
         this.assign = assign_;
     }
 
@@ -54,14 +55,37 @@ public class ApiAssignmentFileManager{
     }
 
     public void showElements(){
+        List<TreeItem> tree = this.getElements();
+        for (TreeItem t:tree) {
+            System.out.println(t.getType().toString()+" - "+t.getName());
+        }
+    }
+
+    public List<TreeItem> getElements(){
         try {
-            List<TreeItem> tree = ApiConnect.REPOAPI.getTree(this.assign.getIdAssign());
-            for (TreeItem t:tree) {
-                System.out.println(t.getType().toString()+" - "+t.getName());
-            }
+            return ApiConnect.REPOAPI.getTree(this.assign.getIdAssign());
         }
         catch (org.gitlab4j.api.GitLabApiException e){
-            System.out.println("Internal Error : Can't show the repo's files. "+e);
+            System.out.println("Internal Error : Can't get the elements from repo. "+e);
         }
+        return null;
+    }
+
+    public File saveFile(String branch, String filepathRepository, String directoryPath){
+        File dir = new File(directoryPath);
+        dir.mkdir();
+        try{
+            return ApiConnect.REPOFILEAPI.getRawFile(this.assign.getIdAssign(),branch,filepathRepository,dir);
+        }
+        catch (org.gitlab4j.api.GitLabApiException e){
+            System.out.println("Internal Error : Can't save the file. " + e);
+        }
+
+        return null;
+    }
+
+    public File saveFile(String branch,String filepathRepository){
+        String nameRepo = this.assign.getName();
+        return this.saveFile(branch,filepathRepository,".fileSave/"+nameRepo);
     }
 }

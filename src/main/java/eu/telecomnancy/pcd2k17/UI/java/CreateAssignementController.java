@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import eu.telecomnancy.pcd2k17.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -124,6 +125,13 @@ public class CreateAssignementController{
 		  
 	  }
 	  
+
+	  @FXML
+	  public void back2Menu(ActionEvent event) throws IOException {
+
+			Main.mainPane.setCenter(Main.panel1);
+		  
+	  }
 	  
 	  
 

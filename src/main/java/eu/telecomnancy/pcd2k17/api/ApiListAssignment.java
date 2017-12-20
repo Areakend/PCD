@@ -1,70 +1,52 @@
 package eu.telecomnancy.pcd2k17.api;
 
-import org.gitlab4j.api.ProjectApi;
-import org.gitlab4j.api.models.Project;
+import org.gitlab4j.api.GroupApi;
+import org.gitlab4j.api.models.Group;
+import org.gitlab4j.api.models.Visibility;
 
 import java.util.List;
 
-public final class ApiListAssignment implements ApiAssignmentInterface{
-    private static ApiListAssignment ala;
-    private int idAssign;
-    protected ApiConnect apico;
-    protected List<Project> lsp;
-    protected ProjectApi projectApi;
 
-    public ApiListAssignment(ApiConnect ac){
-        ApiListAssignment.ala = this;
-        this.apico = ac;
-        this.projectApi = ac.getProjectApi();
-        this.lsp = ac.getProjectsList();
+public abstract class ApiListAssignment {
+    protected GroupApi group;
+    private ApiDiscipline discipline;
+
+    public ApiListAssignment(ApiDiscipline discipline_){
+        this.group = ApiConnect.GROUP;
+        this.discipline = discipline_;
     }
 
-    public void createAssignment(String name){
-        try {
-            this.projectApi.createProject(name);
-            System.out.println("Your project "+name+" has been created");
+    public void createAssignment(String name,String desc){
+        try{
+            this.group.addGroup(name,name,desc,Boolean.FALSE,Boolean.TRUE,Visibility.PRIVATE,Boolean.FALSE,Boolean.FALSE,this.discipline.getDisciplineId(),0);
         }
         catch (org.gitlab4j.api.GitLabApiException e){
-            System.out.println("Error when creating project : The project "+name+" exists already." );
+            System.out.println("Internal Error : Can't create a new assignment. " + e);
         }
     }
 
-    public boolean deleteAssignment(int idProject){
-        try {
-            this.projectApi.deleteProject(idProject);
-            System.out.println("Deletion Sucess");
-            return true;
+    protected void deleteAssignment(int idAssignment){
+        try{
+            this.group.deleteGroup(idAssignment);
         }
         catch (org.gitlab4j.api.GitLabApiException e){
-            System.out.println("Error when deleting a project : "+idProject+" does not exist.");
+            System.out.println("Internal Error : Can't delete assignment. "+e);
         }
-
-        return false;
     }
 
-    public int getIdAssign(String name){
-        for (int i = 0 ; i<this.lsp.size(); i++){
-            if (this.lsp.get(i).getName().equals(name)){
-                this.idAssign = this.lsp.get(i).getId();
-                return this.lsp.get(i).getId();
+    protected Group getAssignment(String name){
+        try {
+            List<Group> group = this.group.getGroups();
+            for (int i = 0 ; i<group.size();i++){
+                if (group.get(i).getName().equals(name)){
+                    return group.get(i);
+                }
             }
         }
-        return -1;
-    }
-
-    public void show(){
-        this.refresh();
-        for (Project p: this.lsp) {
-            System.out.println(p.getName());
+        catch (org.gitlab4j.api.GitLabApiException e){
+            System.out.println("The Assignment doesn't exist. Creating a new one.");
         }
-        System.out.println("");
+        return null;
     }
 
-    public void refresh(){
-        this.lsp = this.apico.getProjectsList();
-    }
-
-    public static ApiListAssignment getInstance() {
-        return ApiListAssignment.ala;
-    }
 }
