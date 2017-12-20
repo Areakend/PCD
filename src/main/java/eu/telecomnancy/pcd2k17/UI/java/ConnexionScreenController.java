@@ -9,12 +9,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.scene.Node;
-
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 public class ConnexionScreenController {
 
 	final static Logger log = LogManager.getLogger(ConnexionScreenController.class);
-//	public static Stage FileLoaderStage;
+	// public static Stage FileLoaderStage;
 
 	@FXML
 	TextField tokenTextField = new TextField();
@@ -25,16 +26,21 @@ public class ConnexionScreenController {
 		log.debug("Input TextField : " + tokenTextField.getText());
 
 		Main.Token = tokenTextField.getText();
-		if (Main.Token.length() > 0){
+		if (Main.Token.length() > 0) {
 			Main.api.login(Main.Token);
 			if (Main.api.loginOK()) {
-				log.debug("Connection reussie"); //Afficher stage suivant
+				log.debug("Connection reussie"); // Afficher stage suivant
 
 				Stage FileLoaderStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 				FileLoaderStage.hide();
 				FileLoaderStage.setScene(new Scene(Main.rootEnseignant, 1600, 800));
 				FileLoaderStage.show();
 			}
+			else {Alert connectionError = new Alert(AlertType.ERROR);
+			connectionError.setTitle("Connection error");
+			connectionError.setHeaderText(null);
+			connectionError.setContentText("Could not connect with this token");
+			connectionError.showAndWait();}
 		}
 
 	}

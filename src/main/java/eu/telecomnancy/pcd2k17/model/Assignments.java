@@ -18,7 +18,7 @@ public class Assignments extends MainDbhandler{
 		String sql = //"CREATE TYPE state IF NOT EXISTS AS ENUM ('active', 'closed', 'archived');\n"
 				//"CREATE TYPE isPrivate IF NOT EXISTS AS ENUM ('true','false');\n"
 				"CREATE TABLE IF NOT EXISTS Assignments (\n"
-				+ " title text PRIMARY KEY,\n"
+				+ " title text,\n"
 				+ " description text,\n"
 				+ " discipline text,\n"
 				+ " teacher text,\n"
