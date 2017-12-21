@@ -18,7 +18,7 @@
    <top>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1600.0" BorderPane.alignment="CENTER">
    <children>
-      <Text layoutX="471.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modification d'un devoir" textAlignment="CENTER">
+      <Text layoutX="471.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modification d'un devoir" textAlignment="CENTER">
          <font>
             <Font name="Calibri Bold" size="64.0" />
          </font>
