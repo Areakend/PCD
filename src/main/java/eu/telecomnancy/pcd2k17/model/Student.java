@@ -97,4 +97,5 @@ public class Student {
     public void afficherStudent(){
         System.out.print("Prenom : "+this.prenom+"\nNom : " + this.nom + "\nMail : " + this.mail + "\nGroupe : " + this.groupName + "\n" );
     }
+
 }

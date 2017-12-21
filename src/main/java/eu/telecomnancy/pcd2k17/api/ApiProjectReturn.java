@@ -20,6 +20,11 @@ public class ApiProjectReturn extends ApiListProjectReturn{
         this.checkProject();
     }
 
+    public ApiProjectReturn setPrefix(String pre){
+        this.name = "["+pre+"] " + this.name;
+        return this;
+    }
+
     private void checkProject(){
         if(this.project == null){
             this.createProject(name,this.assign.getAssignmentId());
@@ -88,6 +93,10 @@ public class ApiProjectReturn extends ApiListProjectReturn{
         for (TreeItem item: listItem) {
             fileManager.saveFile("master",item.getName());
         }
+    }
+
+    public Project getProject(){
+        return this.assign.getProject(this.getName());
     }
 
 }

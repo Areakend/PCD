@@ -7,52 +7,43 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <BorderPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.pcd2k17.UI.java.EnseignantScreenController">
-   <center>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1600.0" BorderPane.alignment="CENTER">
+   <top>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1600.0" style="-fx-background-color: FFFF;" BorderPane.alignment="CENTER">
          <children>
             <Group fx:id="GroupCreateDevoir" layoutX="500.0" layoutY="230.0" />
             <Group layoutX="900.0" layoutY="230.0" />
-            <Button layoutX="1121.0" layoutY="334.0" mnemonicParsing="false" onAction="#goToConsultDevoir" prefHeight="67.0" prefWidth="283.0" text="Accerder au dépot">
+            <Button layoutX="808.0" layoutY="410.0" mnemonicParsing="false" onAction="#goToConsultDevoir" prefHeight="67.0" prefWidth="283.0" text="Push un fichier">
                <font>
                   <Font size="28.0" />
                </font></Button>
-            <Button layoutX="553.0" layoutY="334.0" mnemonicParsing="false" onAction="#goToCreateDevoir" prefHeight="67.0" prefWidth="283.0" text="Créer un devoir">
+            <Button layoutX="376.0" layoutY="410.0" mnemonicParsing="false" onAction="#goToCreateDevoir" prefHeight="67.0" prefWidth="283.0" text="Créer un devoir">
                <font>
                   <Font size="28.0" />
                </font></Button>
-            <ImageView fitHeight="45.0" fitWidth="105.0" focusTraversable="true" layoutX="402.0" layoutY="345.0">
-               <image>
-                  <Image url="@Logo/banana.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="75.0" fitWidth="257.0" focusTraversable="true" layoutX="270.0" layoutY="45.0">
-               <image>
-                  <Image url="@Logo/TheBananaCompany.PNG" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="80.0" fitWidth="150.0" focusTraversable="true" layoutX="53.0" layoutY="42.0">
-               <image>
-                  <Image url="@Logo/Logo.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="45.0" fitWidth="105.0" focusTraversable="true" layoutX="975.0" layoutY="345.0">
-               <image>
-                  <Image url="@Icons/banana.png" />
-               </image>
-            </ImageView>
-            <Button fx:id="disconnectButton" layoutX="886.0" layoutY="502.0" mnemonicParsing="false" onAction="#Disconnect" prefHeight="67.0" prefWidth="283.0" text="Me déconnecter">
+            <Button fx:id="disconnectButton" layoutX="808.0" layoutY="563.0" mnemonicParsing="false" onAction="#Disconnect" prefHeight="67.0" prefWidth="283.0" text="Me déconnecter">
                <font>
                   <Font size="28.0" />
                </font>
             </Button>
-            <ImageView fitHeight="45.0" fitWidth="105.0" focusTraversable="true" layoutX="731.0" layoutY="513.0">
+            <Text fx:id="nameText" layoutX="719.0" layoutY="341.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="161.13671875">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="204.0" fitWidth="581.0" layoutX="510.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@Icons/banana.png" />
+                  <Image url="@Icons/TNS.PNG" />
                </image>
             </ImageView>
+            <Button fx:id="pullButton" layoutX="376.0" layoutY="563.0" mnemonicParsing="false" onAction="#goToPullDevoir" prefHeight="67.0" prefWidth="283.0" text="Pull un fichier">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
-   </center>
+   </top>
 </BorderPane>

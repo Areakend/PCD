@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
+@SuppressWarnings("unused")
 public class ConnexionScreenController {
 
 	final static Logger log = LogManager.getLogger(ConnexionScreenController.class);
@@ -25,12 +26,13 @@ public class ConnexionScreenController {
 		log.debug("Connexion button was clicked!");
 		log.debug("Input TextField : " + tokenTextField.getText());
 
-		Main.Token = tokenTextField.getText();
-		if (Main.Token.length() > 0) {
-			Main.api.login(Main.Token);
+		Main.setToken(tokenTextField.getText());
+		if (Main.getToken().length() > 0) {
+			Main.api.login(Main.getToken());
 			if (Main.api.loginOK()) {
-				if (Main.connected == 0) {
-					Main.connected = 1;
+				tokenTextField.setText("");
+				if (Main.getConnected() == 0) {
+					Main.setConnected(1);
 					Main.mainPane.setCenter(Main.panel0);
 					Scene scene = new Scene(Main.mainPane, 1600, 800);
 					Main.stage.setTitle("test");
@@ -38,7 +40,7 @@ public class ConnexionScreenController {
 					Main.stage.show();
 					Main.stage2.hide();
 				}
-				if (Main.connected == 2) {
+				if (Main.getConnected() == 2) {
 					Main.stage2.hide();
 					Main.stage.show();
 				}
@@ -51,6 +53,39 @@ public class ConnexionScreenController {
 				connectionError.setContentText("Could not connect with this token");
 				connectionError.showAndWait();
 			}
+		}
+
+	}
+	
+	@FXML
+	public void handleClickReconnect(ActionEvent event) throws Exception {
+		log.debug("Connexion button was clicked!");
+		log.debug("Input TextField : " + tokenTextField.getText());
+			Main.api.login();
+			if (Main.api.loginOK()) {
+	//			if (Main.connected == 0) {
+					Main.setConnected(1);
+					Main.mainPane.setCenter(Main.panel0);
+					Scene scene = new Scene(Main.mainPane, 1600, 800);
+					Main.stage.setTitle("TelecomNancy Schoolroom");
+					Main.stage.setScene(scene);
+					Main.stage.show();
+					Main.stage2.hide();
+	//			}
+	/*			if (Main.connected == 2) {
+					Main.stage2.hide();
+				//	EnseignantScreenController.nameText.setText(Main.api.getCurrentUserName());
+					Main.stage.show();
+				}*/
+				log.debug("Connection reussie"); // Afficher stage suivant
+				Main.mainPane.setCenter(Main.panel1);
+			} else {
+				Alert connectionError = new Alert(AlertType.ERROR);
+				connectionError.setTitle("Connection error");
+				connectionError.setHeaderText(null);
+				connectionError.setContentText("Could not connect with this token");
+				connectionError.showAndWait();
+			
 		}
 
 	}

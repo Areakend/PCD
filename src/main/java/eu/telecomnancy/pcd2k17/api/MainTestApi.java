@@ -1,5 +1,8 @@
 package eu.telecomnancy.pcd2k17.api;
 
+import jdk.internal.org.objectweb.asm.tree.TryCatchBlockNode;
+import org.gitlab4j.api.models.User;
+
 public class MainTestApi {
         public static void main(String args[]) {
             // Log in to the GitLab server using a username and password
@@ -19,15 +22,18 @@ public class MainTestApi {
 
             api.showListDiscipline();
 
-            ApiProjectReturn rendu1 = new ApiProjectReturn("Rendu de projet "+assign.getName(),assign);
-            ApiProjectReturn rendu2 = new ApiProjectReturn("Rendu de projet "+assign2.getName(),assign2);
+            ApiProjectReturn rendu1 = new ApiProjectReturn("coucou","Rendu de projet "+assign.getName(),assign);
+            ApiProjectReturn rendu2 = new ApiProjectReturn("salut","Rendu de projet "+assign2.getName(),assign2);
 
             assign.showProjects();
 
-            System.out.println(api.getCurrentUserName());
-            //assign.deleteAssignment();
-
-
+            ApiFile file = new ApiFile(rendu1);
+            try {
+                file.pushFile("C:\\Users\\User\\Downloads\\Donkey_Kong.jpg","Gros Zeub");
+            }
+            catch (Exception e){
+                System.out.println("Error : "+e);
+            }
         }
 
 }

@@ -8,7 +8,12 @@ import java.nio.file.Paths;
 
 import eu.telecomnancy.pcd2k17.Main;
 import eu.telecomnancy.pcd2k17.model.Student;
+import eu.telecomnancy.pcd2k17.api.ApiAssignment;
+import eu.telecomnancy.pcd2k17.api.ApiDiscipline;
+import eu.telecomnancy.pcd2k17.api.ApiProjectReturn;
 import eu.telecomnancy.pcd2k17.model.Students;
+import java.util.LinkedList;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.beans.value.ObservableValue;
@@ -30,15 +35,16 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import java.util.Optional;
 import javafx.scene.control.cell.PropertyValueFactory;
+import objects.Project;
 
+@SuppressWarnings("unused")
 public class GroupScreenController {
 
     final static Logger log = LogManager.getLogger(GroupScreenController.class);
 
 	private String path;
-    private Scene addScene;
-    private Stage addStage;
     private ObservableList<Student> studentData;
+	private List<Integer> listUserId = new LinkedList<>();
 
 	@FXML
 	Text pathText = new Text();
@@ -54,52 +60,50 @@ public class GroupScreenController {
     private TableColumn<Student, String> mailColumn;
     @FXML
     private TableColumn<Student, String> groupColumn;
-	
+
 	@FXML
-	public void deleteStudent(ActionEvent event){
-		
+	public void deleteStudent(ActionEvent event) {
+
 	}
-	
+
 	@FXML
-	public void modifyStudent(ActionEvent event){
-		
+	public void modifyStudent(ActionEvent event) {
+
 	}
-	
+
 	@FXML
-	public void generateGroups(ActionEvent event){
-		
-	}
-	
-	@FXML
-	public void validate(ActionEvent event){
+	public void generateGroups(ActionEvent event) {
 
 	}
 
 
-	@FXML
-	  public void importCSV(ActionEvent event) {
 
-			final FileChooser fileChooser = new FileChooser();
-			fileChooser.getExtensionFilters().addAll(
-					new FileChooser.ExtensionFilter("CSV","*.csv"),
-					new FileChooser.ExtensionFilter("ALL","*.*")
-					);
 
-			Stage FileLoaderStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			File file = fileChooser.showOpenDialog(FileLoaderStage);
-			path = file.getAbsolutePath();
+	public void validate(ActionEvent event) {
+		Project project = CreateAssignementController.getCurrentProject();
+		ApiDiscipline disc = new ApiDiscipline(project.getTitre());
 
-			String doubleSlashPath = path.replace("\\", "\\\\");
-			Path p1 = Paths.get(doubleSlashPath);	 
-			pathText.setText(p1.getFileName().toString());
-	  }
+		for (Integer id : listUserId) {
+			ApiProjectReturn p = new ApiProjectReturn(project.getTitre(),
+					new ApiAssignment(disc, project.getTitre())).setPrefix(project.getPrefix());
+			p.addMembers(p.getIdProject(), id);
+		}
+	}
 
 	@FXML
-	public void AddStudent() throws IOException {
+	public void importCSV(ActionEvent event) {
 
+		final FileChooser fileChooser = new FileChooser();
+		fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("CSV", "*.csv"),
+				new FileChooser.ExtensionFilter("ALL", "*.*"));
 
+		Stage FileLoaderStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		File file = fileChooser.showOpenDialog(FileLoaderStage);
+		path = file.getAbsolutePath();
 
-
+		String doubleSlashPath = path.replace("\\", "\\\\");
+		Path p1 = Paths.get(doubleSlashPath);
+		pathText.setText(p1.getFileName().toString());
 	}
 
 	@FXML
@@ -120,8 +124,12 @@ public class GroupScreenController {
     }
 
 
+	public void AddStudent(ActionEvent event) throws IOException {
+		Scene scene = new Scene(Main.panel5, 400, 400);
+		Main.stage2.setTitle("Ajouter un élève");
+		Main.stage2.setScene(scene);
+		Main.stage2.show();
 
-
-
+	}
 
 }

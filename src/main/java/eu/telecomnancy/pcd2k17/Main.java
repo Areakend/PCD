@@ -16,15 +16,18 @@ import javafx.stage.Stage;
 
 import org.apache.logging.log4j.Logger;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.Modality;
-import java.io.IOException;
-
+import javafx.fxml.FXMLLoader;
+ 
+@SuppressWarnings("unused")
 public class Main extends Application{
      
 	final static Logger log = LogManager.getLogger(Main.class);
@@ -37,16 +40,20 @@ public class Main extends Application{
     public static BorderPane panel3 = new BorderPane();
 	public static BorderPane panel4 = new BorderPane();
 	public static BorderPane panel5 = new BorderPane();
+	public static BorderPane panel6 = new BorderPane();
     
     public static Stage stage = new Stage();
     public static Stage stage2 = new Stage();
-
-	public static String Token = null;
+    
 	public static ApiConnect api = new ApiConnect("https://gitlab.telecomnancy.univ-lorraine.fr");
-	public static String commitMessage = null;
-	public static String fileList[] = new String[64];
-	public static int nbofFiles = 0;
-	public static int connected = 0;
+
+	private static String Token = null;
+	private static String commitMessage = null;
+	public static LinkedList<String> fileList = new LinkedList<>();
+	public static LinkedList<String> fileListPull = new LinkedList<>();
+
+	private static int nbofFiles = 0;
+	private static int connected = 0;
      
      
  
@@ -60,6 +67,7 @@ public class Main extends Application{
     	panel3 = FXMLLoader.load(getClass().getResource("studentControl.fxml"));
 		panel4 = FXMLLoader.load(getClass().getResource("GroupScreen.fxml"));
 		panel5 = FXMLLoader.load(getClass().getResource("addStudent.fxml"));
+		panel6 = FXMLLoader.load(getClass().getResource("pullScreen.fxml"));
 
 		stage2.setScene(new Scene(root, 400, 200));
 		stage2.show();
@@ -69,6 +77,37 @@ public class Main extends Application{
     public static void main(String[] args) {
         launch(args);
     }
+    
+    public static String getToken() {
+    	return Main.Token;
+    }
+    
+    public static void setToken(String tok) {
+    	Main.Token = tok;
+    }
+    
+	public static String getCommitMessage() {
+		return commitMessage;
+	}
 
+	public static void setCommitMessage(String commitMessage) {
+		Main.commitMessage = commitMessage;
+	}
+	
+	public static int getNbofFiles() {
+		return nbofFiles;
+	}
 
+	public static void setNbofFiles(int nbofFiles) {
+		Main.nbofFiles = nbofFiles;
+	}
+
+	public static int getConnected() {
+		return connected;
+	}
+
+	public static void setConnected(int connected) {
+		Main.connected = connected;
+	}
 }
+
