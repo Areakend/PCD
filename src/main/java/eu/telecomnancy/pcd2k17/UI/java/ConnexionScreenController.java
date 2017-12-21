@@ -25,9 +25,9 @@ public class ConnexionScreenController {
 		log.debug("Connexion button was clicked!");
 		log.debug("Input TextField : " + tokenTextField.getText());
 
-		Main.Token = tokenTextField.getText();
-		if (Main.Token.length() > 0) {
-			Main.api.login(Main.Token);
+		Main.setToken(tokenTextField.getText());
+		if (Main.getToken().length() > 0) {
+			Main.api.login(Main.getToken());
 			if (Main.api.loginOK()) {
 				tokenTextField.setText("");
 				if (Main.connected == 0) {

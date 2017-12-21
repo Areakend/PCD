@@ -10,6 +10,10 @@ import java.util.Optional;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import eu.telecomnancy.pcd2k17.Main;
+import eu.telecomnancy.pcd2k17.api.ApiAssignment;
+import eu.telecomnancy.pcd2k17.api.ApiConnect;
+import eu.telecomnancy.pcd2k17.api.ApiDiscipline;
+import eu.telecomnancy.pcd2k17.api.ApiFile;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -55,9 +59,7 @@ public class studentControl {
 	
 	public void choisirMatiere(ActionEvent event) throws IOException {
 		
-		List<String> matiere = new LinkedList<>();
-		matiere.add("PCD");
-		matiere.add("MOCI");
+		List<String> matiere = ApiConnect.getInstance().getListDiscipline();
 
 		ChoiceDialog<String> dialog = new ChoiceDialog<>(" ", matiere);
 		dialog.setTitle("Choix de la matière");
@@ -68,10 +70,8 @@ public class studentControl {
 		Optional<String> result = dialog.showAndWait();
 		if (result.isPresent()) {
 			matiereChoisie = result.get();
-			List<String> projets = new LinkedList<>();
-				projets.add("Projet 1");
-				projets.add("Projet 2");
-				projets.add("Projet 3");
+			ApiDiscipline disp = new ApiDiscipline(matiereChoisie);
+			List<String> projets = disp.getListAssignments();
 			
 			ChoiceDialog<String> dialog1 = new ChoiceDialog<>(" ", projets);
 			dialog1.setTitle("Choix du projet");
@@ -93,6 +93,8 @@ public class studentControl {
 
 		Main.commitMessage = commitMessage.getText();
 		log.debug("Push Devoir");
+		
+//		ApiFile file = new ApiFile(new ApiAssignment(new ApiDiscipline(matiereChoisie), projetChoisi).getProject(projetChoisi));
 	}
 
 	  @FXML

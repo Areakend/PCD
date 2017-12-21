@@ -39,7 +39,7 @@ public class Main extends Application{
     public static Stage stage = new Stage();
     public static Stage stage2 = new Stage();
 
-	public static String Token = null;
+	private static String Token = null;
 	public static ApiConnect api = new ApiConnect("https://gitlab.telecomnancy.univ-lorraine.fr");
 	public static String commitMessage = null;
 	public static String fileList[] = new String[64];
@@ -67,4 +67,13 @@ public class Main extends Application{
     public static void main(String[] args) {
         launch(args);
     }
+    
+    public static String getToken() {
+    	return Main.Token;
+    }
+    
+    public static void setToken(String tok) {
+    	Main.Token = tok;
+    }
 }
+

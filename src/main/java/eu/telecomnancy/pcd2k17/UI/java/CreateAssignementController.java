@@ -10,6 +10,9 @@ import java.util.Optional;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import eu.telecomnancy.pcd2k17.Main;
+import eu.telecomnancy.pcd2k17.api.ApiAssignment;
+import eu.telecomnancy.pcd2k17.api.ApiConnect;
+import eu.telecomnancy.pcd2k17.api.ApiDiscipline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,13 +26,16 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import objects.Project;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextInputDialog;
 
 public class CreateAssignementController {
+	private static Project CURRENTPROJECT = null;
+	
 
 	final static Logger log = LogManager.getLogger(ConnexionScreenController.class);
-	private String discipline, title, description, heureFin, isPrivate;
+	private String discipline, title, description, heureFin, isPrivate, prefix;
 
 	private LocalDate releaseDate, deadline;
 
@@ -119,6 +125,7 @@ public class CreateAssignementController {
 				releaseDate = releaseDatePicker.getValue();
 				deadline = endDatePicker.getValue();
 				heureFin = endHour.getText();
+				prefix = prefixTextField.getText();
 				isPrivate = radioPrivate.isSelected() ? "true" : "false";
 				NbEleves = Integer.parseInt(NbElevesTextField.getText());
 				Main.mainPane.setCenter(Main.panel4);
@@ -131,9 +138,14 @@ public class CreateAssignementController {
 		log.debug("Matiere : " + discipline);
 		log.debug("Titre : " + title);
 		log.debug("Text : " + description);
+		log.debug("Prefixe : " + prefix);
 		log.debug("ReleaseDate : " + releaseDate);
 		log.debug("EndDate : " + deadline + " � " + heureFin + "h\n");
-
+		
+		
+		new ApiAssignment(new ApiDiscipline(discipline), title, description);
+		
+		CreateAssignementController.CURRENTPROJECT = new Project(title, prefix, deadline);
 	}
 
 	@FXML
@@ -177,6 +189,10 @@ public class CreateAssignementController {
 		matiereChoiceBox.setItems(list);
 		matiereChoiceBox.setValue("1");
 		radioPrivate.setSelected(true);
+	}
+	
+	public static Project getCurrentProject(){
+		return CreateAssignementController.CURRENTPROJECT;
 	}
 
 }
