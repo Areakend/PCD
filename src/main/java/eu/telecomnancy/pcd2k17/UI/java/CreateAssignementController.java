@@ -87,7 +87,7 @@ public class CreateAssignementController{
 			  Alert alert = new Alert(AlertType.ERROR);
 		        alert.setTitle("Erreur de date");
 		        alert.setHeaderText("Erreur de date");
-		        alert.setContentText("La date de rendu doit être après la date de début.");
+		        alert.setContentText("La date de rendu doit ï¿½tre aprï¿½s la date de dï¿½but.");
 		        alert.showAndWait();
 		        error = true;    
 		  }else{
@@ -97,7 +97,7 @@ public class CreateAssignementController{
 					Alert alert = new Alert(AlertType.ERROR);
 			        alert.setTitle("Erreur de type");
 			        alert.setHeaderText("Erreur de type");
-			        alert.setContentText("Un entier est attendu dans le champ : Nb d'élève/groupe.");
+			        alert.setContentText("Un entier est attendu dans le champ : Nb d'ï¿½lï¿½ve/groupe.");
 			        alert.showAndWait();
 			        error = true;
 				}
@@ -110,6 +110,7 @@ public class CreateAssignementController{
 				  heureFin = endHour.getText();
 				  isPrivate = radioPrivate.isSelected() ? "true" : "false";
 				  NbEleves = Integer.parseInt(NbElevesTextField.getText());
+				  Main.mainPane.setCenter(Main.panel4);
 			  }
 			  
 		  }
@@ -121,7 +122,8 @@ public class CreateAssignementController{
 		  log.debug("Titre : " + title);
 		  log.debug("Text : " + description);
 		  log.debug("ReleaseDate : " + releaseDate);
-		  log.debug("EndDate : " + deadline + " à " + heureFin+"h\n");
+		  log.debug("EndDate : " + deadline + " ï¿½ " + heureFin+"h\n");
+
 		  
 	  }
 	  

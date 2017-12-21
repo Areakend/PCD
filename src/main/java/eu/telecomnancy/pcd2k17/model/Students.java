@@ -17,10 +17,10 @@ public class Students extends MainDbhandler{
 				"/src/main/resources/eu/telecomnancy/pcd2k17/database/gitTN.db";
 		String sql = "CREATE TABLE IF NOT EXISTS Students (\n"
 				+ " idStudent int PRIMARY KEY,\n"
-				+ " name text,\n"
-				+ " firstName text,\n"
+				+ " username text,\n"
 				+ " mail text,\n"
-				+ " discipline text\n"
+				+ " year text,\n"
+				+ " appro\n"
 				+ ");";
 		try (Connection conn = DriverManager.getConnection(url);
 				Statement stmt = conn.createStatement()) {
@@ -32,18 +32,18 @@ public class Students extends MainDbhandler{
 				
 	}
 	
-    public void insertStudent(int idStudent, String name, String firstName, String mail,
-    		String discipline) {
-        String sql = "INSERT INTO Students(idStudent,name,firstName,mail,discipline)"
+    public void insertStudent(int idStudent, String username, String mail,
+    		String year, String appro) {
+        String sql = "INSERT INTO Students(idStudent,username,mail,year,appro"
         		+ " VALUES(?,?,?,?,?);";
  
         try (Connection conn = this.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
         	pstmt.setInt(1, idStudent);
-            pstmt.setString(2, name);
-            pstmt.setString(3, firstName);
-            pstmt.setString(4, mail);
-            pstmt.setString(5, discipline);
+            pstmt.setString(2, username);
+            pstmt.setString(3, mail);
+            pstmt.setString(4, year);
+            pstmt.setString(5, appro);
             pstmt.executeUpdate();
             System.out.println("Student has been created.");
         } catch (SQLException e) {
@@ -51,18 +51,18 @@ public class Students extends MainDbhandler{
         }
     }
     
-    public void insertStudent(int idStudent, String name, String firstName, String mail,
-    		String discipline, String groupName) {
-        String sql = "INSERT INTO Students(idStudent,name,firstName,mail,discipline)"
+    public void insertStudent(int idStudent, String username, String mail,
+    		String year, String appro, String groupName) {
+        String sql = "INSERT INTO Students(idStudent,username,mail,year,appro)"
         		+ " VALUES(?,?,?,?,?);";
  
         try (Connection conn = this.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
         	pstmt.setInt(1, idStudent);
-            pstmt.setString(2, name);
-            pstmt.setString(3, firstName);
-            pstmt.setString(4, mail);
-            pstmt.setString(5, discipline);
+            pstmt.setString(2, username);
+            pstmt.setString(3, mail);
+            pstmt.setString(4, year);
+            pstmt.setString(5, appro);
             pstmt.executeUpdate();
             Groups groups = new Groups();
             groups.insertGroup(groupName,idStudent);
@@ -105,10 +105,10 @@ public class Students extends MainDbhandler{
              ResultSet rs    = stmt.executeQuery(sql)){
             while (rs.next()) {
                 System.out.println(rs.getInt("idStudent") +  "\t" + 
-                				   rs.getString("name") + "\t" +
-                                   rs.getString("firstName") + "\t" +
+                				   rs.getString("username") + "\t" +
                                    rs.getString("mail") + "\t" +
-                                   rs.getString("discipline"));
+                                   rs.getString("year") + "\t" +
+                                   rs.getString("appro"));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -123,10 +123,10 @@ public class Students extends MainDbhandler{
         	ResultSet rs  = pstmt.executeQuery();
         	while (rs.next()) {
         		System.out.println(rs.getInt("idStudent") +  "\t" + 
-        						   rs.getString("name") +  "\t" + 
-                        		   rs.getString("firstName") + "\t" +
+        						   rs.getString("username") +  "\t" + 
                         		   rs.getString("mail") + "\t" +
-                        		   rs.getString("discipline"));
+                        		   rs.getString("year") + "\t" +
+                        		   rs.getString("appro"));
         		}
         	} catch (SQLException e) {
         		System.out.println(e.getMessage());
