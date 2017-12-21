@@ -51,6 +51,27 @@ public class Students extends MainDbhandler{
         }
     }
     
+    public void insertStudent(int idStudent, String name, String firstName, String mail,
+    		String discipline, String groupName) {
+        String sql = "INSERT INTO Students(idStudent,name,firstName,mail,discipline)"
+        		+ " VALUES(?,?,?,?,?);";
+ 
+        try (Connection conn = this.connect();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        	pstmt.setInt(1, idStudent);
+            pstmt.setString(2, name);
+            pstmt.setString(3, firstName);
+            pstmt.setString(4, mail);
+            pstmt.setString(5, discipline);
+            pstmt.executeUpdate();
+            Groups groups = new Groups();
+            groups.insertGroup(groupName,idStudent);
+            System.out.println("Student has been created.");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
     public void deleteStudent(int idStudent) {
     	String sql = "DELETE FROM Students WHERE idStudent = ?";
     	try (Connection conn = this.connect();

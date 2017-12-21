@@ -4,33 +4,32 @@ import org.gitlab4j.api.models.AccessLevel;
 import org.gitlab4j.api.models.Project;
 import org.gitlab4j.api.models.TreeItem;
 
+import java.util.LinkedList;
 import java.util.List;
 
-public class ApiProjectReturn {
+public class ApiProjectReturn extends ApiListProjectReturn{
     private String name;
     private Project project;
-    private int idAssign;
-    private ApiListProjectReturn listProject;
+    private ApiAssignment assign;
 
-    public ApiProjectReturn(String s){
-        this.listProject = ApiListProjectReturn.getInstance();
+    public ApiProjectReturn(String s, ApiAssignment assign_){
+        super();
+        this.assign = assign_;
         this.name = s;
-        this.idAssign = this.listProject.getIdAssign(s);
-        if (this.idAssign == -1){
-            System.out.println("This assignment doesn't exist yet. Please create by using this.create().");
-        }
-        else {
-            try{
-                this.project = this.listProject.getProjectApi().getProject(idAssign);
-            }
-            catch (org.gitlab4j.api.GitLabApiException e){System.out.println("Internal Error : Project not found.");}
+        this.project = this.assign.getProject(s);
+        this.checkProject();
+    }
+
+    private void checkProject(){
+        if(this.project == null){
+            this.createProject(name,this.assign.getAssignmentId());
+            this.project = this.assign.getProject(this.name);
         }
     }
 
     public void create(){
-        if (this.idAssign == -1){
-            this.listProject.createAssignment(this.name);
-            this.refresh();
+        if (this.project.getId() == -1){
+            this.createProject(this.name,this.assign.getAssignmentId());
         }
         else {
             System.out.println("The assignment "+this.name+" exists already.");
@@ -38,13 +37,21 @@ public class ApiProjectReturn {
     }
 
     public void delete(){
-        this.listProject.deleteAssignment(this.idAssign);
-        this.refresh();
+        this.deleteProject(this.project.getId());
+    }
+
+    public int getIdProject(){
+        for (Project p: this.assign.getListProjects()) {
+            if(p.getName().equals(this.name)){
+                return p.getId();
+            }
+        }
+        return -1;
     }
 
     public boolean addMembers(int idProject, int userId, AccessLevel accessLevel){
         try {
-            this.listProject.getProjectApi().addMember(idProject,userId,accessLevel);
+            ApiConnect.PROJECT.addMember(idProject,userId,accessLevel);
             System.out.println("Member "+userId+" "+"added successfully");
             return true;
         }
@@ -62,7 +69,7 @@ public class ApiProjectReturn {
 
     public boolean delMembers(int idProject, int userId){
         try {
-            this.listProject.getProjectApi().removeMember(idProject,userId);
+            ApiConnect.PROJECT.removeMember(idProject,userId);
             System.out.println("Member "+userId+" "+"deleted successfully");
             return true;
         }
@@ -72,40 +79,15 @@ public class ApiProjectReturn {
         return false;
     }
 
-    public int getIdAssign(){
-        return this.listProject.getIdAssign(this.name);
-    }
-
     public String getName(){
         return this.name;
     }
 
-    public void setDescription(String desc){
-        this.project.setDescription(desc);
-    }
-
-    public String getDescription(){
-        return this.project.getDescription();
-    }
-
-    public void refresh(){
-        this.listProject.refresh();
-        this.idAssign = this.listProject.getIdAssign(this.name);
-        if (this.idAssign == -1){
-            System.out.println("This assignment doesn't exist yet. Please create by using this.create().");
-        }
-        else {
-            try{
-                this.project = this.listProject.getProjectApi().getProject(idAssign);
-            }
-            catch (org.gitlab4j.api.GitLabApiException e){}
-        }
-    }
-
-    public void getLocalAssignment(ApiAssignmentFileManager fileManager){
+    public void saveAssignment(ApiAssignmentFileManager fileManager){
         List<TreeItem> listItem = fileManager.getElements();
         for (TreeItem item: listItem) {
             fileManager.saveFile("master",item.getName());
         }
     }
+
 }

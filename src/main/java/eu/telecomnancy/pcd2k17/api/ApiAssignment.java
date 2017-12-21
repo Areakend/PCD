@@ -1,7 +1,7 @@
 package eu.telecomnancy.pcd2k17.api;
 
-
 import org.gitlab4j.api.models.Group;
+import org.gitlab4j.api.models.Project;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -13,19 +13,19 @@ public class ApiAssignment extends ApiListAssignment{
     private Group gp;
     private ApiListAssignment listAssignment;
 
-    public ApiAssignment(String name_, ApiDiscipline discipline_, String desc_){
+    public ApiAssignment(ApiDiscipline discipline_,String name_, String desc_){
         super(discipline_);
         this.name = name_;
         this.desc = desc_;
         this.discipline = discipline_;
-        this.gp = this.getAssignment(name);
+        this.gp = this.discipline.getAssignment(name);
         this.checkAssignment();
     }
 
     private void checkAssignment(){
         if(this.gp == null){
             this.createAssignment(name,desc);
-            this.gp = this.getAssignment(this.name);
+            this.gp = this.discipline.getAssignment(this.name);
         }
     }
 
@@ -37,44 +37,39 @@ public class ApiAssignment extends ApiListAssignment{
         this.deleteAssignment(this.getAssignmentId());
     }
 
-    protected List<String> getListAssignments(){
-        List<String> list = new LinkedList<>();
+    public List<Project> getListProjects(){
         try{
-            for (Group gp:this.group.getGroups()) {
-                if (gp.getId() == this.gp.getParentId())
-                    list.add(gp.getName());
-            }
-        }
-        catch (org.gitlab4j.api.GitLabApiException e){
-            System.out.println("Internal Error : Can't show the disciplines. "+e);
-        }
-        return list;
-    }
-
-    public void showAssignments(){
-        try {
-            int j = 0;
-            System.out.println("List of Assignments : ");
-            List<Group> group = this.group.getGroups();
-
-            System.out.println(this.gp.getParentId() + " + " + this.gp.getName());
-
-            for (int i = 0 ; i<group.size();i++){
-
-                System.out.println(group.get(i).getId()+" - " +group.get(i).getFullName() + " - " + group.get(i).getFullName().startsWith(this.discipline.getName()));
-
-
-                if((group.get(i).getFullName().startsWith(this.discipline.getName())
-                        && (this.gp.getParentId()!=group.get(i).getId()))){
-                    j++;
-                    System.out.println(group.get(i).getName());
+            List<Project> listProject = new LinkedList<>();
+            for (Project p:ApiConnect.PROJECT.getMemberProjects()) {
+                if (p.getPathWithNamespace().contains(this.getName())){
+                    listProject.add(p);
                 }
             }
-            System.out.println("Total : "+j+"\n");
+            return listProject;
         }
         catch (org.gitlab4j.api.GitLabApiException e){
-            System.out.println("The Assignment doesn't exist. Creating a new one.");
+            System.out.println("Internal Error : Can't get the projects. "+e);
         }
+        return null;
+    }
+
+    public Project getProject(String name){
+        for (Project p: this.getListProjects()) {
+            if (p.getName().equals(name)){
+                return p;
+            }
+        }
+        return null;
+    }
+
+    public void showProjects(){
+        System.out.println("List of projects  of " + this.getName() + ":");
+        int i = 0;
+        for (Project p: this.getListProjects()) {
+            System.out.println(p.getName());
+            i++;
+        }
+        System.out.println("Total : "+i+"\n");
     }
 
     public String getName(){
