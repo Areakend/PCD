@@ -17,8 +17,7 @@ public class Teachers extends MainDbhandler{
 				"/src/main/resources/eu/telecomnancy/pcd2k17/database/gitTN.db";
 		String sql = "CREATE TABLE IF NOT EXISTS Teachers (\n"
 				+ " idTeacher int PRIMARY KEY,\n"
-				+ " name text,\n"
-				+ " firstName text,\n"
+				+ " username text,\n"
 				+ " mail text,\n"
 				+ " discipline text\n"
 				+ ");";
@@ -32,18 +31,17 @@ public class Teachers extends MainDbhandler{
 				
 	}
 	
-    public void insertTeacher(int idTeacher, String name, String firstName, String mail,
+    public void insertTeacher(int idTeacher, String username, String mail,
     		String discipline) {
-        String sql = "INSERT INTO Teachers(idTeacher,name,firstName,mail,discipline)"
-        		+ " VALUES(?,?,?,?,?);";
+        String sql = "INSERT INTO Teachers(idTeacher,username,mail,discipline)"
+        		+ " VALUES(?,?,?,?);";
  
         try (Connection conn = this.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
         	pstmt.setInt(1, idTeacher);
-            pstmt.setString(2, name);
-            pstmt.setString(3, firstName);
-            pstmt.setString(4, mail);
-            pstmt.setString(5, discipline);
+            pstmt.setString(2, username);
+            pstmt.setString(3, mail);
+            pstmt.setString(4, discipline);
             pstmt.executeUpdate();
             System.out.println("Teacher has been created.");
         } catch (SQLException e) {
@@ -84,8 +82,7 @@ public class Teachers extends MainDbhandler{
              ResultSet rs    = stmt.executeQuery(sql)){
             while (rs.next()) {
                 System.out.println(rs.getInt("idTeacher") +  "\t" + 
-                				   rs.getString("name") + "\t" +
-                                   rs.getString("firstName") + "\t" +
+                				   rs.getString("username") + "\t" +
                                    rs.getString("mail") + "\t" +
                                    rs.getString("discipline"));
             }
@@ -102,8 +99,7 @@ public class Teachers extends MainDbhandler{
         	ResultSet rs  = pstmt.executeQuery();
         	while (rs.next()) {
         		System.out.println(rs.getInt("idTeacher") +  "\t" + 
-        						   rs.getString("name") +  "\t" + 
-                        		   rs.getString("firstName") + "\t" +
+        						   rs.getString("username") +  "\t" + 
                         		   rs.getString("mail") + "\t" +
                         		   rs.getString("discipline"));
         		}
