@@ -40,7 +40,8 @@ public final class ApiConnect {
 
     public boolean loginOK(){
         try{
-            if (ApiConnect.GLA.getProjectApi().getProjects().size() >0){
+            File tok = new File(".token/userToken.txt");
+            if (ApiConnect.GLA.getProjectApi().getProjects().size() >0 && tok.exists()){
                 return true;
             }
         }
