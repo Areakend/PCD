@@ -12,14 +12,14 @@ public class ApiDiscipline extends ApiListDiscipline{
     public ApiDiscipline(String name_){
         super();
         this.name = name_;
-        this.gp = this.getAssignment(name_);
+        this.gp = ApiConnect.getInstance().getDiscipline(name_);
         this.checkDiscipline();
     }
 
     private void checkDiscipline(){
         if(this.gp == null){
             this.createDiscipline(name);
-            this.gp = this.getAssignment(this.name);
+            this.gp = ApiConnect.getInstance().getDiscipline(this.name);
         }
     }
 
