@@ -28,7 +28,7 @@ public class MainTestApi {
 
             ApiUser user = new ApiUser();
             for (User u: user.getUsers()) {
-                System.out.println(u.getUsername() +" - " + u.get() + " - " + u.getId());
+                System.out.println(u.getUsername() +" - " + u.getEmail() + " - " + u.getId());
             }
             System.out.println("Total : "+user.getListUserName().size());
         }
