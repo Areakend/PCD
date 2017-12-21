@@ -25,6 +25,7 @@ import objects.Project;
 import javafx.scene.control.TreeTableView;
 import javafx.scene.control.TreeTableColumn;
 
+@SuppressWarnings("unused")
 public class GroupScreenController {
 
 	private String path;

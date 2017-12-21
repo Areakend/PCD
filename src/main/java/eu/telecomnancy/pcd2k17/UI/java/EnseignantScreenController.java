@@ -42,7 +42,7 @@ public class EnseignantScreenController {
 	@FXML
 	public void Disconnect(ActionEvent event) throws IOException {
 		Main.setToken("Disconnect");
-		Main.connected = 2;
+		Main.setConnected(2);
 		nameText.setText(" ");
 		Main.api.login(Main.getToken());
 		Main.mainPane.setCenter(Main.panel3);

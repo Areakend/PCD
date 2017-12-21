@@ -38,13 +38,15 @@ public class Main extends Application{
     
     public static Stage stage = new Stage();
     public static Stage stage2 = new Stage();
+    
+	public static ApiConnect api = new ApiConnect("https://gitlab.telecomnancy.univ-lorraine.fr");
 
 	private static String Token = null;
-	public static ApiConnect api = new ApiConnect("https://gitlab.telecomnancy.univ-lorraine.fr");
-	public static String commitMessage = null;
+	private static String commitMessage = null;
 	public static String fileList[] = new String[64];
-	public static int nbofFiles = 0;
-	public static int connected = 0;
+
+	private static int nbofFiles = 0;
+	private static int connected = 0;
      
      
  
@@ -75,5 +77,29 @@ public class Main extends Application{
     public static void setToken(String tok) {
     	Main.Token = tok;
     }
+    
+	public static String getCommitMessage() {
+		return commitMessage;
+	}
+
+	public static void setCommitMessage(String commitMessage) {
+		Main.commitMessage = commitMessage;
+	}
+	
+	public static int getNbofFiles() {
+		return nbofFiles;
+	}
+
+	public static void setNbofFiles(int nbofFiles) {
+		Main.nbofFiles = nbofFiles;
+	}
+
+	public static int getConnected() {
+		return connected;
+	}
+
+	public static void setConnected(int connected) {
+		Main.connected = connected;
+	}
 }
 

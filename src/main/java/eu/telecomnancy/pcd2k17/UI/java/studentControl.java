@@ -24,6 +24,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.text.*;
 
+@SuppressWarnings("unused")
 public class studentControl {
 
 	final static Logger log = LogManager.getLogger(studentControl.class);
@@ -91,7 +92,7 @@ public class studentControl {
 		log.debug("Connexion button was clicked!");
 		log.debug("Input CommitText : " + commitMessage.getText());
 
-		Main.commitMessage = commitMessage.getText();
+		Main.setCommitMessage(commitMessage.getText());
 		log.debug("Push Devoir");
 		
 //		ApiFile file = new ApiFile(new ApiAssignment(new ApiDiscipline(matiereChoisie), projetChoisi).getProject(projetChoisi));
@@ -118,8 +119,8 @@ public class studentControl {
 
 		if (path != file.getAbsolutePath()) {
 			path = file.getAbsolutePath();
-			Main.fileList[Main.nbofFiles] = path;
-			Main.nbofFiles++;
+			Main.fileList[Main.getNbofFiles()] = path;
+			Main.setNbofFiles(Main.getNbofFiles()+1);
 			fileList.setText(fileList.getText() + path + "\n");
 		}
 		log.debug("path : " + path);

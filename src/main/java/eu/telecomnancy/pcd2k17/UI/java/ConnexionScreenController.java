@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
+@SuppressWarnings("unused")
 public class ConnexionScreenController {
 
 	final static Logger log = LogManager.getLogger(ConnexionScreenController.class);
@@ -30,8 +31,8 @@ public class ConnexionScreenController {
 			Main.api.login(Main.getToken());
 			if (Main.api.loginOK()) {
 				tokenTextField.setText("");
-				if (Main.connected == 0) {
-					Main.connected = 1;
+				if (Main.getConnected() == 0) {
+					Main.setConnected(1);
 					Main.mainPane.setCenter(Main.panel0);
 					Scene scene = new Scene(Main.mainPane, 1600, 800);
 					Main.stage.setTitle("test");
@@ -39,7 +40,7 @@ public class ConnexionScreenController {
 					Main.stage.show();
 					Main.stage2.hide();
 				}
-				if (Main.connected == 2) {
+				if (Main.getConnected() == 2) {
 					Main.stage2.hide();
 					Main.stage.show();
 				}
@@ -63,7 +64,7 @@ public class ConnexionScreenController {
 			Main.api.login();
 			if (Main.api.loginOK()) {
 	//			if (Main.connected == 0) {
-					Main.connected = 1;
+					Main.setConnected(1);
 					Main.mainPane.setCenter(Main.panel0);
 					Scene scene = new Scene(Main.mainPane, 1600, 800);
 					Main.stage.setTitle("TelecomNancy Schoolroom");
