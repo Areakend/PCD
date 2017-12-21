@@ -24,7 +24,7 @@ public class MainTestApi {
 
             assign.showProjects();
 
-
+            System.out.println(api.getCurrentUserName());
             //assign.deleteAssignment();
 
 

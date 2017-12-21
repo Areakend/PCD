@@ -29,12 +29,19 @@ public class ConnexionScreenController {
 		if (Main.Token.length() > 0) {
 			Main.api.login(Main.Token);
 			if (Main.api.loginOK()) {
-				 Main.mainPane.setCenter(Main.panel0);
-			        Scene scene = new Scene(Main.mainPane, 1600, 800);
-			        Main.stage.setTitle("test");
-			        Main.stage.setScene(scene);
-			        Main.stage.show();
-			        Main.stage2.hide();
+				if (Main.connected == 0) {
+					Main.connected = 1;
+					Main.mainPane.setCenter(Main.panel0);
+					Scene scene = new Scene(Main.mainPane, 1600, 800);
+					Main.stage.setTitle("test");
+					Main.stage.setScene(scene);
+					Main.stage.show();
+					Main.stage2.hide();
+				}
+				if (Main.connected == 2) {
+					Main.stage2.hide();
+					Main.stage.show();
+				}
 				log.debug("Connection reussie"); // Afficher stage suivant
 				Main.mainPane.setCenter(Main.panel1);
 			} else {

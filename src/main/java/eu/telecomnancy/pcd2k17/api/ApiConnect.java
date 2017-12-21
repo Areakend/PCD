@@ -13,6 +13,7 @@ public final class ApiConnect {
     public static RepositoryFileApi REPOFILEAPI;
     public static GroupApi GROUP;
     public static ProjectApi PROJECT;
+    public static UserApi USER;
 
     private String url;
     private static ApiConnect apico;
@@ -29,6 +30,7 @@ public final class ApiConnect {
         ApiConnect.REPOFILEAPI = new RepositoryFileApi(ApiConnect.GLA);
         ApiConnect.GROUP = new GroupApi(ApiConnect.GLA);
         ApiConnect.PROJECT = new ProjectApi(ApiConnect.GLA);
+        ApiConnect.USER = ApiConnect.GLA.getUserApi();
     }
 
     public void login(String tok){
@@ -112,6 +114,16 @@ public final class ApiConnect {
             i++;
         }
         System.out.println("Total : "+i+"\n");
+    }
+
+    public String getCurrentUserName(){
+        try {
+            return ApiConnect.USER.getCurrentUser().getName();
+        }
+        catch (org.gitlab4j.api.GitLabApiException e){
+            System.out.println("Internal Error : Can't get current user name. "+e);
+        }
+        return "";
     }
 
     public static ApiConnect getInstance(){

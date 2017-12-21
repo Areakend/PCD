@@ -24,13 +24,23 @@ public class EnseignantScreenController {
 
 	}
 
-
 	@FXML
 	public void goToConsultDevoir(ActionEvent event) throws IOException {
 
 		Main.mainPane.setCenter(Main.panel3);
 
+	}
+
+	@FXML
+	public void Disconnect(ActionEvent event) throws IOException {
+		Main.Token = "Disconnect";
+		Main.connected = 2;
+		Main.api.login(Main.Token);
+		Main.mainPane.setCenter(Main.panel3);
+		Main.stage.hide();
+		Main.stage2.show();
 		
+
 	}
 
 }

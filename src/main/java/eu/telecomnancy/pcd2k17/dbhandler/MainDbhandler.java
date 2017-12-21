@@ -8,10 +8,8 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import eu.telecomnancy.pcd2k17.model.Assignments;
-import eu.telecomnancy.pcd2k17.model.Groups;
-import eu.telecomnancy.pcd2k17.model.Students;
-import eu.telecomnancy.pcd2k17.model.Teachers;
+import eu.telecomnancy.pcd2k17.model.*;
+import eu.telecomnancy.pcd2k17.api.*;
 
 public class MainDbhandler {
 
@@ -73,7 +71,8 @@ public class MainDbhandler {
 		Groups groups = new Groups();
 		groups.createGroups();
 		Assignments assignments = new Assignments();
-		assignments.createAssignments();		
+		assignments.createAssignments();
+		
     }
     
 }
