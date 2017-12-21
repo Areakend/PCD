@@ -66,3 +66,9 @@ Une base de données est en cours d'achèvement mais n'est pas encore au point.
 Dans la version 3.0, les menus permettent une navigation plus intuitive, avec la possibilié de cliquer sur le bouton "Menu" ramenant au menu prncipal.
 Des alertes sont présente lors de la création d'un projet permettant à l'utilisateur de ne pas se tormper (mauvaise dâte, horraires dans un mauvais format, ...).
 La base de donnée a été finalisée.
+
+## RELEASE_DAY_4
+Dans la version 4.0, on a ajouté toute l'interface graphique qui permet de pull un fichier pour l'utilisateur mais n'est pas encore relié à l'API.
+Ajout d'une API permettant de push des fichiers dans les dépots des devoirs.
+Liaison entre l'interface graphique et l'API ainsi qu'entre l'API et la database.
+On peut afficher les données concernant les groupes d'un devoir à partir de la database.
