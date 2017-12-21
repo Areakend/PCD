@@ -1,5 +1,6 @@
 package eu.telecomnancy.pcd2k17.api;
 
+import jdk.internal.org.objectweb.asm.tree.TryCatchBlockNode;
 import org.gitlab4j.api.models.User;
 
 public class MainTestApi {
@@ -26,11 +27,13 @@ public class MainTestApi {
 
             assign.showProjects();
 
-            ApiUser user = new ApiUser();
-            for (User u: user.getUsers()) {
-                System.out.println(u.getUsername() +" - " + u.getEmail() + " - " + u.getId());
+            ApiFile file = new ApiFile(rendu1);
+            try {
+                file.pushFile("C:\\Users\\User\\Downloads\\Donkey_Kong.jpg");
             }
-            System.out.println("Total : "+user.getListUserName().size());
+            catch (Exception e){
+                System.out.println("Error : "+e);
+            }
         }
 
 }

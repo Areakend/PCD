@@ -55,7 +55,6 @@ public final class ApiConnect {
 	private String getToken(){
         String line ;
         BufferedReader in;
-
         try {
             File dir = new File(".token");
             dir.mkdir();
@@ -129,5 +128,4 @@ public final class ApiConnect {
     public static ApiConnect getInstance(){
         return ApiConnect.apico;
     }
-
 }

@@ -60,11 +60,11 @@ public class MainDbhandler {
 		}
 	}
     
-    /*public static void refreshFromApi() {
+    public static void refreshFromApi() {
     	ApiUser user = new ApiUser();
-    	List<User>
+    	//List<User>
     	
-    }*/
+    }
     
     public static void main(String[] args) {
     	deleteDb();

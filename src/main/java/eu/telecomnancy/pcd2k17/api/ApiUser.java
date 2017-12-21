@@ -1,6 +1,5 @@
 package eu.telecomnancy.pcd2k17.api;
 
-import com.sun.xml.internal.ws.api.ha.StickyFeature;
 import org.gitlab4j.api.Pager;
 import org.gitlab4j.api.UserApi;
 import org.gitlab4j.api.models.Project;

@@ -90,4 +90,8 @@ public class ApiProjectReturn extends ApiListProjectReturn{
         }
     }
 
+    public Project getProject(){
+        return this.assign.getProject(this.getName());
+    }
+
 }
