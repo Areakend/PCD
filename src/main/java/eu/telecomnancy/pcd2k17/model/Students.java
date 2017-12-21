@@ -8,10 +8,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import eu.telecomnancy.pcd2k17.dbhandler.MainDbhandler;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 
 public class Students extends MainDbhandler{
-	
+
 	public void createStudents() {
 		String url = "jdbc:sqlite:"+ System.getProperty("user.dir") + 
 				"/src/main/resources/eu/telecomnancy/pcd2k17/database/gitTN.db";
@@ -98,21 +100,40 @@ public class Students extends MainDbhandler{
         }
     }
     
-    public void getAllStudents(){
-        String sql = "SELECT * FROM Students";
+    public ObservableList<Student>  getAllStudents(){
+        ObservableList<Student> studentData = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM Students JOIN Groups where Students.idStudent == Groups.idStudent";
         try (Connection conn = this.connect();
              Statement stmt  = conn.createStatement();
              ResultSet rs    = stmt.executeQuery(sql)){
             while (rs.next()) {
+                String prenom,nom,mail,groupe,username;
+
                 System.out.println(rs.getInt("idStudent") +  "\t" + 
                 				   rs.getString("username") + "\t" +
                                    rs.getString("mail") + "\t" +
                                    rs.getString("year") + "\t" +
                                    rs.getString("appro"));
+                username = rs.getString("username");
+                String[] prenomNom = username.split("\\.");
+                if (prenomNom.length ==2) {
+                    prenom = prenomNom[0];
+                    nom = prenomNom[1];
+                } else {
+                    System.out.print(""+prenomNom.length);
+                    prenom = "";
+                    nom = "";
+                }
+                mail = rs.getString("mail");
+                groupe = rs.getString("name");
+                Student student = new Student(prenom,nom,mail,groupe);
+                student.afficherStudent();
+                studentData.add(student);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+        return studentData;
     }
     
     public void getStudentsby(String searchField, String Value){
@@ -135,19 +156,20 @@ public class Students extends MainDbhandler{
     
 	/*
 	public static void main(String[] args) {
-		// A faire dès le lancement de l'appli
+		// A faire dï¿½s le lancement de l'appli
 		MainDbhandler.createFile();
 		MainDbhandler.createNewDatabase("gitTN.db");
 		Students assign = new Students();
 		assign.createStudents();
-		// A faire dès la création d'un nouveau devoir
+		// A faire dï¿½s la crï¿½ation d'un nouveau devoir
 		//assign.insertStudent("name", "firstName", "mail", "discipline");
 		//assign.getAllStudents();
-		// A faire dès la modification d'un devoir
+		// A faire dï¿½s la modification d'un devoir
 		assign.updateStudent("mail","name","theName");
 		assign.getStudentsby("name", "theName");
-		// A ne pas forcément faire
+		// A ne pas forcï¿½ment faire
 		assign.deleteStudent("theName");
 	}*/
+
 
 }

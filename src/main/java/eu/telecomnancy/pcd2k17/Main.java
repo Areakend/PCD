@@ -1,6 +1,7 @@
 package eu.telecomnancy.pcd2k17;
 
 import eu.telecomnancy.pcd2k17.api.ApiConnect;
+import eu.telecomnancy.pcd2k17.model.Student;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -9,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -20,8 +22,9 @@ import javafx.application.Platform;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.fxml.FXMLLoader;
- 
+import javafx.stage.Modality;
+import java.io.IOException;
+
 public class Main extends Application{
      
 	final static Logger log = LogManager.getLogger(Main.class);
@@ -66,4 +69,6 @@ public class Main extends Application{
     public static void main(String[] args) {
         launch(args);
     }
+
+
 }

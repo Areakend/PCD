@@ -63,9 +63,6 @@ public class CreateAssignementController{
 	 
 	  @FXML
 	  public void CreateDevoir(ActionEvent event) throws IOException {
-		  /*Stage FileLoaderStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		    FileLoaderStage.setScene(new Scene(Main.createDevoir, 1600, 800));
-		    FileLoaderStage.show();*/
 		  boolean error = false;
 		  if ( titreTextField.getText().length() == 0 || prefixTextField.getText().length() == 0||descriptionText.getText().length() == 0 
 				  || releaseDatePicker.getValue() == null || endDatePicker.getValue() == null || endHour.getText().length() == 0
