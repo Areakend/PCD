@@ -1,5 +1,7 @@
 package eu.telecomnancy.pcd2k17.api;
 
+import org.gitlab4j.api.models.User;
+
 public class MainTestApi {
         public static void main(String args[]) {
             // Log in to the GitLab server using a username and password
@@ -24,10 +26,11 @@ public class MainTestApi {
 
             assign.showProjects();
 
-            System.out.println(api.getCurrentUserName());
-            //assign.deleteAssignment();
-
-
+            ApiUser user = new ApiUser();
+            for (User u: user.getUsers()) {
+                System.out.println(u.getUsername() +" - " + u.get() + " - " + u.getId());
+            }
+            System.out.println("Total : "+user.getListUserName().size());
         }
 
 }
