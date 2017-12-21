@@ -17,9 +17,9 @@ public class ApiUser {
         this.listUser = this.getUsers();
     }
 
-    public List<User> getUsers(){
+    public LinkedList<User> getUsers(){
         try {
-            List<User> list = new LinkedList<>();
+            LinkedList<User> list = new LinkedList<>();
             Pager<User> pages = this.userApi.getUsers(100);
             pages.first();
             for (int i =0 ; i<pages.getTotalPages(); i++){
@@ -38,24 +38,24 @@ public class ApiUser {
 
     //id ; username ; email ; team
 
-    public List<String> getListUserName(){
-        List<String> list = new LinkedList<>();
+    public LinkedList<String> getListUserName(){
+        LinkedList<String> list = new LinkedList<>();
         for (User u: this.listUser) {
             list.add(u.getUsername());
         }
         return list;
     }
 
-    public List<String> getListEmail(){
-        List<String> list = new LinkedList<>();
+    public LinkedList<String> getListEmail(){
+        LinkedList<String> list = new LinkedList<>();
         for (User u: this.listUser) {
             list.add(u.getEmail());
         }
         return list;
     }
 
-    public List<String> getListTeam(){
-        List<String> list = new LinkedList<>();
+    public LinkedList<String> getListTeam(){
+        LinkedList<String> list = new LinkedList<>();
         try{
             List<Project> projects = ApiConnect.PROJECT.getProjects();
             for (User u: this.listUser) {
@@ -69,8 +69,8 @@ public class ApiUser {
         return list;
     }
 
-    public List<Integer> getListId(){
-        List<Integer> list = new LinkedList<>();
+    public LinkedList<Integer> getListId(){
+        LinkedList<Integer> list = new LinkedList<>();
         for (User u: this.listUser) {
             list.add(u.getId());
         }
