@@ -9,42 +9,45 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <BorderPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.pcd2k17.UI.java.EnseignantScreenController">
-   <center>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1600.0">
+   <top>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1600.0" BorderPane.alignment="CENTER">
          <children>
-            <Group fx:id="GroupCreateDevoir" layoutX="500.0" layoutY="230.0">
-               <children>
-                  <Button layoutX="-40.0" layoutY="-38.0" mnemonicParsing="false" onAction="#goToCreateDevoir" prefHeight="269.0" prefWidth="280.0" />
-                  <ImageView fitHeight="200.0" fitWidth="200.0" focusTraversable="true" layoutY="-25.0" rotate="45.0">
-                     <image>
-                        <Image url="@Icons/close.png" />
-                     </image>
-                  </ImageView>
-                  <Text focusTraversable="true" layoutX="-41.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Créer un devoir" textAlignment="CENTER" wrappingWidth="281.13671875">
-                     <font>
-                        <Font name="Calibri" size="30.0" />
-                     </font>
-                  </Text>
-               </children>
-            </Group>
-            <Group layoutX="900.0" layoutY="230.0">
-               <children>
-                  <Button layoutX="-40.0" layoutY="-38.0" mnemonicParsing="false" onAction="#goToConsultDevoir" prefHeight="269.0" prefWidth="280.0" />
-                  <ImageView fitHeight="200.0" fitWidth="200.0" layoutY="-25.0">
-                     <image>
-                        <Image url="@Icons/close.png" />
-                     </image>
-                  </ImageView>
-                  <Text layoutX="-41.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Acceder au depot" textAlignment="CENTER" wrappingWidth="281.13671875">
-                     <font>
-                        <Font name="Calibri" size="30.0" />
-                     </font>
-                  </Text>
-               </children>
-            </Group>
+            <Group fx:id="GroupCreateDevoir" layoutX="500.0" layoutY="230.0" />
+            <Group layoutX="900.0" layoutY="230.0" />
+            <Button layoutX="635.0" layoutY="549.0" mnemonicParsing="false" onAction="#goToConsultDevoir" prefHeight="67.0" prefWidth="283.0" />
+            <Button layoutX="635.0" layoutY="425.0" mnemonicParsing="false" onAction="#goToCreateDevoir" prefHeight="67.0" prefWidth="283.0" />
+            <ImageView fitHeight="45.0" fitWidth="105.0" focusTraversable="true" layoutX="500.0" layoutY="436.0">
+               <image>
+                  <Image url="@Logo/banana.png" />
+               </image>
+            </ImageView>
+            <Text focusTraversable="true" layoutX="636.0" layoutY="466.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Créer un devoir" textAlignment="CENTER" wrappingWidth="281.13671875">
+               <font>
+                  <Font name="Calibri" size="30.0" />
+               </font>
+            </Text>
+            <Text layoutX="625.0" layoutY="591.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Acceder au depot" textAlignment="CENTER" wrappingWidth="281.13671875">
+               <font>
+                  <Font name="Calibri" size="30.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="75.0" fitWidth="257.0" focusTraversable="true" layoutX="637.0" layoutY="129.0">
+               <image>
+                  <Image url="@Logo/TheBananaCompany.PNG" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="80.0" fitWidth="150.0" focusTraversable="true" layoutX="416.0" layoutY="126.0">
+               <image>
+                  <Image url="@Logo/Logo.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="45.0" fitWidth="105.0" focusTraversable="true" layoutX="500.0" layoutY="561.0">
+               <image>
+                  <Image url="@Icons/banana.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
-   </center>
+   </top>
 </BorderPane>

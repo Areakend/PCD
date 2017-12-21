@@ -19,9 +19,9 @@ Jour 2 :
 - Utiliser l'API pour la gestion de projet -- Pas termine (manque la partie push)
 
 Jour 3 :
-- Finir la DataBase
-- Bien avancer dans les fonctions d'appels et de modif de la Db
-- Amelioration de l'IG (fluidifier et proposer plus de fonctionnalites)
+- Finir la DataBase -- OK
+- Bien avancer dans les fonctions d'appels et de modif de la Db -- Pas terminé
+- Amelioration de l'IG (fluidifier et proposer plus de fonctionnalites) -- OK
 - Creation des groupes pour pouvoir gerer les matieres avec a l'interieur des devoirs, des projets et des groupes
 - Finir la creation de devoirs et permettre de gerer des groupes
 
