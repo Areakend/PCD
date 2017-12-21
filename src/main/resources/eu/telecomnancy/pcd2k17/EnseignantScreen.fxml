@@ -7,47 +7,52 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <BorderPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.pcd2k17.UI.java.EnseignantScreenController">
-   <top>
+   <center>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1600.0" BorderPane.alignment="CENTER">
          <children>
             <Group fx:id="GroupCreateDevoir" layoutX="500.0" layoutY="230.0" />
             <Group layoutX="900.0" layoutY="230.0" />
-            <Button layoutX="635.0" layoutY="549.0" mnemonicParsing="false" onAction="#goToConsultDevoir" prefHeight="67.0" prefWidth="283.0" />
-            <Button layoutX="635.0" layoutY="425.0" mnemonicParsing="false" onAction="#goToCreateDevoir" prefHeight="67.0" prefWidth="283.0" />
-            <ImageView fitHeight="45.0" fitWidth="105.0" focusTraversable="true" layoutX="500.0" layoutY="436.0">
+            <Button layoutX="1121.0" layoutY="334.0" mnemonicParsing="false" onAction="#goToConsultDevoir" prefHeight="67.0" prefWidth="283.0" text="Accerder au dépot">
+               <font>
+                  <Font size="28.0" />
+               </font></Button>
+            <Button layoutX="553.0" layoutY="334.0" mnemonicParsing="false" onAction="#goToCreateDevoir" prefHeight="67.0" prefWidth="283.0" text="Créer un devoir">
+               <font>
+                  <Font size="28.0" />
+               </font></Button>
+            <ImageView fitHeight="45.0" fitWidth="105.0" focusTraversable="true" layoutX="402.0" layoutY="345.0">
                <image>
                   <Image url="@Logo/banana.png" />
                </image>
             </ImageView>
-            <Text focusTraversable="true" layoutX="636.0" layoutY="466.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Créer un devoir" textAlignment="CENTER" wrappingWidth="281.13671875">
-               <font>
-                  <Font name="Calibri" size="30.0" />
-               </font>
-            </Text>
-            <Text layoutX="625.0" layoutY="591.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Acceder au depot" textAlignment="CENTER" wrappingWidth="281.13671875">
-               <font>
-                  <Font name="Calibri" size="30.0" />
-               </font>
-            </Text>
-            <ImageView fitHeight="75.0" fitWidth="257.0" focusTraversable="true" layoutX="637.0" layoutY="129.0">
+            <ImageView fitHeight="75.0" fitWidth="257.0" focusTraversable="true" layoutX="270.0" layoutY="45.0">
                <image>
                   <Image url="@Logo/TheBananaCompany.PNG" />
                </image>
             </ImageView>
-            <ImageView fitHeight="80.0" fitWidth="150.0" focusTraversable="true" layoutX="416.0" layoutY="126.0">
+            <ImageView fitHeight="80.0" fitWidth="150.0" focusTraversable="true" layoutX="53.0" layoutY="42.0">
                <image>
                   <Image url="@Logo/Logo.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="45.0" fitWidth="105.0" focusTraversable="true" layoutX="500.0" layoutY="561.0">
+            <ImageView fitHeight="45.0" fitWidth="105.0" focusTraversable="true" layoutX="975.0" layoutY="345.0">
+               <image>
+                  <Image url="@Icons/banana.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="disconnectButton" layoutX="886.0" layoutY="502.0" mnemonicParsing="false" onAction="#Disconnect" prefHeight="67.0" prefWidth="283.0" text="Me déconnecter">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="45.0" fitWidth="105.0" focusTraversable="true" layoutX="731.0" layoutY="513.0">
                <image>
                   <Image url="@Icons/banana.png" />
                </image>
             </ImageView>
          </children>
       </AnchorPane>
-   </top>
+   </center>
 </BorderPane>
