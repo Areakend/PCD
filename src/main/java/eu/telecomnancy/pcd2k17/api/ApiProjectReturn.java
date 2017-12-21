@@ -12,10 +12,10 @@ public class ApiProjectReturn extends ApiListProjectReturn{
     private Project project;
     private ApiAssignment assign;
 
-    public ApiProjectReturn(String s, ApiAssignment assign_){
+    public ApiProjectReturn(String prefixe ,String s, ApiAssignment assign_){
         super();
         this.assign = assign_;
-        this.name = s;
+        this.name = "["+prefixe+"] "+s;
         this.project = this.assign.getProject(s);
         this.checkProject();
     }

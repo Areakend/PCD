@@ -22,14 +22,14 @@ public class MainTestApi {
 
             api.showListDiscipline();
 
-            ApiProjectReturn rendu1 = new ApiProjectReturn("Rendu de projet "+assign.getName(),assign);
-            ApiProjectReturn rendu2 = new ApiProjectReturn("Rendu de projet "+assign2.getName(),assign2);
+            ApiProjectReturn rendu1 = new ApiProjectReturn("coucou","Rendu de projet "+assign.getName(),assign);
+            ApiProjectReturn rendu2 = new ApiProjectReturn("salut","Rendu de projet "+assign2.getName(),assign2);
 
             assign.showProjects();
 
             ApiFile file = new ApiFile(rendu1);
             try {
-                file.pushFile("C:\\Users\\User\\Downloads\\Donkey_Kong.jpg");
+                file.pushFile("C:\\Users\\User\\Downloads\\Donkey_Kong.jpg","Gros Zeub");
             }
             catch (Exception e){
                 System.out.println("Error : "+e);
