@@ -89,9 +89,9 @@ public class ApiProjectReturn extends ApiListProjectReturn{
     }
 
     public void saveAssignment(ApiAssignmentFileManager fileManager){
-        List<TreeItem> listItem = fileManager.getElements();
-        for (TreeItem item: listItem) {
-            fileManager.saveFile("master",item.getName());
+        List<String> listItem = fileManager.getElements();
+        for (String item: listItem) {
+            fileManager.saveFile("master",item);
         }
     }
 
