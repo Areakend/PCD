@@ -70,6 +70,4 @@ public class Student {
     	return groupName;
     }
     
-    
-
 }

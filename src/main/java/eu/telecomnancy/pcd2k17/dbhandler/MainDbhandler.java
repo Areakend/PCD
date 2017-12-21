@@ -13,7 +13,7 @@ import eu.telecomnancy.pcd2k17.api.*;
 
 public class MainDbhandler {
 
-    public static void createNewDatabase() {
+    private static void createNewDatabase() {
         String url = "jdbc:sqlite:" + System.getProperty("user.dir") + 
         		"/src/main/resources/eu/telecomnancy/pcd2k17/database/GitTN.db";
         try (Connection conn = DriverManager.getConnection(url)) {
@@ -37,7 +37,7 @@ public class MainDbhandler {
         return conn;
     }
     
-    public static void createFile() {
+    private static void createFile() {
     	try {
             File dir = new File("src/main/resources/eu/telecomnancy/pcd2k17/database");
             dir.mkdir();
@@ -48,7 +48,7 @@ public class MainDbhandler {
         }
     }
     
-    public static void deleteDb() {
+    private static void deleteDb() {
     	Path path = FileSystems.getDefault()
     			.getPath("src/main/resources/eu/telecomnancy/pcd2k17/database/gitTN.db");
     	try {
@@ -59,6 +59,12 @@ public class MainDbhandler {
 			System.out.println("The database gitTN.db does not exist.");
 		}
 	}
+    
+    /*public static void refreshFromApi() {
+    	ApiUser user = new ApiUser();
+    	List<User>
+    	
+    }*/
     
     public static void main(String[] args) {
     	deleteDb();
@@ -72,7 +78,6 @@ public class MainDbhandler {
 		groups.createGroups();
 		Assignments assignments = new Assignments();
 		assignments.createAssignments();
-		
     }
     
 }
