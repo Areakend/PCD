@@ -22,6 +22,15 @@ public class ApiAssignment extends ApiListAssignment{
         this.checkAssignment();
     }
 
+    public ApiAssignment (ApiDiscipline discipline_,String name_){
+        super(discipline_);
+        this.name = name_;
+        this.desc = "";
+        this.discipline = discipline_;
+        this.gp = this.discipline.getAssignment(name);
+        this.checkAssignment();
+    }
+
     private void checkAssignment(){
         if(this.gp == null){
             this.createAssignment(name,desc);
