@@ -30,6 +30,7 @@ import objects.Project;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextInputDialog;
 
+@SuppressWarnings("unused")
 public class CreateAssignementController {
 	private static Project CURRENTPROJECT = null;
 	
@@ -63,6 +64,7 @@ public class CreateAssignementController {
 	DatePicker endDatePicker = new DatePicker();
 
 	@FXML
+
 	TextField endHour = new TextField();
 
 	@FXML
@@ -151,9 +153,9 @@ public class CreateAssignementController {
 	@FXML
 	public void ajoutMatiere(ActionEvent event) throws IOException {
 		TextInputDialog dialog = new TextInputDialog("");
-		dialog.setTitle("Ajouter une matière");
+		dialog.setTitle("Ajouter une matiï¿½re");
 		dialog.setHeaderText(null);
-		dialog.setContentText("Nom de la matière :");
+		dialog.setContentText("Nom de la matiï¿½re :");
 
 		// Traditional way to get the response value.
 		Optional<String> result = dialog.showAndWait();
@@ -161,7 +163,7 @@ public class CreateAssignementController {
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Information");
 			alert.setHeaderText(null);
-			alert.setContentText("Veuillez choisir une liste d'élèves");
+			alert.setContentText("Veuillez choisir une liste d'ï¿½lï¿½ves");
 
 			alert.showAndWait();
 			final FileChooser fileChooser = new FileChooser();

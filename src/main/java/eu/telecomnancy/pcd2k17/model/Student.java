@@ -4,6 +4,8 @@ public class Student {
 
     private int idStudent;
     private String username;
+    private String prenom;
+    private String nom;
     private String mail;
     private String year;
     private String appro;
@@ -19,6 +21,20 @@ public class Student {
         this.mail = mail;
         this.year = year;
         this.appro = appro;
+        this.groupName = groupName;
+    }
+
+    public Student(int idStudent, String username, String mail,String groupName) {
+        this.idStudent = idStudent;
+        this.username = username;
+        this.mail = mail;
+        this.groupName = groupName;
+    }
+
+    public Student(String prenom, String nom, String mail,String groupName) {
+        this.prenom = prenom;
+        this.nom = nom;
+        this.mail = mail;
         this.groupName = groupName;
     }
 
@@ -69,5 +85,17 @@ public class Student {
     public String getGroupName() {
     	return groupName;
     }
-    
+
+    public String getNom() {
+        return nom;
+    }
+
+    public String getPrenom(){
+        return prenom;
+    }
+
+    public void afficherStudent(){
+        System.out.print("Prenom : "+this.prenom+"\nNom : " + this.nom + "\nMail : " + this.mail + "\nGroupe : " + this.groupName + "\n" );
+    }
+
 }

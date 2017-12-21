@@ -4,49 +4,62 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
+
 
 import eu.telecomnancy.pcd2k17.Main;
+import eu.telecomnancy.pcd2k17.model.Student;
 import eu.telecomnancy.pcd2k17.api.ApiAssignment;
 import eu.telecomnancy.pcd2k17.api.ApiDiscipline;
 import eu.telecomnancy.pcd2k17.api.ApiProjectReturn;
 import eu.telecomnancy.pcd2k17.model.Students;
+import java.util.LinkedList;
+import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.beans.value.ObservableValue;
+import javafx.util.Callback;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.ChoiceDialog;
+import javafx.scene.control.TableColumn;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TableColumn.CellDataFeatures;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import java.util.Optional;
+import javafx.scene.control.cell.PropertyValueFactory;
 import objects.Project;
-import javafx.scene.control.TreeTableView;
-import javafx.scene.control.TreeTableColumn;
 
 @SuppressWarnings("unused")
 public class GroupScreenController {
 
+    final static Logger log = LogManager.getLogger(GroupScreenController.class);
+
 	private String path;
+    private ObservableList<Student> studentData;
 	private List<Integer> listUserId = new LinkedList<>();
 
 	@FXML
 	Text pathText = new Text();
 
-	TreeTableView<String> groupsTreeTableView;
-
 	@FXML
-	private TreeTableColumn<Students, String> firstNameTableColumn;
+	private TableView<Student> groupsView;
 
-	@FXML
-	private TreeTableColumn<Students, String> lastNameTableColumn;
-
-	@FXML
-	private TreeTableColumn<Students, String> mailTableColumn;
-
-	@FXML
-	private TreeTableColumn<Students, String> groupsTableColumn;
+    @FXML
+    private TableColumn<Student, String> firstNameColumn;
+    @FXML
+    private TableColumn<Student, String> lastNameColumn;
+    @FXML
+    private TableColumn<Student, String> mailColumn;
+    @FXML
+    private TableColumn<Student, String> groupColumn;
 
 	@FXML
 	public void deleteStudent(ActionEvent event) {
@@ -63,14 +76,16 @@ public class GroupScreenController {
 
 	}
 
-	@FXML
+
+
+
 	public void validate(ActionEvent event) {
 		Project project = CreateAssignementController.getCurrentProject();
 		ApiDiscipline disc = new ApiDiscipline(project.getTitre());
 
 		for (Integer id : listUserId) {
-			ApiProjectReturn p = new ApiProjectReturn(project.getPrefix(), project.getTitre(),
-					new ApiAssignment(disc, project.getTitre()));
+			ApiProjectReturn p = new ApiProjectReturn(project.getTitre(),
+					new ApiAssignment(disc, project.getTitre())).setPrefix(project.getPrefix());
 			p.addMembers(p.getIdProject(), id);
 		}
 	}
@@ -92,6 +107,23 @@ public class GroupScreenController {
 	}
 
 	@FXML
+    public void refresh() throws IOException{
+        Students students = new Students();
+        studentData = students.getAllStudents();
+        groupsView.setItems(studentData);
+    }
+
+    @FXML
+    public void initialize(){
+        Students students = new Students();
+        studentData = students.getAllStudents();
+        studentData.add(new Student("Tanguy","Roudaut","tanguy.roudaut@telecomnancy.eu","Banana"));
+        studentData.forEach(student ->student.afficherStudent());
+
+        groupsView.setItems(studentData);
+    }
+
+
 	public void AddStudent(ActionEvent event) throws IOException {
 		Scene scene = new Scene(Main.panel5, 400, 400);
 		Main.stage2.setTitle("Ajouter un élève");
