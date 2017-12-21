@@ -2,6 +2,7 @@ package eu.telecomnancy.pcd2k17.api;
 
 import org.gitlab4j.api.models.Branch;
 import org.gitlab4j.api.models.TreeItem;
+import sun.awt.image.ImageWatched;
 
 import java.io.File;
 import java.util.LinkedList;
@@ -14,9 +15,9 @@ public abstract class ApiAssignmentFileManager{
         this.project = project_;
     }
 
-    public List<String> getElements(){
+    public LinkedList<String> getElements(){
         try {
-            List<String> list = new LinkedList<>();
+            LinkedList<String> list = new LinkedList<>();
             for (TreeItem t:ApiConnect.REPOAPI.getTree(this.project.getIdProject())) {
                 list.add(t.getName());
             }
