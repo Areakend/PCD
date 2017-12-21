@@ -28,9 +28,9 @@ import javafx.stage.Stage;
 import javafx.scene.text.*;
 
 @SuppressWarnings("unused")
-public class studentControl {
+public class pullScreen {
 
-	final static Logger log = LogManager.getLogger(studentControl.class);
+	final static Logger log = LogManager.getLogger(pullScreen.class);
 
 	private String path = null;
 
@@ -58,8 +58,8 @@ public class studentControl {
 	Label test;
 
 	static String matiereChoisie = null;
-
 	static String projetChoisi = null;
+	static String fichierChoisi = null;
 
 	public void choisirMatiere(ActionEvent event) throws IOException {
 
@@ -100,19 +100,17 @@ public class studentControl {
 			connectionError.setContentText("Il faut choisir un projet dans lequel push");
 			connectionError.showAndWait();
 		} else {
-			log.debug("Connexion button was clicked!");
-			log.debug("Input CommitText : " + commitMessage.getText());
+			log.debug("Push button was clicked!");
 
-			Main.setCommitMessage(commitMessage.getText());
-			log.debug("Push Devoir");
+			// PULL
 
-			ApiFile file = new ApiFile(new ApiProjectReturn("Rendu de projet " + projetChoisi,
-					new ApiAssignment(new ApiDiscipline(matiereChoisie), projetChoisi)));
 			try {
-				file.pushListFile(Main.fileList, Main.getCommitMessage());
+
+				// PULL
+
 			} catch (Exception e) {
 				Alert connectionError = new Alert(AlertType.ERROR);
-				connectionError.setTitle("Erreur de push");
+				connectionError.setTitle("Erreur de pull");
 				connectionError.setHeaderText(null);
 				connectionError.setContentText("" + e);
 				connectionError.showAndWait();
@@ -127,25 +125,24 @@ public class studentControl {
 	}
 
 	@FXML
-	public void importFile(ActionEvent event) {
-
-		final FileChooser fileChooser = new FileChooser();
-		fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("ALL", "*.*"),
-				new FileChooser.ExtensionFilter("CSV", "*.csv"));
-
-		Stage FileLoaderStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		File file = fileChooser.showOpenDialog(FileLoaderStage);
-		// Main.path = file.getAbsolutePath();
-
-		if (path != file.getAbsolutePath()) {
-			path = file.getAbsolutePath();
-			Main.fileList.add(path);
+	public void choisirUnFichier(ActionEvent event) {
+		
+		ApiFile file = new ApiFile(new ApiProjectReturn("Rendu de projet " + projetChoisi,
+				new ApiAssignment(new ApiDiscipline(matiereChoisie), projetChoisi)));
+		
+		LinkedList<String> files = file.getElements();
+				
+		ChoiceDialog<String> dialog = new ChoiceDialog<>(" ", files);
+		dialog.setTitle("Choix du fichier");
+		dialog.setHeaderText(null);
+		dialog.setContentText("Fichier du projet " + projetChoisi + ": ");
+		Optional<String> result = dialog.showAndWait();
+		if (result.isPresent()) {
+			fichierChoisi = result.get();
+			Main.fileListPull.add(fichierChoisi);
 			Main.setNbofFiles(Main.getNbofFiles() + 1);
-			fileList.setText(fileList.getText() + path + "\n");
+			fileList.setText(fileList.getText() + fichierChoisi + "\n");
 		}
-		log.debug("path : " + path);
-
-		log.debug("File List : " + Main.fileList);
 	}
 
 }

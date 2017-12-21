@@ -30,6 +30,7 @@ import objects.Project;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextInputDialog;
 
+@SuppressWarnings("unused")
 public class CreateAssignementController {
 	private static Project CURRENTPROJECT = null;
 	

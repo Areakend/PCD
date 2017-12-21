@@ -69,8 +69,8 @@ public class GroupScreenController {
 		ApiDiscipline disc = new ApiDiscipline(project.getTitre());
 
 		for (Integer id : listUserId) {
-			ApiProjectReturn p = new ApiProjectReturn(project.getPrefix(), project.getTitre(),
-					new ApiAssignment(disc, project.getTitre()));
+			ApiProjectReturn p = new ApiProjectReturn(project.getTitre(),
+					new ApiAssignment(disc, project.getTitre())).setPrefix(project.getPrefix());
 			p.addMembers(p.getIdProject(), id);
 		}
 	}

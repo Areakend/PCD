@@ -14,6 +14,9 @@ import javafx.stage.Stage;
 
 import org.apache.logging.log4j.Logger;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -35,6 +38,7 @@ public class Main extends Application{
     public static BorderPane panel3 = new BorderPane();
 	public static BorderPane panel4 = new BorderPane();
 	public static BorderPane panel5 = new BorderPane();
+	public static BorderPane panel6 = new BorderPane();
     
     public static Stage stage = new Stage();
     public static Stage stage2 = new Stage();
@@ -43,7 +47,8 @@ public class Main extends Application{
 
 	private static String Token = null;
 	private static String commitMessage = null;
-	public static String fileList[] = new String[64];
+	public static LinkedList<String> fileList = new LinkedList<>();
+	public static LinkedList<String> fileListPull = new LinkedList<>();
 
 	private static int nbofFiles = 0;
 	private static int connected = 0;
@@ -60,6 +65,7 @@ public class Main extends Application{
     	panel3 = FXMLLoader.load(getClass().getResource("studentControl.fxml"));
 		panel4 = FXMLLoader.load(getClass().getResource("GroupScreen.fxml"));
 		panel5 = FXMLLoader.load(getClass().getResource("addStudent.fxml"));
+		panel6 = FXMLLoader.load(getClass().getResource("pullScreen.fxml"));
 
 		stage2.setScene(new Scene(root, 400, 200));
 		stage2.show();

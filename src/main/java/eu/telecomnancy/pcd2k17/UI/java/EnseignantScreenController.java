@@ -38,6 +38,12 @@ public class EnseignantScreenController {
 		nameText.setText(Main.api.getCurrentUserName());
 		Main.mainPane.setCenter(Main.panel3);
 	}
+	
+	@FXML
+	public void goToPullDevoir(ActionEvent event) throws IOException {
+		nameText.setText(Main.api.getCurrentUserName());
+		Main.mainPane.setCenter(Main.panel6);
+	}
 
 	@FXML
 	public void Disconnect(ActionEvent event) throws IOException {
