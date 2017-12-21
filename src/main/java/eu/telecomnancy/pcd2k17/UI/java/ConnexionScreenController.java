@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
+@SuppressWarnings("unused")
 public class ConnexionScreenController {
 
 	final static Logger log = LogManager.getLogger(ConnexionScreenController.class);

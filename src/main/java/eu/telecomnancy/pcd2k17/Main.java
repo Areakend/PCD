@@ -22,6 +22,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
  
+@SuppressWarnings("unused")
 public class Main extends Application{
      
 	final static Logger log = LogManager.getLogger(Main.class);
