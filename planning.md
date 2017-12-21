@@ -23,7 +23,7 @@ Jour 3 :
 - Bien avancer dans les fonctions d'appels et de modif de la Db
 - Amelioration de l'IG (fluidifier et proposer plus de fonctionnalites)
 - Creation des groupes pour pouvoir gerer les matieres avec a l'interieur des devoirs, des projets et des groupes
-- Finir la creation de devoirs et permettre de gerer des groupes
+- Finir la creation de devoirs et permettre de gerer des groupes -- OK
 
 Jour 4 :
 - Finir toutes les fonctions d'appels et de modif de la Db
