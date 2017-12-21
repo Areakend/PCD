@@ -30,7 +30,7 @@ public class ConnexionScreenController {
 			Main.api.login(Main.Token);
 			if (Main.api.loginOK()) {
 				 Main.mainPane.setCenter(Main.panel0);
-			        Scene scene = new Scene(Main.mainPane, 1400, 700);
+			        Scene scene = new Scene(Main.mainPane, 1600, 800);
 			        Main.stage.setTitle("test");
 			        Main.stage.setScene(scene);
 			        Main.stage.show();

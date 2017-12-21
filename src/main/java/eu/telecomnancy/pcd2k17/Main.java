@@ -32,6 +32,8 @@ public class Main extends Application{
     public static BorderPane panel1 = new BorderPane();
     public static BorderPane panel2 = new BorderPane();
     public static BorderPane panel3 = new BorderPane();
+	public static BorderPane panel4 = new BorderPane();
+	public static BorderPane panel5 = new BorderPane();
     
     public static Stage stage = new Stage();
     public static Stage stage2 = new Stage();
@@ -53,6 +55,8 @@ public class Main extends Application{
     	panel1 = FXMLLoader.load(getClass().getResource("EnseignantScreen.fxml"));
     	panel2 = FXMLLoader.load(getClass().getResource("CreateAssignement.fxml"));
     	panel3 = FXMLLoader.load(getClass().getResource("studentControl.fxml"));
+		panel4 = FXMLLoader.load(getClass().getResource("GroupScreen.fxml"));
+		panel5 = FXMLLoader.load(getClass().getResource("addStudent.fxml"));
 
 		stage2.setScene(new Scene(root, 400, 200));
 		stage2.show();

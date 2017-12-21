@@ -1,12 +1,20 @@
 package eu.telecomnancy.pcd2k17.UI.java;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Optional;
 
+import eu.telecomnancy.pcd2k17.Main;
+import eu.telecomnancy.pcd2k17.model.Students;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.ChoiceDialog;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -23,21 +31,18 @@ public class GroupScreenController {
 	TreeTableView<String> groupsTreeTableView;
 	 
 	@FXML
-	private TreeTableColumn<String, String> firstNameTableColumn;
+	private TreeTableColumn<Students, String> firstNameTableColumn;
 	
 	@FXML
-	private TreeTableColumn<String, String> lastNameTableColumn;
+	private TreeTableColumn<Students, String> lastNameTableColumn;
 	
 	@FXML
-	private TreeTableColumn<String, String> mailTableColumn;
+	private TreeTableColumn<Students, String> mailTableColumn;
 	
 	@FXML
-	private TreeTableColumn<String, String> groupsTableColumn;
+	private TreeTableColumn<Students, String> groupsTableColumn;
 	
-	@FXML
-	public void AddStudent(ActionEvent event){
-		
-	}
+
 	
 	@FXML
 	public void deleteStudent(ActionEvent event){
@@ -77,4 +82,16 @@ public class GroupScreenController {
 			Path p1 = Paths.get(doubleSlashPath);	 
 			pathText.setText(p1.getFileName().toString());
 	  }
+
+	@FXML
+	public void AddStudent(ActionEvent event) throws IOException {
+        Scene scene = new Scene(Main.panel5, 400, 400);
+        Main.stage2.setTitle("Ajouter un élève");
+        Main.stage2.setScene(scene);
+        Main.stage2.show();
+
+
+	}
+
+
 }

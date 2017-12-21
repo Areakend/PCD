@@ -5,6 +5,7 @@
 <?import javafx.scene.control.TreeTableColumn?>
 <?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
@@ -12,95 +13,99 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <GridPane layoutX="120.0" layoutY="157.0" prefHeight="395.0" prefWidth="300.0">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="170.0" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="110.0" minWidth="0.0" prefWidth="80.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-         </rowConstraints>
+<BorderPane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.pcd2k17.UI.java.GroupScreenController">
+   <center>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1600.0">
          <children>
-            <Button fx:id="importButton" mnemonicParsing="false" onAction="#importCSV" prefWidth="100.0" text="Importer" GridPane.columnIndex="1">
+            <GridPane layoutX="120.0" layoutY="157.0" prefHeight="395.0" prefWidth="300.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="170.0" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="110.0" minWidth="0.0" prefWidth="80.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Button fx:id="importButton" mnemonicParsing="false" onAction="#importCSV" prefWidth="100.0" text="Importer" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="Calibri" size="14.0" />
+                     </font>
+                  </Button>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Importer un fichier CSV">
+                     <font>
+                        <Font name="Calibri" size="14.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets top="2.0" />
+                     </GridPane.margin>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter un élève" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="Calibri" size="14.0" />
+                     </font>
+                  </Text>
+                  <Button fx:id="addStudentButton" mnemonicParsing="false" onAction="#AddStudent" prefWidth="100.0" text="Ajouter" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="Calibri" size="14.0" />
+                     </font>
+                  </Button>
+                  <Text layoutX="10.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modifier un élève" GridPane.rowIndex="4">
+                     <font>
+                        <Font name="Calibri" size="14.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="10.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Supprimer un élève" GridPane.rowIndex="3">
+                     <font>
+                        <Font name="Calibri" size="14.0" />
+                     </font>
+                  </Text>
+                  <Button fx:id="modifyStudentButton" layoutX="181.0" layoutY="102.0" mnemonicParsing="false" onAction="#modifyStudent" prefWidth="100.0" text="Modifier" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <font>
+                        <Font name="Calibri" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="deleteStudentButton" layoutX="181.0" layoutY="102.0" mnemonicParsing="false" onAction="#deleteStudent" prefWidth="100.0" text="Supprimer" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <font>
+                        <Font name="Calibri" size="14.0" />
+                     </font>
+                  </Button>
+                  <Text layoutX="10.0" layoutY="268.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Générer les groupes" GridPane.rowIndex="6">
+                     <font>
+                        <Font name="Calibri" size="14.0" />
+                     </font>
+                  </Text>
+                  <Button fx:id="generateGroupsButton" layoutX="181.0" layoutY="250.0" mnemonicParsing="false" onAction="#generateGroups" prefWidth="100.0" text="Générer" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                     <font>
+                        <Font name="Calibri" size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </GridPane>
+            <Text layoutX="656.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Création de Groupe">
                <font>
-                  <Font name="Calibri" size="14.0" />
+                  <Font name="Calibri" size="36.0" />
                </font>
-            </Button>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Importer un fichier CSV">
-               <font>
-                  <Font name="Calibri" size="14.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets top="2.0" />
-               </GridPane.margin>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter un élève" GridPane.rowIndex="2">
+            <TreeTableView fx:id="groupsTreeTableView" layoutX="457.0" layoutY="134.0" prefHeight="612.0" prefWidth="1100.0">
+              <columns>
+                <TreeTableColumn fx:id="firstNameTableColumn" prefWidth="225.0" text="Prénom" />
+                <TreeTableColumn fx:id="lastNameTableColumn" prefWidth="225.0" text="Nom" />
+                  <TreeTableColumn fx:id="mailTableColumn" prefWidth="450.0" text="Mail" />
+                  <TreeTableColumn fx:id="GroupsTableColumn" minWidth="0.0" prefWidth="200.0" text="Groupe" />
+              </columns>
+            </TreeTableView>
+            <Button fx:id="validateButton" layoutX="290.0" layoutY="719.0" mnemonicParsing="false" onAction="#validate" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #27ae60;" text="Valider" textFill="WHITE">
                <font>
-                  <Font name="Calibri" size="14.0" />
-               </font>
-            </Text>
-            <Button fx:id="addStudentButton" mnemonicParsing="false" onAction="#AddStudent" prefWidth="100.0" text="Ajouter" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <font>
-                  <Font name="Calibri" size="14.0" />
-               </font>
-            </Button>
-            <Text layoutX="10.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modifier un élève" GridPane.rowIndex="4">
-               <font>
-                  <Font name="Calibri" size="14.0" />
-               </font>
-            </Text>
-            <Text layoutX="10.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Supprimer un élève" GridPane.rowIndex="3">
-               <font>
-                  <Font name="Calibri" size="14.0" />
-               </font>
-            </Text>
-            <Button fx:id="modifyStudentButton" layoutX="181.0" layoutY="102.0" mnemonicParsing="false" onAction="#modifyStudent" prefWidth="100.0" text="Modifier" GridPane.columnIndex="1" GridPane.rowIndex="4">
-               <font>
-                  <Font name="Calibri" size="14.0" />
-               </font>
-            </Button>
-            <Button fx:id="deleteStudentButton" layoutX="181.0" layoutY="102.0" mnemonicParsing="false" onAction="#deleteStudent" prefWidth="100.0" text="Supprimer" GridPane.columnIndex="1" GridPane.rowIndex="3">
-               <font>
-                  <Font name="Calibri" size="14.0" />
-               </font>
-            </Button>
-            <Text layoutX="10.0" layoutY="268.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Générer les groupes" GridPane.rowIndex="6">
-               <font>
-                  <Font name="Calibri" size="14.0" />
-               </font>
-            </Text>
-            <Button fx:id="generateGroupsButton" layoutX="181.0" layoutY="250.0" mnemonicParsing="false" onAction="#generateGroups" prefWidth="100.0" text="Générer" GridPane.columnIndex="1" GridPane.rowIndex="6">
-               <font>
-                  <Font name="Calibri" size="14.0" />
+                  <Font name="Calibri Bold" size="14.0" />
                </font>
             </Button>
          </children>
-      </GridPane>
-      <Text layoutX="656.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Création de Groupe">
-         <font>
-            <Font name="Calibri" size="36.0" />
-         </font>
-      </Text>
-      <TreeTableView fx:id="groupsTreeTableView" layoutX="457.0" layoutY="134.0" prefHeight="612.0" prefWidth="1100.0">
-        <columns>
-          <TreeTableColumn fx:id="firstNameTableColumn" prefWidth="225.0" text="Prénom" />
-          <TreeTableColumn fx:id="lastNameTableColumn" prefWidth="225.0" text="Nom" />
-            <TreeTableColumn fx:id="mailTableColumn" prefWidth="450.0" text="Mail" />
-            <TreeTableColumn fx:id="GroupsTableColumn" minWidth="0.0" prefWidth="200.0" text="Groupe" />
-        </columns>
-      </TreeTableView>
-      <Button fx:id="validateButton" layoutX="290.0" layoutY="719.0" mnemonicParsing="false" onAction="#validate" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #27ae60;" text="Valider" textFill="WHITE">
-         <font>
-            <Font name="Calibri Bold" size="14.0" />
-         </font>
-      </Button>
-   </children>
-</AnchorPane>
+      </AnchorPane>
+   </center>
+</BorderPane>
