@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
+import javafx.stage.DirectoryChooser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import eu.telecomnancy.pcd2k17.Main;
@@ -31,6 +32,7 @@ import javafx.scene.text.*;
 @SuppressWarnings("unused")
 public class pullScreen {
 
+	private  ApiFile currentFile;
 	final static Logger log = LogManager.getLogger(pullScreen.class);
 
 	private String path = null;
@@ -102,41 +104,31 @@ public class pullScreen {
 
 	@FXML
 	public void validDevoir(ActionEvent event) throws IOException {
-/*		new Projet project = (projetChoisi, )
-		ApiProjectReturn p = new ApiProjectReturn(project.getTitre(),
-				new ApiAssignment(disc, project.getTitre())).setPrefix(project.getPrefix());
-		new File fichierChoisi = new File 
-				
-	*/
-//		String dir = "C:'\'Users'\'Zaven'\'Pictures'\'";
-//		ApiAssignmentFileManager.saveFile(fichierChoisi,dir);
-		Alert connectionError2 = new Alert(AlertType.ERROR);
-		connectionError2.setTitle("Api error");
-		connectionError2.setHeaderText(null);
-		connectionError2.setContentText("Need jerem pour finir <3");
-		connectionError2.showAndWait();
-		if (projetChoisi == null) {
-			Alert connectionError = new Alert(AlertType.ERROR);
-			connectionError.setTitle("Impossible de pull");
-			connectionError.setHeaderText(null);
-			connectionError.setContentText("Il faut choisir un fichier � pull");
-			connectionError.showAndWait();
-		} else {
-			log.debug("Push button was clicked!");
+		try {
+			final DirectoryChooser dirChooser = new DirectoryChooser();
+			Stage DirLoaderStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			File file = dirChooser.showDialog(DirLoaderStage);
+			path = file.getAbsolutePath();
 
-			// PULL
-
-			try {
-
-				// PULL
-
-			} catch (Exception e) {
+			if (projetChoisi == null) {
 				Alert connectionError = new Alert(AlertType.ERROR);
-				connectionError.setTitle("Erreur de pull");
+				connectionError.setTitle("Impossible de pull");
 				connectionError.setHeaderText(null);
-				connectionError.setContentText("" + e);
+				connectionError.setContentText("Il faut choisir un fichier à pull");
 				connectionError.showAndWait();
+			} else {
+				log.debug("Push button was clicked!");
+				for (String s:Main.fileListPull){
+					currentFile.saveFile(s,path );
+				}
+
 			}
+		} catch (Exception e) {
+			Alert connectionError = new Alert(AlertType.ERROR);
+			connectionError.setTitle("Erreur de pull");
+			connectionError.setHeaderText(null);
+			connectionError.setContentText("" + e);
+			connectionError.showAndWait();
 		}
 	}
 
@@ -149,10 +141,10 @@ public class pullScreen {
 	@FXML
 	public void choisirUnFichier(ActionEvent event) {
 		try {
-			ApiFile file = new ApiFile(new ApiProjectReturn("Rendu de projet " + projetChoisi,
+			currentFile = new ApiFile(new ApiProjectReturn("Rendu de projet " + projetChoisi,
 					new ApiAssignment(new ApiDiscipline(matiereChoisie), projetChoisi)));
 
-			LinkedList<String> files = file.getElements();
+			LinkedList<String> files = currentFile.getElements();
 
 			ChoiceDialog<String> dialog = new ChoiceDialog<>(" ", files);
 			dialog.setTitle("Choix du fichier");
