@@ -42,6 +42,7 @@ public class Main extends Application{
 	public static BorderPane panel5 = new BorderPane();
 	public static BorderPane panel6 = new BorderPane();
 	public static BorderPane panel7 = new BorderPane();
+	public static BorderPane panel8 = new BorderPane();
     
     public static Stage stage = new Stage();
     public static Stage stage2 = new Stage();
@@ -52,6 +53,7 @@ public class Main extends Application{
 	private static String commitMessage = null;
 	public static LinkedList<String> fileList = new LinkedList<>();
 	public static LinkedList<String> fileListPull = new LinkedList<>();
+	public static LinkedList<String> fileListDelete = new LinkedList<>();
 
 	private static int nbofFiles = 0;
 	private static int connected = 0;
@@ -69,7 +71,8 @@ public class Main extends Application{
 		panel4 = FXMLLoader.load(getClass().getResource("GroupScreen.fxml"));
 		panel5 = FXMLLoader.load(getClass().getResource("addStudent.fxml"));
 		panel6 = FXMLLoader.load(getClass().getResource("pullScreen.fxml"));
-		panel7 = FXMLLoader.load(getClass().getResource("ModificationStudent.fxml"));
+		panel7 = FXMLLoader.load(getClass().getResource("deleteScreen.fxml"));
+		panel8 = FXMLLoader.load(getClass().getResource("ModificationStudent.fxml"));
 
 		stage2.setScene(new Scene(root, 400, 200));
 		stage2.show();
@@ -112,4 +115,3 @@ public class Main extends Application{
 		Main.connected = connected;
 	}
 }
-

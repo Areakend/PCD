@@ -1,3 +1,4 @@
+
 package eu.telecomnancy.pcd2k17.UI.java;
 
 import java.io.File;
@@ -7,6 +8,7 @@ import java.nio.file.Paths;
 
 
 import eu.telecomnancy.pcd2k17.Main;
+import eu.telecomnancy.pcd2k17.api.ApiConnect;
 import eu.telecomnancy.pcd2k17.model.Groups;
 import eu.telecomnancy.pcd2k17.model.Student;
 import eu.telecomnancy.pcd2k17.api.ApiAssignment;
@@ -86,7 +88,7 @@ public class GroupScreenController {
         System.out.print("Index : " + selectedIndex + "\n");
         if (selectedIndex >= 0) {
             if (modifOpen == 0){
-                modifScene = new Scene(Main.panel7,400,400);
+                modifScene = new Scene(Main.panel8,400,400);
                 modifOpen = 1;
             }
             mailStudent = groupsView.getItems().get(selectedIndex).getMail();
@@ -127,16 +129,33 @@ public class GroupScreenController {
 
 
 
-	public void validate(ActionEvent event) {
-		Project project = CreateAssignementController.getCurrentProject();
-		ApiDiscipline disc = new ApiDiscipline(project.getTitre());
+    public void validate(ActionEvent event) {
+        try{
+            Project project = CreateAssignementController.getCurrentProject();
+            ApiDiscipline disc = new ApiDiscipline(project.getTitre());
 
-		for (Integer id : listUserId) {
-			ApiProjectReturn p = new ApiProjectReturn(project.getTitre(),
-					new ApiAssignment(disc, project.getTitre())).setPrefix(project.getPrefix());
-			p.addMembers(p.getIdProject(), id);
-		}
-	}
+            for (int id : listUserId) {
+
+                ApiProjectReturn p = new ApiProjectReturn("["+project.getPrefix()+"]Rendu_de_projet_"+project.getTitre()+"_"+ ApiConnect.USER.getUser(id).getUsername(),
+                        new ApiAssignment(disc, project.getTitre()));
+                p.addMembers(p.getIdProject(), id);
+            }
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText(null);
+            alert.setContentText("Action effectu�e !");
+
+            alert.showAndWait();
+            Main.mainPane.setCenter(Main.panel1);
+        }
+        catch (Exception e){
+            Alert connectionError = new Alert(AlertType.ERROR);
+            connectionError.setTitle("Error:");
+            connectionError.setHeaderText(null);
+            connectionError.setContentText("Try again : " + e);
+            connectionError.showAndWait();
+        }
+    }
 
 	@FXML
 	public void importCSV(ActionEvent event) {
@@ -170,5 +189,12 @@ public class GroupScreenController {
 
     public int getSelectedIndex() {
         return selectedIndex;
+    }
+
+    @FXML
+    public void back2Menu(ActionEvent event) throws IOException {
+
+        Main.mainPane.setCenter(Main.panel1);
+
     }
 }

@@ -7,12 +7,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
-import javafx.stage.DirectoryChooser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import eu.telecomnancy.pcd2k17.Main;
 import eu.telecomnancy.pcd2k17.api.ApiAssignment;
-import eu.telecomnancy.pcd2k17.api.ApiAssignmentFileManager;
 import eu.telecomnancy.pcd2k17.api.ApiConnect;
 import eu.telecomnancy.pcd2k17.api.ApiDiscipline;
 import eu.telecomnancy.pcd2k17.api.ApiFile;
@@ -30,10 +28,9 @@ import javafx.stage.Stage;
 import javafx.scene.text.*;
 
 @SuppressWarnings("unused")
-public class pullScreen {
+public class deleteScreenController {
 
-	private  ApiFile currentFile;
-	final static Logger log = LogManager.getLogger(pullScreen.class);
+	final static Logger log = LogManager.getLogger(deleteScreenController.class);
 
 	private String path = null;
 
@@ -61,8 +58,8 @@ public class pullScreen {
 	Label test;
 
 	static String matiereChoisie = null;
-	static String projetChoisi = null;
 	static String fichierChoisi = null;
+	static String projetChoisi = null;
 
 	public void choisirMatiere(ActionEvent event) throws IOException {
 
@@ -93,65 +90,43 @@ public class pullScreen {
 				}
 			}
 			catch (Exception e){
-				Alert connectionError = new Alert(AlertType.ERROR);
-				connectionError.setTitle("Error:");
-				connectionError.setHeaderText(null);
-				connectionError.setContentText("" + e);
-				connectionError.showAndWait();
+
 			}
 		}
 	}
 
-	@FXML
-	public void validDevoir(ActionEvent event) throws IOException {
-		try {
-			final DirectoryChooser dirChooser = new DirectoryChooser();
-			Stage DirLoaderStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			File file = dirChooser.showDialog(DirLoaderStage);
-			path = file.getAbsolutePath();
-
-			if (projetChoisi == null) {
-				Alert connectionError = new Alert(AlertType.ERROR);
-				connectionError.setTitle("Impossible de pull");
-				connectionError.setHeaderText(null);
-				connectionError.setContentText("Il faut choisir un fichier Ã  pull");
-				connectionError.showAndWait();
-			} else {
-				log.debug("Push button was clicked!");
-				for (String s:Main.fileListPull){
-					currentFile.saveFile(s,path );
-				}
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Information");
-				alert.setHeaderText(null);
-				alert.setContentText("Action effectuée !");
-
-				alert.showAndWait();
-				Main.mainPane.setCenter(Main.panel1);
-
-			}
-		} catch (Exception e) {
-			Alert connectionError = new Alert(AlertType.ERROR);
-			connectionError.setTitle("Erreur de pull");
-			connectionError.setHeaderText(null);
-			connectionError.setContentText("" + e);
-			connectionError.showAndWait();
-		}
-	}
 
 	@FXML
 	public void back2Menu(ActionEvent event) throws IOException {
 
 		Main.mainPane.setCenter(Main.panel1);
 	}
+	
+	@FXML
+	public void deleteProject(ActionEvent event) throws IOException {
+		Alert connectionError = new Alert(AlertType.ERROR);
+		connectionError.setTitle("Api error");
+		connectionError.setHeaderText(null);
+		connectionError.setContentText("Need jerem pour finir <3");
+		connectionError.showAndWait();
+	}
+	
+	@FXML
+	public void deleteFiles(ActionEvent event) throws IOException {
+		Alert connectionError = new Alert(AlertType.ERROR);
+		connectionError.setTitle("Api error");
+		connectionError.setHeaderText(null);
+		connectionError.setContentText("Need jerem pour finir <3");
+		connectionError.showAndWait();
+	}
 
 	@FXML
 	public void choisirUnFichier(ActionEvent event) {
 		try {
-			currentFile = new ApiFile(new ApiProjectReturn("Rendu de projet " + projetChoisi,
+			ApiFile file = new ApiFile(new ApiProjectReturn("Rendu de projet " + projetChoisi,
 					new ApiAssignment(new ApiDiscipline(matiereChoisie), projetChoisi)));
 
-			LinkedList<String> files = currentFile.getElements();
+			LinkedList<String> files = file.getElements();
 
 			ChoiceDialog<String> dialog = new ChoiceDialog<>(" ", files);
 			dialog.setTitle("Choix du fichier");
@@ -160,7 +135,7 @@ public class pullScreen {
 			Optional<String> result = dialog.showAndWait();
 			if (result.isPresent()) {
 				fichierChoisi = result.get();
-				Main.fileListPull.add(fichierChoisi);
+				Main.fileListDelete.add(fichierChoisi);
 				Main.setNbofFiles(Main.getNbofFiles() + 1);
 				fileList.setText(fileList.getText() + fichierChoisi + "\n");
 			}

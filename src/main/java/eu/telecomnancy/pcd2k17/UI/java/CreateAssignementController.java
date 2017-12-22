@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
@@ -18,17 +19,20 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import objects.Project;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextInputDialog;
+import org.gitlab4j.api.models.Visibility;
 
 @SuppressWarnings("unused")
 public class CreateAssignementController {
@@ -53,7 +57,7 @@ public class CreateAssignementController {
 
 	@FXML
 	TextField prefixTextField = new TextField();
-
+	
 	@FXML
 	TextArea descriptionText = new TextArea();
 
@@ -66,6 +70,9 @@ public class CreateAssignementController {
 	@FXML
 
 	TextField endHour = new TextField();
+	
+	@FXML
+	Text matiereText = new Text();
 
 	@FXML
 	RadioButton radioPrivate;
@@ -75,7 +82,11 @@ public class CreateAssignementController {
 
 	@FXML
 	TextField NbElevesTextField = new TextField();
+	
+	static String matiereChoisie = null;
+ /*
 
+*/
 	@FXML
 	public void CreateDevoir(ActionEvent event) throws IOException {
 		/*
@@ -121,7 +132,7 @@ public class CreateAssignementController {
 				error = true;
 			}
 			if (!error) {
-				discipline = matiereChoiceBox.getValue().toString();
+				discipline = matiereText.getText();
 				title = titreTextField.getText();
 				description = descriptionText.getText();
 				releaseDate = releaseDatePicker.getValue();
@@ -144,23 +155,57 @@ public class CreateAssignementController {
 		log.debug("ReleaseDate : " + releaseDate);
 		log.debug("EndDate : " + deadline + " � " + heureFin + "h\n");
 		
-		
-		new ApiAssignment(new ApiDiscipline(discipline), title, description);
-		
+		try {
+			new ApiAssignment(new ApiDiscipline(discipline), title, description);
+		}
+		catch (Exception e){
+
+		}
 		CreateAssignementController.CURRENTPROJECT = new Project(title, prefix, deadline);
 	}
-
+	
 	@FXML
-	public void ajoutMatiere(ActionEvent event) throws IOException {
+	public void ajouterMatiere(ActionEvent event) throws IOException {
+		
+		List<String> matiere = ApiConnect.getInstance().getListDiscipline();
+
 		TextInputDialog dialog = new TextInputDialog("");
 		dialog.setTitle("Ajouter une mati�re");
 		dialog.setHeaderText(null);
-		dialog.setContentText("Nom de la mati�re :");
+		dialog.setContentText("Mati�re :");
+
+		// Traditional way to get the response value.
+		Optional<String> result = dialog.showAndWait();
+		try {
+			if (result.isPresent()){
+				new ApiDiscipline(result.get(), Visibility.PUBLIC);
+			}
+		}
+		catch (Exception e) {
+			Alert connectionError = new Alert(AlertType.ERROR);
+			connectionError.setTitle("Error:");
+			connectionError.setHeaderText(null);
+			connectionError.setContentText("" + e);
+			connectionError.showAndWait();
+		}
+	}
+		
+	@FXML
+	public void choixMatiere(ActionEvent event) throws IOException {
+		List<String> matiere = ApiConnect.getInstance().getListDiscipline();
+
+		ChoiceDialog<String> dialog = new ChoiceDialog<>(" ", matiere);
+		dialog.setTitle("Choix de la mati�re");
+		dialog.setHeaderText(null);
+		dialog.setContentText("Mati�res :");
 
 		// Traditional way to get the response value.
 		Optional<String> result = dialog.showAndWait();
 		if (result.isPresent()) {
-			Alert alert = new Alert(AlertType.INFORMATION);
+			matiereChoisie = result.get();
+			matiereText.setText(matiereChoisie);
+
+/*			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Information");
 			alert.setHeaderText(null);
 			alert.setContentText("Veuillez choisir une liste d'�l�ves");
@@ -175,6 +220,7 @@ public class CreateAssignementController {
 			String path = file.getAbsolutePath();
 
 			System.out.println("File : " + path);
+*/
 		}
 	}
 
