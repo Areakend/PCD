@@ -30,7 +30,7 @@ public class MainDbhandler {
         }
     }
     
-    public Connection connect() {
+    public static Connection connect() {
         String url = "jdbc:sqlite:" + System.getProperty("user.dir") + 
         		"/src/main/resources/eu/telecomnancy/pcd2k17/database/gitTN.db";
         Connection conn = null;
