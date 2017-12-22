@@ -11,7 +11,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import eu.telecomnancy.pcd2k17.Main;
 import eu.telecomnancy.pcd2k17.api.ApiAssignment;
-import eu.telecomnancy.pcd2k17.api.ApiAssignmentFileManager;
 import eu.telecomnancy.pcd2k17.api.ApiConnect;
 import eu.telecomnancy.pcd2k17.api.ApiDiscipline;
 import eu.telecomnancy.pcd2k17.api.ApiFile;
@@ -29,9 +28,9 @@ import javafx.stage.Stage;
 import javafx.scene.text.*;
 
 @SuppressWarnings("unused")
-public class pullScreen {
+public class deleteScreenController {
 
-	final static Logger log = LogManager.getLogger(pullScreen.class);
+	final static Logger log = LogManager.getLogger(deleteScreenController.class);
 
 	private String path = null;
 
@@ -59,8 +58,8 @@ public class pullScreen {
 	Label test;
 
 	static String matiereChoisie = null;
-	static String projetChoisi = null;
 	static String fichierChoisi = null;
+	static String projetChoisi = null;
 
 	public void choisirMatiere(ActionEvent event) throws IOException {
 
@@ -91,50 +90,29 @@ public class pullScreen {
 		}
 	}
 
-	@FXML
-	public void validDevoir(ActionEvent event) throws IOException {
-/*		new Projet project = (projetChoisi, )
-		ApiProjectReturn p = new ApiProjectReturn(project.getTitre(),
-				new ApiAssignment(disc, project.getTitre())).setPrefix(project.getPrefix());
-		new File fichierChoisi = new File 
-				
-	*/
-//		String dir = "C:'\'Users'\'Zaven'\'Pictures'\'";
-//		ApiAssignmentFileManager.saveFile(fichierChoisi,dir);
-		Alert connectionError2 = new Alert(AlertType.ERROR);
-		connectionError2.setTitle("Api error");
-		connectionError2.setHeaderText(null);
-		connectionError2.setContentText("Need jerem pour finir <3");
-		connectionError2.showAndWait();
-		if (projetChoisi == null) {
-			Alert connectionError = new Alert(AlertType.ERROR);
-			connectionError.setTitle("Impossible de pull");
-			connectionError.setHeaderText(null);
-			connectionError.setContentText("Il faut choisir un fichier à pull");
-			connectionError.showAndWait();
-		} else {
-			log.debug("Push button was clicked!");
-
-			// PULL
-
-			try {
-
-				// PULL
-
-			} catch (Exception e) {
-				Alert connectionError = new Alert(AlertType.ERROR);
-				connectionError.setTitle("Erreur de pull");
-				connectionError.setHeaderText(null);
-				connectionError.setContentText("" + e);
-				connectionError.showAndWait();
-			}
-		}
-	}
 
 	@FXML
 	public void back2Menu(ActionEvent event) throws IOException {
 
 		Main.mainPane.setCenter(Main.panel1);
+	}
+	
+	@FXML
+	public void deleteProject(ActionEvent event) throws IOException {
+		Alert connectionError = new Alert(AlertType.ERROR);
+		connectionError.setTitle("Api error");
+		connectionError.setHeaderText(null);
+		connectionError.setContentText("Need jerem pour finir <3");
+		connectionError.showAndWait();
+	}
+	
+	@FXML
+	public void deleteFiles(ActionEvent event) throws IOException {
+		Alert connectionError = new Alert(AlertType.ERROR);
+		connectionError.setTitle("Api error");
+		connectionError.setHeaderText(null);
+		connectionError.setContentText("Need jerem pour finir <3");
+		connectionError.showAndWait();
 	}
 
 	@FXML
@@ -152,7 +130,7 @@ public class pullScreen {
 		Optional<String> result = dialog.showAndWait();
 		if (result.isPresent()) {
 			fichierChoisi = result.get();
-			Main.fileListPull.add(fichierChoisi);
+			Main.fileListDelete.add(fichierChoisi);
 			Main.setNbofFiles(Main.getNbofFiles() + 1);
 			fileList.setText(fileList.getText() + fichierChoisi + "\n");
 		}
