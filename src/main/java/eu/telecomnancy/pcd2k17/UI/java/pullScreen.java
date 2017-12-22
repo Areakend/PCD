@@ -124,7 +124,7 @@ public class pullScreen {
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Information");
 				alert.setHeaderText(null);
-				alert.setContentText("Action effectuée !");
+				alert.setContentText("Action effectuï¿½e !");
 
 				alert.showAndWait();
 				Main.mainPane.setCenter(Main.panel1);
@@ -148,7 +148,7 @@ public class pullScreen {
 	@FXML
 	public void choisirUnFichier(ActionEvent event) {
 		try {
-			currentFile = new ApiFile(new ApiProjectReturn(projetChoisi,
+			currentFile = new ApiFile(new ApiProjectReturn(ApiProjectReturn.getNameProjectFromUserName(ApiConnect.USER.getCurrentUser().getId(),projetChoisi),
 					new ApiAssignment(new ApiDiscipline(matiereChoisie), projetChoisi)));
 
 			LinkedList<String> files = currentFile.getElements();

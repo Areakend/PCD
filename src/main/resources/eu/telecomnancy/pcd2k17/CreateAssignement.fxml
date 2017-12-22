@@ -174,14 +174,6 @@
                </rowConstraints>
                <children>
                   <DatePicker fx:id="releaseDatePicker" maxHeight="25.0" prefHeight="25.0" prefWidth="160.0" GridPane.valignment="TOP" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date de rendu" wrappingWidth="117.8359375" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="TOP">
-                     <font>
-                        <Font name="Calibri" size="18.0" />
-                     </font>
-                     <GridPane.margin>
-                        <Insets top="4.0" />
-                     </GridPane.margin>
-                  </Text>
                   <DatePicker fx:id="endDatePicker" layoutX="10.0" layoutY="10.0" maxHeight="20.0" maxWidth="160.0" prefHeight="10.0" prefWidth="174.0" GridPane.columnIndex="3" GridPane.valignment="TOP" />
                   <Text layoutX="442.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="L'heure de début est fixé à minuit" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="TOP">
                      <font>
@@ -192,14 +184,6 @@
                      </GridPane.margin>
                   </Text>
                   <TextField fx:id="endHour" layoutX="363.0" layoutY="10.0" maxWidth="100.0" promptText="HH:MM" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="TOP" />
-                  <Text layoutX="192.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Heure de rendu" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="TOP">
-                     <font>
-                        <Font name="Calibri" size="18.0" />
-                     </font>
-                     <GridPane.margin>
-                        <Insets top="4.0" />
-                     </GridPane.margin>
-                  </Text>
                </children>
             </GridPane>
             <GridPane GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.valignment="TOP">

@@ -43,8 +43,8 @@ public class GroupScreenController {
     final static Logger log = LogManager.getLogger(GroupScreenController.class);
 
 	private String path,mailStudent;
-    private ObservableList<Student> studentData;
-	private List<Integer> listUserId = new LinkedList<>();
+    private  ObservableList<Student> studentData;
+	public static List<Integer> listUserId = new LinkedList<>();
     private Scene addScene,modifScene;
     private int addOpen = 0,modifOpen = 0,selectedIndex;
 
