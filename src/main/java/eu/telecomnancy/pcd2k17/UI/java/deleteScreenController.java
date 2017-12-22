@@ -123,7 +123,7 @@ public class deleteScreenController {
 	@FXML
 	public void choisirUnFichier(ActionEvent event) {
 		try {
-			ApiFile file = new ApiFile(new ApiProjectReturn("Rendu de projet " + projetChoisi,
+			ApiFile file = new ApiFile(new ApiProjectReturn(ApiProjectReturn.getNameProjectFromUserName(ApiConnect.USER.getCurrentUser().getId(),projetChoisi),
 					new ApiAssignment(new ApiDiscipline(matiereChoisie), projetChoisi)));
 
 			LinkedList<String> files = file.getElements();
