@@ -117,7 +117,7 @@ public class CreateAssignementController {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Erreur de date");
 			alert.setHeaderText("Erreur de date");
-			alert.setContentText("La date de rendu doit �tre apr�s la date de d�but.");
+			alert.setContentText("La date de rendu doit etre apres la date de debut.");
 			alert.showAndWait();
 			error = true;
 		} else {
@@ -127,7 +127,7 @@ public class CreateAssignementController {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Erreur de type");
 				alert.setHeaderText("Erreur de type");
-				alert.setContentText("Un entier est attendu dans le champ : Nb d'�l�ve/groupe.");
+				alert.setContentText("Un entier est attendu dans le champ : Nb d'eleve/groupe.");
 				alert.showAndWait();
 				error = true;
 			}
@@ -170,9 +170,9 @@ public class CreateAssignementController {
 		List<String> matiere = ApiConnect.getInstance().getListDiscipline();
 
 		TextInputDialog dialog = new TextInputDialog("");
-		dialog.setTitle("Ajouter une mati�re");
+		dialog.setTitle("Ajouter une matiere");
 		dialog.setHeaderText(null);
-		dialog.setContentText("Mati�re :");
+		dialog.setContentText("Matiere :");
 
 		// Traditional way to get the response value.
 		Optional<String> result = dialog.showAndWait();
@@ -195,9 +195,9 @@ public class CreateAssignementController {
 		List<String> matiere = ApiConnect.getInstance().getListDiscipline();
 
 		ChoiceDialog<String> dialog = new ChoiceDialog<>(" ", matiere);
-		dialog.setTitle("Choix de la mati�re");
+		dialog.setTitle("Choix de la matiere");
 		dialog.setHeaderText(null);
-		dialog.setContentText("Mati�res :");
+		dialog.setContentText("Matieres :");
 
 		// Traditional way to get the response value.
 		Optional<String> result = dialog.showAndWait();

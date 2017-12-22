@@ -64,16 +64,6 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Heure de rendu : " GridPane.columnIndex="1" GridPane.halignment="RIGHT">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Text>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date de rendu : " GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Text>
                         <Text fx:id="HeureRendu" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="366.0" GridPane.columnIndex="2">
                            <font>
                               <Font size="18.0" />
