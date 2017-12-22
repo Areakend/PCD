@@ -83,3 +83,6 @@ Le bouton "Pull un fichier" permet de récuperer un fichier en ligne et de le t�
 Le bouton "Supprimer un devoir" permet de choisir de supprimer d'un projet particulier.
 Le menu "groupes", apparait après le menu "créer un devoir", il permet d'afficher la liste des membres de chaque groupe. On peut aussi ajouter des élèves grâce au bouton ajouter.
 Nous possédons une base de données, celle-ci est en partie accessible à travers l'interface graphique. Nous avons 4 tables : Assignments, Teachers, Students et Groups. Toutes les quatre sont fonctionnelles. Nous avons cependant un problème lors de l'importation des devoirs depuis gitLab vers l'API, de plus l'interface graphique pour la table teachers n'a pas été développée.
+
+
+Lien vidéo : https://drive.google.com/drive/folders/1OLwQx2UXi9HQhc-bNz_ET9koaNfqolYi?usp=sharing
