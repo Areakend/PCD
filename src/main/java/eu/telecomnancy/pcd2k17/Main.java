@@ -1,7 +1,7 @@
 package eu.telecomnancy.pcd2k17;
 
 import eu.telecomnancy.pcd2k17.api.ApiConnect;
-import eu.telecomnancy.pcd2k17.model.Student;
+import eu.telecomnancy.pcd2k17.model.Students;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

@@ -9,15 +9,14 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<BorderPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.pcd2k17.UI.java.CreateAssignementController">
+<BorderPane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.pcd2k17.UI.java.CreateAssignementController">
    <center>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1600.0">
          <fx:define>
@@ -118,6 +117,11 @@
                         <Font name="Calibri" size="14.0" />
                      </font>
                   </RadioButton>
+                        <Button mnemonicParsing="false" onAction="#ajoutMatiere" text="+" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="175.0" />
+                           </GridPane.margin>
+                        </Button>
                </children>
             </GridPane>
             <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="TOP">
@@ -211,7 +215,7 @@
          </children>
       </GridPane>
 
-      <Button fx:id="menuButton" layoutX="1344.0" layoutY="66.0" onAction="#back2Menu" mnemonicParsing="false" prefHeight="39.0" prefWidth="108.0" text="Menu">
+      <Button fx:id="menuButton" layoutX="1344.0" layoutY="66.0" mnemonicParsing="false" onAction="#back2Menu" prefHeight="39.0" prefWidth="108.0" text="Menu">
          <font>
             <Font size="18.0" />
          </font>
