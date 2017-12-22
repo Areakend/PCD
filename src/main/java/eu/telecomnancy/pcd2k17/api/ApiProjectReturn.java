@@ -1,8 +1,6 @@
 package eu.telecomnancy.pcd2k17.api;
 
-import org.gitlab4j.api.models.AccessLevel;
-import org.gitlab4j.api.models.Project;
-import org.gitlab4j.api.models.TreeItem;
+import org.gitlab4j.api.models.*;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -88,6 +86,18 @@ public class ApiProjectReturn extends ApiListProjectReturn{
         for (String item: listItem) {
             fileManager.saveFile("master",item);
         }
+    }
+
+    public static String getNameProjectFromUserName(int idUser, String assign) throws Exception{
+        for (Project p:ApiConnect.PROJECT.getProjects()) {
+            for(Member member:ApiConnect.PROJECT.getMembers(p.getId())){
+                System.out.println(member.getId()+" - "+idUser);
+                if (member.getId() == idUser && p.getNameWithNamespace().contains(assign)){
+                    return p.getName();
+                }
+            }
+        }
+        return "";
     }
 
     public Project getProject(){

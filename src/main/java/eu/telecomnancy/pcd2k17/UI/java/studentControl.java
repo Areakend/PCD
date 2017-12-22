@@ -112,14 +112,14 @@ public class studentControl {
 			Main.setCommitMessage(commitMessage.getText());
 			log.debug("Push Devoir");
 			try {
-				ApiFile file = new ApiFile(new ApiProjectReturn(projetChoisi,
+				ApiFile file = new ApiFile(new ApiProjectReturn(ApiProjectReturn.getNameProjectFromUserName(ApiConnect.USER.getCurrentUser().getId(),projetChoisi),
 						new ApiAssignment(new ApiDiscipline(matiereChoisie), projetChoisi)));
 				try {
 					file.pushListFile(Main.fileList, Main.getCommitMessage());
 					Alert alert = new Alert(AlertType.INFORMATION);
 					alert.setTitle("Information");
 					alert.setHeaderText(null);
-					alert.setContentText("Action effectuée !");
+					alert.setContentText("Action effectuÃ©e !");
 
 					alert.showAndWait();
 					Main.mainPane.setCenter(Main.panel1);
