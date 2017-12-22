@@ -2,6 +2,7 @@ package eu.telecomnancy.pcd2k17.api;
 
 import org.gitlab4j.api.models.Group;
 import org.gitlab4j.api.models.Project;
+import org.gitlab4j.api.models.Visibility;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -13,7 +14,7 @@ public class ApiAssignment extends ApiListAssignment{
     private Group gp;
     private ApiListAssignment listAssignment;
 
-    public ApiAssignment(ApiDiscipline discipline_,String name_, String desc_){
+    public ApiAssignment(ApiDiscipline discipline_,String name_, String desc_)throws Exception{
         super(discipline_);
         this.name = name_;
         this.desc = desc_;
@@ -22,7 +23,7 @@ public class ApiAssignment extends ApiListAssignment{
         this.checkAssignment();
     }
 
-    public ApiAssignment (ApiDiscipline discipline_,String name_){
+    public ApiAssignment (ApiDiscipline discipline_,String name_)throws Exception{
         super(discipline_);
         this.name = name_;
         this.desc = "";
@@ -31,7 +32,7 @@ public class ApiAssignment extends ApiListAssignment{
         this.checkAssignment();
     }
 
-    private void checkAssignment(){
+    private void checkAssignment()throws Exception{
         if(this.gp == null){
             this.createAssignment(name,desc);
             this.gp = this.discipline.getAssignment(this.name);

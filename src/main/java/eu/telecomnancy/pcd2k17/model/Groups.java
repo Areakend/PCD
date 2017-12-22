@@ -6,8 +6,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.LinkedList;
 
 import eu.telecomnancy.pcd2k17.dbhandler.MainDbhandler;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 
 public class Groups extends MainDbhandler{
@@ -30,10 +33,10 @@ public class Groups extends MainDbhandler{
 				
 	}
 	
-    public void insertGroup(String name, int idStudent) {
+    public static void insertGroup(String name, int idStudent) {
         String sql = "INSERT INTO Groups(name,idStudent) VALUES(?,?);";
  
-        try (Connection conn = this.connect();
+        try (Connection conn = MainDbhandler.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, name);
             pstmt.setInt(2, idStudent);
@@ -44,9 +47,9 @@ public class Groups extends MainDbhandler{
         }
     }
     
-    public void deleteGroup(String title) {
+    public static void deleteGroup(String title) {
     	String sql = "DELETE FROM Groups WHERE title = ?";
-    	try (Connection conn = this.connect();
+    	try (Connection conn = MainDbhandler.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) { 
             pstmt.setString(1, title);
             pstmt.executeUpdate();
@@ -55,11 +58,23 @@ public class Groups extends MainDbhandler{
             //System.out.println(e.getMessage());
         }
     }
+
+    public static void deleteGroup(int id) {
+        String sql = "DELETE FROM Groups WHERE idStudent = ?";
+        try (Connection conn = MainDbhandler.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+            System.out.println("Group has been deleted.");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
     
-    public void updateGroupName(String name, String newValue) {
+    public static void updateGroupName(String name, String newValue) {
         String sql = "UPDATE Groups SET name = ? "
                 + "WHERE name = ?";
-        try (Connection conn = this.connect();
+        try (Connection conn = MainDbhandler.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
         	pstmt.setString(1, newValue);
             pstmt.setString(2, name);
@@ -70,10 +85,10 @@ public class Groups extends MainDbhandler{
         }
     }
     
-    public void updateGroupComposition(String name, int newValue) {
+    public static void updateGroupComposition(String name, int newValue) {
         String sql = "UPDATE Groups SET idStudent = ? "
                 + "WHERE name = ?";
-        try (Connection conn = this.connect();
+        try (Connection conn = MainDbhandler.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
         	pstmt.setInt(1, newValue);
             pstmt.setString(2, name);
@@ -84,9 +99,9 @@ public class Groups extends MainDbhandler{
         }
     }
     
-    public void getAllGroups(){
+    public static void getAllGroups(){
         String sql = "SELECT * FROM assignments";
-        try (Connection conn = this.connect();
+        try (Connection conn = MainDbhandler.connect();
              Statement stmt  = conn.createStatement();
              ResultSet rs    = stmt.executeQuery(sql)){
             while (rs.next()) {
@@ -98,20 +113,44 @@ public class Groups extends MainDbhandler{
         }
     }
     
-    public void getGroupsby(String searchField, String Value){
-        String sql = "SELECT * FROM Groups WHERE " + searchField + " = ?";
-        try (Connection conn = this.connect();
+    public static LinkedList<Integer> getGroupsbyGroupName(String Value){
+        LinkedList<Integer> list = new LinkedList<Integer>();
+        String sql = "SELECT * FROM Groups WHERE name = ?";
+        try (Connection conn = MainDbhandler.connect();
         		PreparedStatement pstmt  = conn.prepareStatement(sql)){
         	pstmt.setString(1, Value);
         	ResultSet rs  = pstmt.executeQuery();
         	while (rs.next()) {
         		System.out.println(rs.getString("name") +  "\t" + 
                         		   rs.getInt("idStudent"));
-        		}
+                list.add(rs.getInt("idStudent"));
+
+            }
         	} catch (SQLException e) {
         		System.out.println(e.getMessage());
         		}
+        return list;
+
+    }
+
+    public static LinkedList<String> getGroupsbyIdStudent(int Value){
+        LinkedList<String> list = new LinkedList<String>();
+        String sql = "SELECT * FROM Groups WHERE idStudent = ?";
+        try (Connection conn = MainDbhandler.connect();
+             PreparedStatement pstmt  = conn.prepareStatement(sql)){
+            pstmt.setInt(1, Value);
+            ResultSet rs  = pstmt.executeQuery();
+            while (rs.next()) {
+
+                System.out.println(rs.getString("name") +  "\t" +
+                        rs.getInt("idStudent"));
+                list.add(rs.getString("name"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
+        return list;
+    }
     
 	/*
 	public static void main(String[] args) {

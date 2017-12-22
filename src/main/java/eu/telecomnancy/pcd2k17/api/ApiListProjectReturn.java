@@ -9,13 +9,13 @@ public abstract class ApiListProjectReturn {
         this.projectApi = ApiConnect.GLA.getProjectApi();
     }
 
-    protected void createProject(String name, int groupId){
+    protected void createProject(String name, int groupId) throws Exception{
         try {
             this.projectApi.createProject(groupId,name);
             System.out.println("Your project "+name+" has been created");
         }
         catch (org.gitlab4j.api.GitLabApiException e){
-            System.out.println("Error when creating project : The project "+name+" exists already." );
+            throw new Exception("Can't create project." );
         }
     }
 

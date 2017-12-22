@@ -38,12 +38,6 @@ public abstract class ApiAssignmentFileManager{
         catch (org.gitlab4j.api.GitLabApiException e){
             System.out.println("Internal Error : Can't save the file. " + e);
         }
-
         return null;
-    }
-
-    public File saveFile(String filepathRepository){
-        String nameRepo = this.project.getName();
-        return this.saveFile(filepathRepository,".fileSave/"+nameRepo);
     }
 }

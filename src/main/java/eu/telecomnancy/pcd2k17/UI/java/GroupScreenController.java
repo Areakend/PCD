@@ -1,3 +1,4 @@
+
 package eu.telecomnancy.pcd2k17.UI.java;
 
 import java.io.File;
@@ -7,6 +8,8 @@ import java.nio.file.Paths;
 
 
 import eu.telecomnancy.pcd2k17.Main;
+import eu.telecomnancy.pcd2k17.api.ApiConnect;
+import eu.telecomnancy.pcd2k17.model.Groups;
 import eu.telecomnancy.pcd2k17.model.Student;
 import eu.telecomnancy.pcd2k17.api.ApiAssignment;
 import eu.telecomnancy.pcd2k17.api.ApiDiscipline;
@@ -17,21 +20,18 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.beans.value.ObservableValue;
+import javafx.scene.control.*;
 import javafx.util.Callback;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import javafx.scene.control.TextInputDialog;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import java.util.Optional;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -42,9 +42,11 @@ public class GroupScreenController {
 
     final static Logger log = LogManager.getLogger(GroupScreenController.class);
 
-	private String path;
+	private String path,mailStudent;
     private ObservableList<Student> studentData;
 	private List<Integer> listUserId = new LinkedList<>();
+    private Scene addScene,modifScene;
+    private int addOpen = 0,modifOpen = 0,selectedIndex;
 
 	@FXML
 	Text pathText = new Text();
@@ -63,13 +65,61 @@ public class GroupScreenController {
 
 	@FXML
 	public void deleteStudent(ActionEvent event) {
-
+            int selectedIndex = groupsView.getSelectionModel().getSelectedIndex();
+            if (selectedIndex >= 0) {
+                Student student = groupsView.getItems().get(selectedIndex);
+                LinkedList<String> list= Groups.getGroupsbyIdStudent(student.getIdStudent());
+                log.debug(""+list.size());
+                Students.deleteStudent(student.getIdStudent());
+                groupsView.getItems().remove(selectedIndex);
+            } else {
+                // Nothing selected
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Nothing selected");
+                alert.setHeaderText("Nothing selected");
+                alert.setContentText("Aucun élève n'est sélectionné.");
+                alert.showAndWait();
+            }
 	}
 
 	@FXML
 	public void modifyStudent(ActionEvent event) {
+        selectedIndex = groupsView.getSelectionModel().getSelectedIndex();
+        System.out.print("Index : " + selectedIndex + "\n");
+        if (selectedIndex >= 0) {
+            if (modifOpen == 0){
+                modifScene = new Scene(Main.panel8,400,400);
+                modifOpen = 1;
+            }
+            mailStudent = groupsView.getItems().get(selectedIndex).getMail();
+
+            System.out.print("Mail : " + mailStudent + "\n");
+            Main.stage2.setTitle("Modifier un élève");
+            Main.stage2.setScene(modifScene);
+            Main.stage2.show();
+        } else {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Nothing selected");
+            alert.setHeaderText("Nothing selected");
+            alert.setContentText("Aucun élève n'est sélectionné.");
+            alert.showAndWait();
+
+        }
+
+
 
 	}
+
+    public void AddStudent(ActionEvent event) throws IOException {
+        if(addOpen ==0){
+            addScene = new Scene(Main.panel5, 400, 400);
+            addOpen =1;
+        }
+        Main.stage2.setTitle("Ajouter un élève");
+        Main.stage2.setScene(addScene);
+        Main.stage2.show();
+
+    }
 
 	@FXML
 	public void generateGroups(ActionEvent event) {
@@ -79,16 +129,33 @@ public class GroupScreenController {
 
 
 
-	public void validate(ActionEvent event) {
-		Project project = CreateAssignementController.getCurrentProject();
-		ApiDiscipline disc = new ApiDiscipline(project.getTitre());
+    public void validate(ActionEvent event) {
+        try{
+            Project project = CreateAssignementController.getCurrentProject();
+            ApiDiscipline disc = new ApiDiscipline(project.getTitre());
 
-		for (Integer id : listUserId) {
-			ApiProjectReturn p = new ApiProjectReturn(project.getTitre(),
-					new ApiAssignment(disc, project.getTitre())).setPrefix(project.getPrefix());
-			p.addMembers(p.getIdProject(), id);
-		}
-	}
+            for (int id : listUserId) {
+
+                ApiProjectReturn p = new ApiProjectReturn("["+project.getPrefix()+"]Rendu_de_projet_"+project.getTitre()+"_"+ ApiConnect.USER.getUser(id).getUsername(),
+                        new ApiAssignment(disc, project.getTitre()));
+                p.addMembers(p.getIdProject(), id);
+            }
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText(null);
+            alert.setContentText("Action effectu�e !");
+
+            alert.showAndWait();
+            Main.mainPane.setCenter(Main.panel1);
+        }
+        catch (Exception e){
+            Alert connectionError = new Alert(AlertType.ERROR);
+            connectionError.setTitle("Error:");
+            connectionError.setHeaderText(null);
+            connectionError.setContentText("Try again : " + e);
+            connectionError.showAndWait();
+        }
+    }
 
 	@FXML
 	public void importCSV(ActionEvent event) {
@@ -108,34 +175,26 @@ public class GroupScreenController {
 
 	@FXML
     public void refresh() throws IOException{
-        Students students = new Students();
-        studentData = students.getAllStudents();
+        studentData = Students.getAllStudents();
         groupsView.setItems(studentData);
     }
 
     @FXML
     public void initialize(){
-        Students students = new Students();
-        studentData = students.getAllStudents();
-        studentData.add(new Student("Tanguy","Roudaut","tanguy.roudaut@telecomnancy.eu","Banana"));
+        studentData = Students.getAllStudents();
+        //studentData.add(new Student("Tanguy","Roudaut","tanguy.roudaut@telecomnancy.eu","Banana"));
         studentData.forEach(student ->student.afficherStudent());
-
         groupsView.setItems(studentData);
     }
-    
-	@FXML
-	public void back2Menu(ActionEvent event) throws IOException {
 
-		Main.mainPane.setCenter(Main.panel1);
+    public int getSelectedIndex() {
+        return selectedIndex;
+    }
 
-	}
+    @FXML
+    public void back2Menu(ActionEvent event) throws IOException {
 
-	public void AddStudent(ActionEvent event) throws IOException {
-		Scene scene = new Scene(Main.panel5, 400, 400);
-		Main.stage2.setTitle("Ajouter un élève");
-		Main.stage2.setScene(scene);
-		Main.stage2.show();
+        Main.mainPane.setCenter(Main.panel1);
 
-	}
-
+    }
 }

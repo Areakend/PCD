@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
+import javafx.stage.DirectoryChooser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import eu.telecomnancy.pcd2k17.Main;
@@ -31,6 +32,7 @@ import javafx.scene.text.*;
 @SuppressWarnings("unused")
 public class pullScreen {
 
+	private  ApiFile currentFile;
 	final static Logger log = LogManager.getLogger(pullScreen.class);
 
 	private String path = null;
@@ -67,67 +69,73 @@ public class pullScreen {
 		List<String> matiere = ApiConnect.getInstance().getListDiscipline();
 
 		ChoiceDialog<String> dialog = new ChoiceDialog<>(" ", matiere);
-		dialog.setTitle("Choix de la matière");
+		dialog.setTitle("Choix de la matiï¿½re");
 		dialog.setHeaderText(null);
-		dialog.setContentText("Matières :");
+		dialog.setContentText("Matiï¿½res :");
 
 		// Traditional way to get the response value.
 		Optional<String> result = dialog.showAndWait();
 		if (result.isPresent()) {
-			matiereChoisie = result.get();
-			ApiDiscipline disp = new ApiDiscipline(matiereChoisie);
-			List<String> projets = disp.getListAssignments();
+			try {
+				matiereChoisie = result.get();
+				ApiDiscipline disp = new ApiDiscipline(matiereChoisie);
+				List<String> projets = disp.getListAssignments();
 
-			ChoiceDialog<String> dialog1 = new ChoiceDialog<>(" ", projets);
-			dialog1.setTitle("Choix du projet");
-			dialog1.setHeaderText(null);
-			dialog1.setContentText("Projet(s) de " + matiereChoisie + ": ");
-			Optional<String> result2 = dialog1.showAndWait();
-			if (result2.isPresent()) {
-				projetChoisi = result2.get();
-				matiereText.setText(matiereChoisie);
-				Title.setText(projetChoisi);
+				ChoiceDialog<String> dialog1 = new ChoiceDialog<>(" ", projets);
+				dialog1.setTitle("Choix du projet");
+				dialog1.setHeaderText(null);
+				dialog1.setContentText("Projet(s) de " + matiereChoisie + ": ");
+				Optional<String> result2 = dialog1.showAndWait();
+				if (result2.isPresent()) {
+					projetChoisi = result2.get();
+					matiereText.setText(matiereChoisie);
+					Title.setText(projetChoisi);
+				}
+			}
+			catch (Exception e){
+				Alert connectionError = new Alert(AlertType.ERROR);
+				connectionError.setTitle("Error:");
+				connectionError.setHeaderText(null);
+				connectionError.setContentText("" + e);
+				connectionError.showAndWait();
 			}
 		}
 	}
 
 	@FXML
 	public void validDevoir(ActionEvent event) throws IOException {
-/*		new Projet project = (projetChoisi, )
-		ApiProjectReturn p = new ApiProjectReturn(project.getTitre(),
-				new ApiAssignment(disc, project.getTitre())).setPrefix(project.getPrefix());
-		new File fichierChoisi = new File 
-				
-	*/
-//		String dir = "C:'\'Users'\'Zaven'\'Pictures'\'";
-//		ApiAssignmentFileManager.saveFile(fichierChoisi,dir);
-		Alert connectionError2 = new Alert(AlertType.ERROR);
-		connectionError2.setTitle("Api error");
-		connectionError2.setHeaderText(null);
-		connectionError2.setContentText("Need jerem pour finir <3");
-		connectionError2.showAndWait();
-		if (projetChoisi == null) {
-			Alert connectionError = new Alert(AlertType.ERROR);
-			connectionError.setTitle("Impossible de pull");
-			connectionError.setHeaderText(null);
-			connectionError.setContentText("Il faut choisir un fichier à pull");
-			connectionError.showAndWait();
-		} else {
-			log.debug("Push button was clicked!");
+		try {
+			final DirectoryChooser dirChooser = new DirectoryChooser();
+			Stage DirLoaderStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			File file = dirChooser.showDialog(DirLoaderStage);
+			path = file.getAbsolutePath();
 
-			// PULL
-
-			try {
-
-				// PULL
-
-			} catch (Exception e) {
+			if (projetChoisi == null) {
 				Alert connectionError = new Alert(AlertType.ERROR);
-				connectionError.setTitle("Erreur de pull");
+				connectionError.setTitle("Impossible de pull");
 				connectionError.setHeaderText(null);
-				connectionError.setContentText("" + e);
+				connectionError.setContentText("Il faut choisir un fichier Ã  pull");
 				connectionError.showAndWait();
+			} else {
+				log.debug("Push button was clicked!");
+				for (String s:Main.fileListPull){
+					currentFile.saveFile(s,path );
+				}
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Information");
+				alert.setHeaderText(null);
+				alert.setContentText("Action effectuée !");
+
+				alert.showAndWait();
+				Main.mainPane.setCenter(Main.panel1);
+
 			}
+		} catch (Exception e) {
+			Alert connectionError = new Alert(AlertType.ERROR);
+			connectionError.setTitle("Erreur de pull");
+			connectionError.setHeaderText(null);
+			connectionError.setContentText("" + e);
+			connectionError.showAndWait();
 		}
 	}
 
@@ -139,22 +147,30 @@ public class pullScreen {
 
 	@FXML
 	public void choisirUnFichier(ActionEvent event) {
-		
-		ApiFile file = new ApiFile(new ApiProjectReturn("Rendu de projet " + projetChoisi,
-				new ApiAssignment(new ApiDiscipline(matiereChoisie), projetChoisi)));
-		
-		LinkedList<String> files = file.getElements();
-				
-		ChoiceDialog<String> dialog = new ChoiceDialog<>(" ", files);
-		dialog.setTitle("Choix du fichier");
-		dialog.setHeaderText(null);
-		dialog.setContentText("Fichier du projet " + projetChoisi + ": ");
-		Optional<String> result = dialog.showAndWait();
-		if (result.isPresent()) {
-			fichierChoisi = result.get();
-			Main.fileListPull.add(fichierChoisi);
-			Main.setNbofFiles(Main.getNbofFiles() + 1);
-			fileList.setText(fileList.getText() + fichierChoisi + "\n");
+		try {
+			currentFile = new ApiFile(new ApiProjectReturn("Rendu de projet " + projetChoisi,
+					new ApiAssignment(new ApiDiscipline(matiereChoisie), projetChoisi)));
+
+			LinkedList<String> files = currentFile.getElements();
+
+			ChoiceDialog<String> dialog = new ChoiceDialog<>(" ", files);
+			dialog.setTitle("Choix du fichier");
+			dialog.setHeaderText(null);
+			dialog.setContentText("Fichier du projet " + projetChoisi + ": ");
+			Optional<String> result = dialog.showAndWait();
+			if (result.isPresent()) {
+				fichierChoisi = result.get();
+				Main.fileListPull.add(fichierChoisi);
+				Main.setNbofFiles(Main.getNbofFiles() + 1);
+				fileList.setText(fileList.getText() + fichierChoisi + "\n");
+			}
+		}
+		catch (Exception e){
+			Alert connectionError = new Alert(AlertType.ERROR);
+			connectionError.setTitle("Error:");
+			connectionError.setHeaderText(null);
+			connectionError.setContentText("" + e);
+			connectionError.showAndWait();
 		}
 	}
 

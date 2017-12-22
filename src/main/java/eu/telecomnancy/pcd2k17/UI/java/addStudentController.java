@@ -60,9 +60,8 @@ public class addStudentController {
             mailTextField.setText("");
             groupTextField.setText("");
             student = new Student(i++,prenom+"."+nom,mail,group);
-            Students students = new Students();
             Main.stage2.hide();
-            students.insertStudent(i,prenom+"."+nom,mail,"","",group);
+            Students.insertStudent(i,prenom+"."+nom,mail,"","",group);
 
         }
         return student;
@@ -74,7 +73,7 @@ public class addStudentController {
         lastNameTextField.setText("");
         mailTextField.setText("");
         groupTextField.setText("");
-        Main.stage2.hide();
+        Main.stage2.close();
     }
 
     public void setStudent(Student student) {
