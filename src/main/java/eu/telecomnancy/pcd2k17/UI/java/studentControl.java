@@ -100,7 +100,7 @@ public class studentControl {
 			connectionError.setContentText("Il faut choisir un projet dans lequel push");
 			connectionError.showAndWait();
 		} else {
-			log.debug("Connexion button was clicked!");
+			log.debug("Valid button was clicked!");
 			log.debug("Input CommitText : " + commitMessage.getText());
 
 			Main.setCommitMessage(commitMessage.getText());

@@ -122,7 +122,13 @@ public class GroupScreenController {
 
         groupsView.setItems(studentData);
     }
+    
+	@FXML
+	public void back2Menu(ActionEvent event) throws IOException {
 
+		Main.mainPane.setCenter(Main.panel1);
+
+	}
 
 	public void AddStudent(ActionEvent event) throws IOException {
 		Scene scene = new Scene(Main.panel5, 400, 400);

@@ -11,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import eu.telecomnancy.pcd2k17.Main;
 import eu.telecomnancy.pcd2k17.api.ApiAssignment;
+import eu.telecomnancy.pcd2k17.api.ApiAssignmentFileManager;
 import eu.telecomnancy.pcd2k17.api.ApiConnect;
 import eu.telecomnancy.pcd2k17.api.ApiDiscipline;
 import eu.telecomnancy.pcd2k17.api.ApiFile;
@@ -92,12 +93,19 @@ public class pullScreen {
 
 	@FXML
 	public void validDevoir(ActionEvent event) throws IOException {
-
+/*		new Projet project = (projetChoisi, )
+		ApiProjectReturn p = new ApiProjectReturn(project.getTitre(),
+				new ApiAssignment(disc, project.getTitre())).setPrefix(project.getPrefix());
+		new File fichierChoisi = new File 
+				
+	*/
+		String dir = "C:'\'Users'\'Zaven'\'Pictures'\'";
+//		ApiAssignmentFileManager.saveFile(fichierChoisi,dir);
 		if (projetChoisi == null) {
 			Alert connectionError = new Alert(AlertType.ERROR);
-			connectionError.setTitle("Impossible de push");
+			connectionError.setTitle("Impossible de pull");
 			connectionError.setHeaderText(null);
-			connectionError.setContentText("Il faut choisir un projet dans lequel push");
+			connectionError.setContentText("Il faut choisir un fichier à pull");
 			connectionError.showAndWait();
 		} else {
 			log.debug("Push button was clicked!");
