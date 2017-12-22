@@ -121,6 +121,13 @@ public class pullScreen {
 				for (String s:Main.fileListPull){
 					currentFile.saveFile(s,path );
 				}
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Information");
+				alert.setHeaderText(null);
+				alert.setContentText("Action effectuée !");
+
+				alert.showAndWait();
+				Main.mainPane.setCenter(Main.panel1);
 
 			}
 		} catch (Exception e) {
