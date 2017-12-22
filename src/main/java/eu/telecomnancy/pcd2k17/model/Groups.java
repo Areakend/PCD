@@ -23,9 +23,9 @@ public class Groups extends MainDbhandler{
 		try (Connection conn = DriverManager.getConnection(url);
 				Statement stmt = conn.createStatement()) {
 			stmt.execute(sql);
-			System.out.println("Groups table has been created.");
+			//System.out.println("Groups table has been created.");
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			//System.out.println(e.getMessage());
 		}
 				
 	}
@@ -38,9 +38,9 @@ public class Groups extends MainDbhandler{
             pstmt.setString(1, name);
             pstmt.setInt(2, idStudent);
             pstmt.executeUpdate();
-            System.out.println("Group has been created.");
+            //System.out.println("Group has been created.");
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            //System.out.println(e.getMessage());
         }
     }
     
@@ -50,9 +50,9 @@ public class Groups extends MainDbhandler{
                 PreparedStatement pstmt = conn.prepareStatement(sql)) { 
             pstmt.setString(1, title);
             pstmt.executeUpdate();
-            System.out.println("Group has been deleted.");
+            //System.out.println("Group has been deleted.");
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            //System.out.println(e.getMessage());
         }
     }
     
@@ -64,9 +64,9 @@ public class Groups extends MainDbhandler{
         	pstmt.setString(1, newValue);
             pstmt.setString(2, name);
             pstmt.executeUpdate();
-            System.out.println("Group has been updated.");
+            //System.out.println("Group has been updated.");
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            //System.out.println(e.getMessage());
         }
     }
     
@@ -78,9 +78,9 @@ public class Groups extends MainDbhandler{
         	pstmt.setInt(1, newValue);
             pstmt.setString(2, name);
             pstmt.executeUpdate();
-            System.out.println("Group has been updated.");
+            //System.out.println("Group has been updated.");
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            //System.out.println(e.getMessage());
         }
     }
     
@@ -115,19 +115,19 @@ public class Groups extends MainDbhandler{
     
 	/*
 	public static void main(String[] args) {
-		// A faire dès le lancement de l'appli
+		// A faire dï¿½s le lancement de l'appli
 		MainDbhandler.createFile();
 		MainDbhandler.createNewDatabase("gitTN.db");
 		Groups assign = new Groups();
 		assign.createGroups();
-		// A faire dès la création d'un nouveau devoir
+		// A faire dï¿½s la crï¿½ation d'un nouveau devoir
 		assign.insertGroup("title", "description", "discipline", "teacher", 1, 2, 
         		"prefix", "folder", "origine");
 		assign.getAllGroups();
-		// A faire dès la modification d'un devoir
+		// A faire dï¿½s la modification d'un devoir
 		assign.updateGroup("title","title","titre");
 		assign.getGroupsby("teacher", "teacher");
-		// A ne pas forcément faire
+		// A ne pas forcï¿½ment faire
 		assign.deleteGroup("titre");
 	}*/
 

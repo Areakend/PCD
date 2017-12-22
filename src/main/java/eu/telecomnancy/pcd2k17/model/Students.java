@@ -22,34 +22,34 @@ public class Students extends MainDbhandler{
 				+ " username text,\n"
 				+ " mail text,\n"
 				+ " year text,\n"
-				+ " appro\n"
+				+ " appro text\n"
 				+ ");";
 		try (Connection conn = DriverManager.getConnection(url);
 				Statement stmt = conn.createStatement()) {
 			stmt.execute(sql);
-			System.out.println("Students table has been created.");
+			//System.out.println("Students table has been created.");
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			//System.out.println(e.getMessage());
 		}
 				
 	}
 	
     public void insertStudent(int idStudent, String username, String mail,
     		String year, String appro) {
-        String sql = "INSERT INTO Students(idStudent,username,mail,year,appro"
-        		+ " VALUES(?,?,?,?,?);";
- 
+        String sql = "INSERT INTO Students(idStudent,username,mail,year,appro)"
+                + " VALUES(?,?,?,?,?);";
+
         try (Connection conn = this.connect();
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
-        	pstmt.setInt(1, idStudent);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, idStudent);
             pstmt.setString(2, username);
             pstmt.setString(3, mail);
             pstmt.setString(4, year);
             pstmt.setString(5, appro);
             pstmt.executeUpdate();
-            System.out.println("Student has been created.");
+            //System.out.println("Student has been created.");
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            //System.out.println(e.getMessage());
         }
     }
     
@@ -68,9 +68,9 @@ public class Students extends MainDbhandler{
             pstmt.executeUpdate();
             Groups groups = new Groups();
             groups.insertGroup(groupName,idStudent);
-            System.out.println("Student has been created.");
+            //System.out.println("Student has been created.");
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            //System.out.println(e.getMessage());
         }
     }
     
@@ -80,9 +80,9 @@ public class Students extends MainDbhandler{
                 PreparedStatement pstmt = conn.prepareStatement(sql)) { 
             pstmt.setInt(1, idStudent);
             pstmt.executeUpdate();
-            System.out.println("Student has been deleted.");
+            //System.out.println("Student has been deleted.");
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            //System.out.println(e.getMessage());
         }
     }
     
@@ -94,9 +94,9 @@ public class Students extends MainDbhandler{
         	pstmt.setString(1, newValue);
             pstmt.setInt(2, idStudent);
             pstmt.executeUpdate();
-            System.out.println("Assignment has been updated.");
+            //System.out.println("Assignment has been updated.");
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            //System.out.println(e.getMessage());
         }
     }
     
