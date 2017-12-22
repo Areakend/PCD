@@ -92,6 +92,13 @@ public class GroupScreenController {
 						new ApiAssignment(disc, project.getTitre()));
 				p.addMembers(p.getIdProject(), id);
 			}
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Information");
+			alert.setHeaderText(null);
+			alert.setContentText("Action effectuée !");
+
+			alert.showAndWait();
+			Main.mainPane.setCenter(Main.panel1);
 		}
 		catch (Exception e){
 			Alert connectionError = new Alert(AlertType.ERROR);
