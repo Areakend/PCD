@@ -36,8 +36,9 @@ Eclipse allows to import a gradle project.
 You first have to install the gradle plugin in NetBeans before being able to import a gradle project.
 
 
-
-POUR LANCER L'APPLICATION, DOUBLE CLIQUER DESSUS.
+POUR LA RELEASE :
+- TELECHARGER LE .JAR
+- EXECUTER LE .JAR EN DOUBLE CLIQUANT DESSUS
 
 #RELEASE
 ## RELEASE_DAY_1
@@ -72,3 +73,13 @@ Dans la version 4.0, on a ajouté toute l'interface graphique qui permet de pull
 Ajout d'une API permettant de push des fichiers dans les dépots des devoirs.
 Liaison entre l'interface graphique et l'API ainsi qu'entre l'API et la database.
 On peut afficher les données concernant les groupes d'un devoir à partir de la database.
+
+##RELEASE_FINAL
+Dans la version finale, l'interface s'ouvre sur un écran de connexion. Cet écran de connexion propose de rentrer son token (on utilise le token de démonstration), si le token a déjà été utilisé sur l'ordinateur il aura été stocké et on pourra donc cliquer sur "reconnexion" plutôt que de le rentrer de nouveau.
+Sur l'écran d'accueil de l'application se trouve le nom du compte connecté ainsi que 5 boutons. Le bouton de déconnexion déconnecte l'utilisateur et supprime le token enregistré de l'ordinateur.
+Le bouton "créer un devoir" ouvre une nouvelle fenêtre. Sur cette fenêtre se trouve différentes option pour créer un devoir. Ces données sont sauvegardées dans la base de données.
+Le bouton "Push un fichier" permet de déposer un dévoir. En choisissant un projet pour lequel on souhaite déposer des fichiers on peut séléctionner des fichiers stockés sur l'ordinateur, choisir un nom de commit et envoyer vers gitlab le rendu en cliquant sur "push". Celui-ci sera effectué au bon endroit directement.
+Le bouton "Pull un fichier" permet de récuperer un fichier en ligne et de le télécharger dans le dossier de notre choix sur l'ordinateur.
+Le bouton "Supprimer un devoir" permet de choisir de supprimer d'un projet particulier.
+Le menu "groupes", apparait après le menu "créer un devoir", il permet d'afficher la liste des membres de chaque groupe. On peut aussi ajouter des élèves grâce au bouton ajouter.
+Nous possédons une base de données, celle-ci est en partie accessible à travers l'interface graphique. Nous avons 4 tables : Assignments, Teachers, Students et Groups. Toutes les quatre sont fonctionnelles. Nous avons cependant un problème lors de l'importation des devoirs depuis gitLab vers l'API, de plus l'interface graphique pour la table teachers n'a pas été développée.

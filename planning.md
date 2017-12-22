@@ -22,15 +22,16 @@ Jour 3 :
 - Finir la DataBase -- OK
 - Bien avancer dans les fonctions d'appels et de modif de la Db -- Pas terminé
 - Amelioration de l'IG (fluidifier et proposer plus de fonctionnalites) -- OK
-- Creation des groupes pour pouvoir gerer les matieres avec a l'interieur des devoirs, des projets et des groupes
+- Creation des groupes pour pouvoir gerer les matieres avec a l'interieur des devoirs, des projets et des groupes - OK
 - Finir la creation de devoirs et permettre de gerer des groupes -- OK
 
 Jour 4 :
-- Finir toutes les fonctions d'appels et de modif de la Db
-- Lier l'interface API avec la Db et l'IG
-- Affichage des donnees entrees et de la Db
+- Finir toutes les fonctions d'appels et de modif de la Db - OK
+- Lier l'interface API avec la Db et l'IG - pas termine
+- Affichage des donnees entrees et de la Db - pas termine
 
 Jour 5 :
-- Corrections de bugs
-- Amelioration
+- Corrections de bugs - pas termine
+- Ameliorations
 - Tournage de la video
+- Lier l'IG a l'API et l'API à la Db - pas termine (on a des problemes)
