@@ -116,6 +116,13 @@ public class studentControl {
 						new ApiAssignment(new ApiDiscipline(matiereChoisie), projetChoisi)));
 				try {
 					file.pushListFile(Main.fileList, Main.getCommitMessage());
+					Alert alert = new Alert(AlertType.INFORMATION);
+					alert.setTitle("Information");
+					alert.setHeaderText(null);
+					alert.setContentText("Action effectuée !");
+
+					alert.showAndWait();
+					Main.mainPane.setCenter(Main.panel1);
 				} catch (Exception e) {
 					Alert connectionError = new Alert(AlertType.ERROR);
 					connectionError.setTitle("Erreur de push");
@@ -125,7 +132,11 @@ public class studentControl {
 				}
 			}
 			catch (Exception e){
-
+				Alert connectionError = new Alert(AlertType.ERROR);
+				connectionError.setTitle("Erreur de push");
+				connectionError.setHeaderText(null);
+				connectionError.setContentText("" + e);
+				connectionError.showAndWait();
 			}
 		}
 	}
