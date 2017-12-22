@@ -15,15 +15,15 @@
          <children>
             <Group fx:id="GroupCreateDevoir" layoutX="500.0" layoutY="230.0" />
             <Group layoutX="900.0" layoutY="230.0" />
-            <Button layoutX="808.0" layoutY="390.0" mnemonicParsing="false" onAction="#goToConsultDevoir" prefHeight="67.0" prefWidth="283.0" text="Push un fichier">
+            <Button layoutX="875.0" layoutY="389.0" mnemonicParsing="false" onAction="#goToConsultDevoir" prefHeight="67.0" prefWidth="283.0" text="Push un fichier">
                <font>
                   <Font size="28.0" />
                </font></Button>
-            <Button layoutX="376.0" layoutY="390.0" mnemonicParsing="false" onAction="#goToCreateDevoir" prefHeight="67.0" prefWidth="283.0" text="Créer un devoir">
+            <Button layoutX="443.0" layoutY="389.0" mnemonicParsing="false" onAction="#goToCreateDevoir" prefHeight="67.0" prefWidth="283.0" text="Créer un devoir">
                <font>
                   <Font size="28.0" />
                </font></Button>
-            <Button fx:id="disconnectButton" layoutX="578.0" layoutY="643.0" mnemonicParsing="false" onAction="#Disconnect" prefHeight="67.0" prefWidth="283.0" text="Me déconnecter">
+            <Button fx:id="disconnectButton" layoutX="658.0" layoutY="641.0" mnemonicParsing="false" onAction="#Disconnect" prefHeight="67.0" prefWidth="283.0" text="Me déconnecter">
                <font>
                   <Font size="28.0" />
                </font>
@@ -38,12 +38,12 @@
                   <Image url="@Icons/TNS.PNG" />
                </image>
             </ImageView>
-            <Button fx:id="pullButton" layoutX="376.0" layoutY="521.0" mnemonicParsing="false" onAction="#goToPullDevoir" prefHeight="67.0" prefWidth="283.0" text="Pull un fichier">
+            <Button fx:id="pullButton" layoutX="443.0" layoutY="520.0" mnemonicParsing="false" onAction="#goToPullDevoir" prefHeight="67.0" prefWidth="283.0" text="Pull un fichier">
                <font>
                   <Font size="28.0" />
                </font>
             </Button>
-            <Button layoutX="808.0" layoutY="521.0" mnemonicParsing="false" onAction="#goToDeleteDevoir" prefHeight="67.0" prefWidth="283.0" text="Supprimer un devoir">
+            <Button layoutX="875.0" layoutY="520.0" mnemonicParsing="false" onAction="#goToDeleteDevoir" prefHeight="67.0" prefWidth="283.0" text="Supprimer un devoir">
                <font>
                   <Font size="27.0" />
                </font>

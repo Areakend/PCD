@@ -30,7 +30,7 @@ public class MainDbhandler {
         }
     }
     
-    public Connection connect() {
+    public static Connection connect() {
         String url = "jdbc:sqlite:" + System.getProperty("user.dir") + 
         		"/src/main/resources/eu/telecomnancy/pcd2k17/database/gitTN.db";
         Connection conn = null;
@@ -82,9 +82,8 @@ public class MainDbhandler {
                     }
                     groups.insertGroup(p.getName(),m.getId());
                 }
-
             }
-
+            System.out.println("end Students with projets");
         } catch (org.gitlab4j.api.GitLabApiException e) {
             System.out.println("Can't get projectList." + e);
         }
@@ -93,7 +92,8 @@ public class MainDbhandler {
                 students.insertStudent(u.getId(), u.getUsername(), u.getUsername() + "@telecomnancy.eu", "", "");
             }
         }
-        Assignments assignments = new Assignments();
+        System.out.println("end Students");
+        /*Assignments assignments = new Assignments();
         try {
             List<Group> groupList = ApiConnect.GROUP.getGroups();
             int i =0;
@@ -104,16 +104,21 @@ public class MainDbhandler {
                         i++;
                     }
                     String discipline = g.getFullName().substring(0,i-1);
-                    for(Project s : g.getProjects()){
-                        assignments.insertAssignment(g.getId(),g.getName(),g.getDescription(),discipline,"",
-                                "","",s.getName(),"active","","true","",100000000);
+                    System.out.println("discipline = " + discipline);
+                    List<Project> listProj = g.getProjects();
+                    if (!listProj.isEmpty()){
+                        for(Project s :listProj){
+                            assignments.insertAssignment(g.getId(),g.getName(),g.getDescription(),discipline,"",
+                                    "","",s.getName(),"active","","true","",150);
+                        }
                     }
                 }
             }
+            System.out.println("end Assignments");
         }
         catch (org.gitlab4j.api.GitLabApiException e) {
             System.out.println("Internal Error : Can't insert assignments in Db" + e );
-        }
+        }*/
 
     }
     

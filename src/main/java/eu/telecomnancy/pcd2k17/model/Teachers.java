@@ -1,5 +1,6 @@
 package eu.telecomnancy.pcd2k17.model;
 
+import java.awt.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -38,17 +39,16 @@ public class Teachers extends MainDbhandler{
 		String url = "jdbc:sqlite:"+ System.getProperty("user.dir") + 
 				"/src/main/resources/eu/telecomnancy/pcd2k17/database/gitTN.db";
 		String sql = "CREATE TABLE IF NOT EXISTS Teachers (\n"
-				+ " idTeacher int PRIMARY KEY,\n"
+				+ " idTeacher int,\n"
 				+ " username text,\n"
 				+ " mail text,\n"
-				+ " discipline text\n"
+				+ " discipline text,\n"
+                + " CONSTRAINT Fk_Teachers PRIMARY KEY (idTeacher,discipline)\n"
 				+ ");";
 		try (Connection conn = DriverManager.getConnection(url);
 				Statement stmt = conn.createStatement()) {
 			stmt.execute(sql);
-			System.out.println("Teachers table has been created.");
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
 		}
 				
 	}
@@ -65,9 +65,7 @@ public class Teachers extends MainDbhandler{
             pstmt.setString(3, mail);
             pstmt.setString(4, discipline);
             pstmt.executeUpdate();
-            System.out.println("Teacher has been created.");
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
         }
     }
     
@@ -77,12 +75,12 @@ public class Teachers extends MainDbhandler{
                 PreparedStatement pstmt = conn.prepareStatement(sql)) { 
             pstmt.setInt(1, idTeacher);
             pstmt.executeUpdate();
-            System.out.println("Teacher has been deleted.");
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
         }
     }
-    
+
+    // ATTENTION, SI UTILISE SUR MATIERE ELLE LES REMPLACERA TOUTES. DE PLUS ELLE N Y ARRIVERA PAS, LE COUPLE
+    //(idTeacher,discipline) SERT DE CLE PRIMAIRE
     public void updateTeacher(int idTeacher, String updatedField, String newValue) {
         String sql = "UPDATE Teachers SET " + updatedField + " = ? "
                 + "WHERE idTeacher = ?";
@@ -91,9 +89,7 @@ public class Teachers extends MainDbhandler{
         	pstmt.setString(1, newValue);
             pstmt.setInt(2, idTeacher);
             pstmt.executeUpdate();
-            System.out.println("Assignment has been updated.");
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
         }
     }
     
@@ -132,21 +128,35 @@ public class Teachers extends MainDbhandler{
     
     public void fillTeachersTable() {
         LinkedList<Integer> listTeacherId = Teachers.getlListTeacher();
-    	Teachers teachers = new Teachers();//RAJOUTER LES MATIERES
+    	Teachers teachers = new Teachers();
 
     	for (int i:listTeacherId){
     	    try {
                 teachers.insertTeacher(i, ApiConnect.USER.getUser(i).getUsername(),
                         ApiConnect.USER.getUser(i).getUsername()+"@telecomnancy.eu", "");
-                        System.out.println();
             }
             catch(org.gitlab4j.api.GitLabApiException e){
-                System.out.println("Internal Error : Can't get teachers for the db. "+e);
             }
     	}
-    	
+    	teachers.updateTeacher(3,"discipline","TOP");
+        teachers.insertTeacher(3,"Olivier.Festor","Olivier.Festor@telecomnancy.eu","SD");
+        teachers.updateTeacher(5,"discipline","MOCI");
+        teachers.insertTeacher(5, "Francois.Charoy","Francois.Charoy@telecomnancy.eu","PCD");
+        teachers.updateTeacher(154,"discipline","SD");
+        teachers.updateTeacher(120,"discipline","TOP");
+        teachers.updateTeacher(9,"discipline","TOP");
+        teachers.updateTeacher(329,"discipline","MOCI");
+        teachers.insertTeacher(329,"Martine.Gautier","Martine.Gautier@telecomnancy.eu","PCD");
+        teachers.updateTeacher(8,"discipline","PCD");
+        teachers.updateTeacher(6,"discipline","MOCI");
+        teachers.insertTeacher(6,"Gerald.Oster","Gerald.Oster@telecomnancy.eu","PCD");
+        teachers.updateTeacher(264,"discipline","TOP");
+        teachers.insertTeacher(264,"Sebastien.Dasila","Sebastien.Dasila@telecomnancy.eu","SD");
+        teachers.updateTeacher(7,"discipline","RS");
+        teachers.updateTeacher(328,"discipline","PCD");
+        teachers.insertTeacher(328,"Brigitte.Wrobel-dautcourt","Brigitte.Wrobel-dautcourt@te","PCD");
     }
-    
+
 	/*
 	public static void main(String[] args) {
 		// A faire d�s le lancement de l'appli

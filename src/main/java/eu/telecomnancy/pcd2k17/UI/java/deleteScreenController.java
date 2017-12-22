@@ -66,9 +66,9 @@ public class deleteScreenController {
 		List<String> matiere = ApiConnect.getInstance().getListDiscipline();
 
 		ChoiceDialog<String> dialog = new ChoiceDialog<>(" ", matiere);
-		dialog.setTitle("Choix de la mati�re");
+		dialog.setTitle("Choix de la matiere");
 		dialog.setHeaderText(null);
-		dialog.setContentText("Mati�res :");
+		dialog.setContentText("Matieres :");
 
 		// Traditional way to get the response value.
 		Optional<String> result = dialog.showAndWait();
@@ -104,11 +104,21 @@ public class deleteScreenController {
 	
 	@FXML
 	public void deleteProject(ActionEvent event) throws IOException {
-		Alert connectionError = new Alert(AlertType.ERROR);
-		connectionError.setTitle("Api error");
-		connectionError.setHeaderText(null);
-		connectionError.setContentText("Need jerem pour finir <3");
-		connectionError.showAndWait();
+
+		try {
+			ApiFile file = new ApiFile(new ApiProjectReturn( projetChoisi,
+					new ApiAssignment(new ApiDiscipline(matiereChoisie), projetChoisi)));
+
+
+		}
+		catch (Exception e){
+			Alert connectionError = new Alert(AlertType.ERROR);
+			connectionError.setTitle("Error:");
+			connectionError.setHeaderText(null);
+			connectionError.setContentText("" + e);
+			connectionError.showAndWait();
+		}
+		
 	}
 	
 	@FXML

@@ -69,9 +69,9 @@ public class pullScreen {
 		List<String> matiere = ApiConnect.getInstance().getListDiscipline();
 
 		ChoiceDialog<String> dialog = new ChoiceDialog<>(" ", matiere);
-		dialog.setTitle("Choix de la mati�re");
+		dialog.setTitle("Choix de la matiere");
 		dialog.setHeaderText(null);
-		dialog.setContentText("Mati�res :");
+		dialog.setContentText("Matieres :");
 
 		// Traditional way to get the response value.
 		Optional<String> result = dialog.showAndWait();
@@ -148,7 +148,7 @@ public class pullScreen {
 	@FXML
 	public void choisirUnFichier(ActionEvent event) {
 		try {
-			currentFile = new ApiFile(new ApiProjectReturn(ApiProjectReturn.getNameProjectFromUserName(Api),
+			currentFile = new ApiFile(new ApiProjectReturn(ApiProjectReturn.getNameProjectFromUserName(ApiConnect.USER.getCurrentUser().getId(),projetChoisi),
 					new ApiAssignment(new ApiDiscipline(matiereChoisie), projetChoisi)));
 
 			LinkedList<String> files = currentFile.getElements();

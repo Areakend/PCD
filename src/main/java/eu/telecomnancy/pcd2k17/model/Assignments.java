@@ -42,11 +42,10 @@ public class Assignments extends MainDbhandler{
 	}
 	
     public void insertAssignment(int idAssignment, String title, String description, String discipline,
-    		String releaseDate, String deadline, String deadlineHour, String groupName, String state,
-    		String folder, String privateGit, String origine, int studentsCapacity) {
-        String sql = "INSERT INTO Assignments(idAssignment,title,description,discipline,"
-        		+ "releaseDate,deadline,deadlineHour,groupName,state,folder,privateGit,"
-        		+ "origine,studentCapacity) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?);";
+								 String releaseDate, String deadline, String deadlineHour, String groupName,
+								 String state, String folder, String privateGit, String origine, int studentsCapacity) {
+        String sql = "INSERT INTO Assignments(idAssignment,title,description,discipline,releaseDate,deadline," +
+				"deadlineHour,groupName,state,folder,privateGit,origine,studentsCapacity) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?);";
  
         try (Connection conn = this.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -66,8 +65,8 @@ public class Assignments extends MainDbhandler{
             pstmt.executeUpdate();
             System.out.println("Assignment has been created.");
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+			System.out.println(e.getMessage());
+		}
     }
     
     public void deleteAssignment(int idAssignment) {
@@ -150,19 +149,19 @@ public class Assignments extends MainDbhandler{
     
 	/*
 	public static void main(String[] args) {
-		// A faire dès le lancement de l'appli
+		// A faire dï¿½s le lancement de l'appli
 		MainDbhandler.createFile();
 		MainDbhandler.createNewDatabase("gitTN.db");
 		Assignments assign = new Assignments();
 		assign.createAssignments();
-		// A faire dès la création d'un nouveau devoir
+		// A faire dï¿½s la crï¿½ation d'un nouveau devoir
 		assign.insertAssignment("title", "description", "discipline", "teacher", 1, 2, 
         		"prefix", "folder", "origine");
 		assign.getAllAssignments();
-		// A faire dès la modification d'un devoir
+		// A faire dï¿½s la modification d'un devoir
 		assign.updateAssignment("title","title","titre");
 		assign.getAssignmentsby("teacher", "teacher");
-		// A ne pas forcément faire
+		// A ne pas forcï¿½ment faire
 		assign.deleteAssignment("titre");
 	}*/
 

@@ -34,7 +34,7 @@ public class addStudentController {
     TextField groupTextField;
 
     private String prenom,nom,mail,group;
-    private int i=10;
+    private int i=1000;
     private Student student;
 
 
@@ -60,10 +60,9 @@ public class addStudentController {
             mailTextField.setText("");
             groupTextField.setText("");
             student = new Student(i++,prenom+"."+nom,mail,group);
-            Students students = new Students();
             Main.stage2.hide();
-            students.insertStudent(i,prenom+"."+nom,mail,"","",group);
-
+            //Students.insertStudent(i,prenom+"."+nom,mail,"","",group);
+            GroupScreenController.listUserId.add(student.getIdStudent());
         }
         return student;
     }
@@ -74,7 +73,7 @@ public class addStudentController {
         lastNameTextField.setText("");
         mailTextField.setText("");
         groupTextField.setText("");
-        Main.stage2.hide();
+        Main.stage2.close();
     }
 
     public void setStudent(Student student) {
