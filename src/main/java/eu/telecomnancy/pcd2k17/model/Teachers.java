@@ -6,11 +6,33 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.LinkedList;
 
+import eu.telecomnancy.pcd2k17.api.ApiConnect;
+import org.gitlab4j.api.models.User;
+
+import eu.telecomnancy.pcd2k17.api.ApiUser;
 import eu.telecomnancy.pcd2k17.dbhandler.MainDbhandler;
 
 
 public class Teachers extends MainDbhandler{
+	
+    public static LinkedList<Integer>getlListTeacher(){
+        LinkedList<Integer> listTeacherId = new LinkedList<>();
+            listTeacherId.add(3);
+            listTeacherId.add(5);
+            listTeacherId.add(154);
+            listTeacherId.add(120);
+            listTeacherId.add(9);
+            listTeacherId.add(329);
+            listTeacherId.add(8);
+            listTeacherId.add(6);
+            listTeacherId.add(264);
+            listTeacherId.add(7);
+            listTeacherId.add(328);
+            listTeacherId.add(2);
+            return listTeacherId;
+    }
 	
 	public void createTeachers() {
 		String url = "jdbc:sqlite:"+ System.getProperty("user.dir") + 
@@ -108,20 +130,37 @@ public class Teachers extends MainDbhandler{
         		}
         }
     
+    public void fillTeachersTable() {
+        LinkedList<Integer> listTeacherId = Teachers.getlListTeacher();
+    	Teachers teachers = new Teachers();//RAJOUTER LES MATIERES
+
+    	for (int i:listTeacherId){
+    	    try {
+                teachers.insertTeacher(i, ApiConnect.USER.getUser(i).getUsername(),
+                        ApiConnect.USER.getUser(i).getUsername()+"@telecomnancy.eu", "");
+                        System.out.println();
+            }
+            catch(org.gitlab4j.api.GitLabApiException e){
+                System.out.println("Internal Error : Can't get teachers for the db. "+e);
+            }
+    	}
+    	
+    }
+    
 	/*
 	public static void main(String[] args) {
-		// A faire dès le lancement de l'appli
+		// A faire dï¿½s le lancement de l'appli
 		MainDbhandler.createFile();
 		MainDbhandler.createNewDatabase("gitTN.db");
 		Teachers assign = new Teachers();
 		assign.createTeachers();
-		// A faire dès la création d'un nouveau devoir
+		// A faire dï¿½s la crï¿½ation d'un nouveau devoir
 		//assign.insertTeacher("name", "firstName", "mail", "discipline");
 		//assign.getAllTeachers();
-		// A faire dès la modification d'un devoir
+		// A faire dï¿½s la modification d'un devoir
 		assign.updateTeacher("mail","name","theName");
 		assign.getTeachersby("name", "theName");
-		// A ne pas forcément faire
+		// A ne pas forcï¿½ment faire
 		assign.deleteTeacher("theName");
 	}*/
 
