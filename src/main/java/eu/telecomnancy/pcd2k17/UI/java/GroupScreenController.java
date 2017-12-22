@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 
 
 import eu.telecomnancy.pcd2k17.Main;
+import eu.telecomnancy.pcd2k17.api.ApiConnect;
 import eu.telecomnancy.pcd2k17.model.Student;
 import eu.telecomnancy.pcd2k17.api.ApiAssignment;
 import eu.telecomnancy.pcd2k17.api.ApiDiscipline;
@@ -36,6 +37,7 @@ import javafx.scene.control.Alert.AlertType;
 import java.util.Optional;
 import javafx.scene.control.cell.PropertyValueFactory;
 import objects.Project;
+import org.gitlab4j.api.models.User;
 
 @SuppressWarnings("unused")
 public class GroupScreenController {
@@ -80,13 +82,23 @@ public class GroupScreenController {
 
 
 	public void validate(ActionEvent event) {
-		Project project = CreateAssignementController.getCurrentProject();
-		ApiDiscipline disc = new ApiDiscipline(project.getTitre());
+		try{
+			Project project = CreateAssignementController.getCurrentProject();
+			ApiDiscipline disc = new ApiDiscipline(project.getTitre());
 
-		for (Integer id : listUserId) {
-			ApiProjectReturn p = new ApiProjectReturn(project.getTitre(),
-					new ApiAssignment(disc, project.getTitre())).setPrefix(project.getPrefix());
-			p.addMembers(p.getIdProject(), id);
+			for (int id : listUserId) {
+
+				ApiProjectReturn p = new ApiProjectReturn("["+project.getPrefix()+"]Rendu_de_projet_"+project.getTitre()+"_"+ ApiConnect.USER.getUser(id).getUsername(),
+						new ApiAssignment(disc, project.getTitre()));
+				p.addMembers(p.getIdProject(), id);
+			}
+		}
+		catch (Exception e){
+			Alert connectionError = new Alert(AlertType.ERROR);
+			connectionError.setTitle("Error:");
+			connectionError.setHeaderText(null);
+			connectionError.setContentText("Try again : " + e);
+			connectionError.showAndWait();
 		}
 	}
 

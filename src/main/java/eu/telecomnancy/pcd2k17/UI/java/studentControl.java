@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
+import jdk.nashorn.internal.runtime.ECMAException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import eu.telecomnancy.pcd2k17.Main;
@@ -66,26 +67,31 @@ public class studentControl {
 		List<String> matiere = ApiConnect.getInstance().getListDiscipline();
 
 		ChoiceDialog<String> dialog = new ChoiceDialog<>(" ", matiere);
-		dialog.setTitle("Choix de la matière");
+		dialog.setTitle("Choix de la matiï¿½re");
 		dialog.setHeaderText(null);
-		dialog.setContentText("Matières :");
+		dialog.setContentText("Matiï¿½res :");
 
 		// Traditional way to get the response value.
 		Optional<String> result = dialog.showAndWait();
 		if (result.isPresent()) {
 			matiereChoisie = result.get();
-			ApiDiscipline disp = new ApiDiscipline(matiereChoisie);
-			List<String> projets = disp.getListAssignments();
+			try{
 
-			ChoiceDialog<String> dialog1 = new ChoiceDialog<>(" ", projets);
-			dialog1.setTitle("Choix du projet");
-			dialog1.setHeaderText(null);
-			dialog1.setContentText("Projet(s) de " + matiereChoisie + ": ");
-			Optional<String> result2 = dialog1.showAndWait();
-			if (result2.isPresent()) {
-				projetChoisi = result2.get();
-				matiereText.setText(matiereChoisie);
-				Title.setText(projetChoisi);
+				ApiDiscipline disp = new ApiDiscipline(matiereChoisie);
+				List<String> projets = disp.getListAssignments();
+
+				ChoiceDialog<String> dialog1 = new ChoiceDialog<>(" ", projets);
+				dialog1.setTitle("Choix du projet");
+				dialog1.setHeaderText(null);
+				dialog1.setContentText("Projet(s) de " + matiereChoisie + ": ");
+				Optional<String> result2 = dialog1.showAndWait();
+				if (result2.isPresent()) {
+					projetChoisi = result2.get();
+					matiereText.setText(matiereChoisie);
+					Title.setText(projetChoisi);
+				}
+			}catch (Exception e){
+
 			}
 		}
 	}
@@ -105,17 +111,21 @@ public class studentControl {
 
 			Main.setCommitMessage(commitMessage.getText());
 			log.debug("Push Devoir");
-
-			ApiFile file = new ApiFile(new ApiProjectReturn("Rendu de projet " + projetChoisi,
-					new ApiAssignment(new ApiDiscipline(matiereChoisie), projetChoisi)));
 			try {
-				file.pushListFile(Main.fileList, Main.getCommitMessage());
-			} catch (Exception e) {
-				Alert connectionError = new Alert(AlertType.ERROR);
-				connectionError.setTitle("Erreur de push");
-				connectionError.setHeaderText(null);
-				connectionError.setContentText("" + e);
-				connectionError.showAndWait();
+				ApiFile file = new ApiFile(new ApiProjectReturn(projetChoisi,
+						new ApiAssignment(new ApiDiscipline(matiereChoisie), projetChoisi)));
+				try {
+					file.pushListFile(Main.fileList, Main.getCommitMessage());
+				} catch (Exception e) {
+					Alert connectionError = new Alert(AlertType.ERROR);
+					connectionError.setTitle("Erreur de push");
+					connectionError.setHeaderText(null);
+					connectionError.setContentText("" + e);
+					connectionError.showAndWait();
+				}
+			}
+			catch (Exception e){
+
 			}
 		}
 	}

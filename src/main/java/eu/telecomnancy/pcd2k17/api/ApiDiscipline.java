@@ -1,6 +1,7 @@
 package eu.telecomnancy.pcd2k17.api;
 
 import org.gitlab4j.api.models.Group;
+import org.gitlab4j.api.models.Visibility;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -8,17 +9,27 @@ import java.util.List;
 public class ApiDiscipline extends ApiListDiscipline{
     private String name;
     private Group gp;
+    private Visibility vis;
 
-    public ApiDiscipline(String name_){
+    public ApiDiscipline(String name_,Visibility vis_)throws Exception{
         super();
         this.name = name_;
+        this.vis = vis_;
         this.gp = ApiConnect.getInstance().getDiscipline(name_);
         this.checkDiscipline();
     }
 
-    private void checkDiscipline(){
+    public ApiDiscipline(String name_)throws Exception{
+        super();
+        this.name = name_;
+        this.vis = Visibility.PRIVATE;
+        this.gp = ApiConnect.getInstance().getDiscipline(name_);
+        this.checkDiscipline();
+    }
+
+    private void checkDiscipline()throws Exception{
         if(this.gp == null){
-            this.createDiscipline(name);
+            this.createDiscipline(name,vis);
             this.gp = ApiConnect.getInstance().getDiscipline(this.name);
         }
     }
@@ -72,6 +83,10 @@ public class ApiDiscipline extends ApiListDiscipline{
             System.out.println(s);
         }
         System.out.println("Total : "+j+"\n");
+    }
+
+    public Visibility getVisibility(){
+        return this.vis;
     }
 
 }

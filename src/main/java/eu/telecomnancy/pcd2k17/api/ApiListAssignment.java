@@ -3,6 +3,8 @@ package eu.telecomnancy.pcd2k17.api;
 import org.gitlab4j.api.GroupApi;
 import org.gitlab4j.api.models.Visibility;
 
+import java.security.spec.ECField;
+
 public abstract class ApiListAssignment {
     protected GroupApi group;
     private ApiDiscipline discipline;
@@ -12,13 +14,14 @@ public abstract class ApiListAssignment {
         this.discipline = discipline_;
     }
 
-    public void createAssignment(String name,String desc){
+    public void createAssignment(String name,String desc)throws Exception{
         try{
-            this.group.addGroup(name,name,desc,Boolean.FALSE,Boolean.TRUE,Visibility.PRIVATE,Boolean.FALSE,Boolean.FALSE,this.discipline.getDisciplineId(),0);
+            this.group.addGroup(name,name,desc,Boolean.FALSE,Boolean.TRUE,this.discipline.getVisibility(),Boolean.FALSE,Boolean.FALSE,this.discipline.getDisciplineId(),0);
         }
         catch (org.gitlab4j.api.GitLabApiException e){
-            System.out.println("Internal Error : Can't create a new assignment. " + e);
+            throw new Exception("Can't create new assignment.");
         }
+
     }
 
     public void deleteAssignment(int idAssignment){

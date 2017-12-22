@@ -67,26 +67,35 @@ public class pullScreen {
 		List<String> matiere = ApiConnect.getInstance().getListDiscipline();
 
 		ChoiceDialog<String> dialog = new ChoiceDialog<>(" ", matiere);
-		dialog.setTitle("Choix de la matière");
+		dialog.setTitle("Choix de la matiï¿½re");
 		dialog.setHeaderText(null);
-		dialog.setContentText("Matières :");
+		dialog.setContentText("Matiï¿½res :");
 
 		// Traditional way to get the response value.
 		Optional<String> result = dialog.showAndWait();
 		if (result.isPresent()) {
-			matiereChoisie = result.get();
-			ApiDiscipline disp = new ApiDiscipline(matiereChoisie);
-			List<String> projets = disp.getListAssignments();
+			try {
+				matiereChoisie = result.get();
+				ApiDiscipline disp = new ApiDiscipline(matiereChoisie);
+				List<String> projets = disp.getListAssignments();
 
-			ChoiceDialog<String> dialog1 = new ChoiceDialog<>(" ", projets);
-			dialog1.setTitle("Choix du projet");
-			dialog1.setHeaderText(null);
-			dialog1.setContentText("Projet(s) de " + matiereChoisie + ": ");
-			Optional<String> result2 = dialog1.showAndWait();
-			if (result2.isPresent()) {
-				projetChoisi = result2.get();
-				matiereText.setText(matiereChoisie);
-				Title.setText(projetChoisi);
+				ChoiceDialog<String> dialog1 = new ChoiceDialog<>(" ", projets);
+				dialog1.setTitle("Choix du projet");
+				dialog1.setHeaderText(null);
+				dialog1.setContentText("Projet(s) de " + matiereChoisie + ": ");
+				Optional<String> result2 = dialog1.showAndWait();
+				if (result2.isPresent()) {
+					projetChoisi = result2.get();
+					matiereText.setText(matiereChoisie);
+					Title.setText(projetChoisi);
+				}
+			}
+			catch (Exception e){
+				Alert connectionError = new Alert(AlertType.ERROR);
+				connectionError.setTitle("Error:");
+				connectionError.setHeaderText(null);
+				connectionError.setContentText("" + e);
+				connectionError.showAndWait();
 			}
 		}
 	}
@@ -110,7 +119,7 @@ public class pullScreen {
 			Alert connectionError = new Alert(AlertType.ERROR);
 			connectionError.setTitle("Impossible de pull");
 			connectionError.setHeaderText(null);
-			connectionError.setContentText("Il faut choisir un fichier à pull");
+			connectionError.setContentText("Il faut choisir un fichier ï¿½ pull");
 			connectionError.showAndWait();
 		} else {
 			log.debug("Push button was clicked!");
@@ -139,22 +148,30 @@ public class pullScreen {
 
 	@FXML
 	public void choisirUnFichier(ActionEvent event) {
-		
-		ApiFile file = new ApiFile(new ApiProjectReturn("Rendu de projet " + projetChoisi,
-				new ApiAssignment(new ApiDiscipline(matiereChoisie), projetChoisi)));
-		
-		LinkedList<String> files = file.getElements();
-				
-		ChoiceDialog<String> dialog = new ChoiceDialog<>(" ", files);
-		dialog.setTitle("Choix du fichier");
-		dialog.setHeaderText(null);
-		dialog.setContentText("Fichier du projet " + projetChoisi + ": ");
-		Optional<String> result = dialog.showAndWait();
-		if (result.isPresent()) {
-			fichierChoisi = result.get();
-			Main.fileListPull.add(fichierChoisi);
-			Main.setNbofFiles(Main.getNbofFiles() + 1);
-			fileList.setText(fileList.getText() + fichierChoisi + "\n");
+		try {
+			ApiFile file = new ApiFile(new ApiProjectReturn("Rendu de projet " + projetChoisi,
+					new ApiAssignment(new ApiDiscipline(matiereChoisie), projetChoisi)));
+
+			LinkedList<String> files = file.getElements();
+
+			ChoiceDialog<String> dialog = new ChoiceDialog<>(" ", files);
+			dialog.setTitle("Choix du fichier");
+			dialog.setHeaderText(null);
+			dialog.setContentText("Fichier du projet " + projetChoisi + ": ");
+			Optional<String> result = dialog.showAndWait();
+			if (result.isPresent()) {
+				fichierChoisi = result.get();
+				Main.fileListPull.add(fichierChoisi);
+				Main.setNbofFiles(Main.getNbofFiles() + 1);
+				fileList.setText(fileList.getText() + fichierChoisi + "\n");
+			}
+		}
+		catch (Exception e){
+			Alert connectionError = new Alert(AlertType.ERROR);
+			connectionError.setTitle("Error:");
+			connectionError.setHeaderText(null);
+			connectionError.setContentText("" + e);
+			connectionError.showAndWait();
 		}
 	}
 

@@ -12,27 +12,22 @@ public class ApiProjectReturn extends ApiListProjectReturn{
     private Project project;
     private ApiAssignment assign;
 
-    public ApiProjectReturn(String s, ApiAssignment assign_){
+    public ApiProjectReturn(String s, ApiAssignment assign_) throws Exception{
         super();
         this.assign = assign_;
         this.name = s;
         this.project = this.assign.getProject(s);
         this.checkProject();
     }
-
-    public ApiProjectReturn setPrefix(String pre){
-        this.name = "["+pre+"] " + this.name;
-        return this;
-    }
-
-    private void checkProject(){
+    
+    private void checkProject()throws Exception{
         if(this.project == null){
             this.createProject(name,this.assign.getAssignmentId());
             this.project = this.assign.getProject(this.name);
         }
     }
 
-    public void create(){
+    public void create()throws Exception{
         if (this.project.getId() == -1){
             this.createProject(this.name,this.assign.getAssignmentId());
         }

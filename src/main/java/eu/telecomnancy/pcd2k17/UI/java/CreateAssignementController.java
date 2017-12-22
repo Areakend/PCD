@@ -32,6 +32,7 @@ import javafx.stage.Stage;
 import objects.Project;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextInputDialog;
+import org.gitlab4j.api.models.Visibility;
 
 @SuppressWarnings("unused")
 public class CreateAssignementController {
@@ -154,9 +155,12 @@ public class CreateAssignementController {
 		log.debug("ReleaseDate : " + releaseDate);
 		log.debug("EndDate : " + deadline + " ï¿½ " + heureFin + "h\n");
 		
-		
-		new ApiAssignment(new ApiDiscipline(discipline), title, description);
-		
+		try {
+			new ApiAssignment(new ApiDiscipline(discipline), title, description);
+		}
+		catch (Exception e){
+
+		}
 		CreateAssignementController.CURRENTPROJECT = new Project(title, prefix, deadline);
 	}
 	
@@ -166,14 +170,23 @@ public class CreateAssignementController {
 		List<String> matiere = ApiConnect.getInstance().getListDiscipline();
 
 		TextInputDialog dialog = new TextInputDialog("");
-		dialog.setTitle("Ajouter une matière");
+		dialog.setTitle("Ajouter une matiï¿½re");
 		dialog.setHeaderText(null);
-		dialog.setContentText("Matière :");
+		dialog.setContentText("Matiï¿½re :");
 
 		// Traditional way to get the response value.
 		Optional<String> result = dialog.showAndWait();
-		if (result.isPresent()){
-			new ApiDiscipline(result.get());
+		try {
+			if (result.isPresent()){
+				new ApiDiscipline(result.get(), Visibility.PUBLIC);
+			}
+		}
+		catch (Exception e) {
+			Alert connectionError = new Alert(AlertType.ERROR);
+			connectionError.setTitle("Error:");
+			connectionError.setHeaderText(null);
+			connectionError.setContentText("" + e);
+			connectionError.showAndWait();
 		}
 	}
 		
@@ -182,9 +195,9 @@ public class CreateAssignementController {
 		List<String> matiere = ApiConnect.getInstance().getListDiscipline();
 
 		ChoiceDialog<String> dialog = new ChoiceDialog<>(" ", matiere);
-		dialog.setTitle("Choix de la matière");
+		dialog.setTitle("Choix de la matiï¿½re");
 		dialog.setHeaderText(null);
-		dialog.setContentText("Matières :");
+		dialog.setContentText("Matiï¿½res :");
 
 		// Traditional way to get the response value.
 		Optional<String> result = dialog.showAndWait();
@@ -195,7 +208,7 @@ public class CreateAssignementController {
 /*			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Information");
 			alert.setHeaderText(null);
-			alert.setContentText("Veuillez choisir une liste d'élèves");
+			alert.setContentText("Veuillez choisir une liste d'ï¿½lï¿½ves");
 
 			alert.showAndWait();
 			final FileChooser fileChooser = new FileChooser();
